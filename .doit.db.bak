@@ -215,3 +215,4 @@
 'scale_images:output/images/blog/images/menu_logo.png', (263168, 243)
 'scale_images:output/images/resources/MicroCal.jpg', (263680, 239)
 'render_posts', (264192, 56)
+'render_galleries:output/es/galleries', (264704, 145)

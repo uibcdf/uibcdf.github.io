@@ -6,137 +6,137 @@
     xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
-  <loc>http://localhost:8000/</loc>
+  <loc>http://uibcdf.org/</loc>
   <lastmod>2017-07-17T23:42:00Z</lastmod>
  </url>
  <url>
-  <loc>http://localhost:8000/2017/</loc>
+  <loc>http://uibcdf.org/2017/</loc>
   <lastmod>2017-07-17T23:42:00Z</lastmod>
  </url>
  <url>
-  <loc>http://localhost:8000/about/</loc>
+  <loc>http://uibcdf.org/about/</loc>
   <lastmod>2017-07-17T23:42:00Z</lastmod>
  </url>
  <url>
-  <loc>http://localhost:8000/archive.html</loc>
+  <loc>http://uibcdf.org/archive.html</loc>
+  <lastmod>2017-07-18T23:06:00Z</lastmod>
+ </url>
+ <url>
+  <loc>http://uibcdf.org/blog/</loc>
   <lastmod>2017-07-17T23:42:00Z</lastmod>
  </url>
  <url>
-  <loc>http://localhost:8000/blog/</loc>
+  <loc>http://uibcdf.org/blog/the-first-version-of-our-web-page/</loc>
   <lastmod>2017-07-17T23:42:00Z</lastmod>
  </url>
  <url>
-  <loc>http://localhost:8000/blog/the-first-version-of-our-web-page/</loc>
+  <loc>http://uibcdf.org/blog/the-uibcdf-has-a-new-logo/</loc>
   <lastmod>2017-07-17T23:42:00Z</lastmod>
  </url>
  <url>
-  <loc>http://localhost:8000/blog/the-uibcdf-has-a-new-logo/</loc>
+  <loc>http://uibcdf.org/categories/</loc>
   <lastmod>2017-07-17T23:42:00Z</lastmod>
  </url>
  <url>
-  <loc>http://localhost:8000/categories/</loc>
+  <loc>http://uibcdf.org/contact/</loc>
   <lastmod>2017-07-17T23:42:00Z</lastmod>
  </url>
  <url>
-  <loc>http://localhost:8000/contact/</loc>
+  <loc>http://uibcdf.org/es/</loc>
   <lastmod>2017-07-17T23:42:00Z</lastmod>
  </url>
  <url>
-  <loc>http://localhost:8000/es/</loc>
+  <loc>http://uibcdf.org/es/2017/</loc>
   <lastmod>2017-07-17T23:42:00Z</lastmod>
  </url>
  <url>
-  <loc>http://localhost:8000/es/2017/</loc>
+  <loc>http://uibcdf.org/es/about/</loc>
   <lastmod>2017-07-17T23:42:00Z</lastmod>
  </url>
  <url>
-  <loc>http://localhost:8000/es/about/</loc>
+  <loc>http://uibcdf.org/es/archive.html</loc>
+  <lastmod>2017-07-18T23:06:00Z</lastmod>
+ </url>
+ <url>
+  <loc>http://uibcdf.org/es/blog/</loc>
   <lastmod>2017-07-17T23:42:00Z</lastmod>
  </url>
  <url>
-  <loc>http://localhost:8000/es/archive.html</loc>
+  <loc>http://uibcdf.org/es/blog/the-first-version-of-our-web-page/</loc>
+  <lastmod>2017-07-17T23:42:00Z</lastmod>
+  <xhtml:link rel="alternate" hreflang="en" href="http://uibcdf.org/blog/the-first-version-of-our-web-page/" />
+ </url>
+ <url>
+  <loc>http://uibcdf.org/es/blog/the-uibcdf-has-a-new-logo/</loc>
+  <lastmod>2017-07-17T23:42:00Z</lastmod>
+  <xhtml:link rel="alternate" hreflang="en" href="http://uibcdf.org/blog/the-uibcdf-has-a-new-logo/" />
+ </url>
+ <url>
+  <loc>http://uibcdf.org/es/categories/</loc>
   <lastmod>2017-07-17T23:42:00Z</lastmod>
  </url>
  <url>
-  <loc>http://localhost:8000/es/blog/</loc>
+  <loc>http://uibcdf.org/es/contact/</loc>
   <lastmod>2017-07-17T23:42:00Z</lastmod>
  </url>
  <url>
-  <loc>http://localhost:8000/es/blog/the-first-version-of-our-web-page/</loc>
-  <lastmod>2017-07-17T23:42:00Z</lastmod>
-  <xhtml:link rel="alternate" hreflang="en" href="http://localhost:8000/blog/the-first-version-of-our-web-page/" />
- </url>
- <url>
-  <loc>http://localhost:8000/es/blog/the-uibcdf-has-a-new-logo/</loc>
-  <lastmod>2017-07-17T23:42:00Z</lastmod>
-  <xhtml:link rel="alternate" hreflang="en" href="http://localhost:8000/blog/the-uibcdf-has-a-new-logo/" />
- </url>
- <url>
-  <loc>http://localhost:8000/es/categories/</loc>
+  <loc>http://uibcdf.org/es/funding/</loc>
   <lastmod>2017-07-17T23:42:00Z</lastmod>
  </url>
  <url>
-  <loc>http://localhost:8000/es/contact/</loc>
+  <loc>http://uibcdf.org/es/galleries/</loc>
   <lastmod>2017-07-17T23:42:00Z</lastmod>
  </url>
  <url>
-  <loc>http://localhost:8000/es/funding/</loc>
+  <loc>http://uibcdf.org/es/members/</loc>
   <lastmod>2017-07-17T23:42:00Z</lastmod>
  </url>
  <url>
-  <loc>http://localhost:8000/es/galleries/</loc>
+  <loc>http://uibcdf.org/es/positions/</loc>
   <lastmod>2017-07-17T23:42:00Z</lastmod>
  </url>
  <url>
-  <loc>http://localhost:8000/es/members/</loc>
+  <loc>http://uibcdf.org/es/publications/</loc>
   <lastmod>2017-07-17T23:42:00Z</lastmod>
  </url>
  <url>
-  <loc>http://localhost:8000/es/positions/</loc>
+  <loc>http://uibcdf.org/es/research/</loc>
   <lastmod>2017-07-17T23:42:00Z</lastmod>
  </url>
  <url>
-  <loc>http://localhost:8000/es/publications/</loc>
+  <loc>http://uibcdf.org/es/resources/</loc>
   <lastmod>2017-07-17T23:42:00Z</lastmod>
  </url>
  <url>
-  <loc>http://localhost:8000/es/research/</loc>
+  <loc>http://uibcdf.org/funding/</loc>
   <lastmod>2017-07-17T23:42:00Z</lastmod>
  </url>
  <url>
-  <loc>http://localhost:8000/es/resources/</loc>
+  <loc>http://uibcdf.org/galleries/</loc>
   <lastmod>2017-07-17T23:42:00Z</lastmod>
  </url>
  <url>
-  <loc>http://localhost:8000/funding/</loc>
+  <loc>http://uibcdf.org/listings/</loc>
   <lastmod>2017-07-17T23:42:00Z</lastmod>
  </url>
  <url>
-  <loc>http://localhost:8000/galleries/</loc>
+  <loc>http://uibcdf.org/members/</loc>
   <lastmod>2017-07-17T23:42:00Z</lastmod>
  </url>
  <url>
-  <loc>http://localhost:8000/listings/</loc>
+  <loc>http://uibcdf.org/positions/</loc>
   <lastmod>2017-07-17T23:42:00Z</lastmod>
  </url>
  <url>
-  <loc>http://localhost:8000/members/</loc>
+  <loc>http://uibcdf.org/publications/</loc>
   <lastmod>2017-07-17T23:42:00Z</lastmod>
  </url>
  <url>
-  <loc>http://localhost:8000/positions/</loc>
+  <loc>http://uibcdf.org/research/</loc>
   <lastmod>2017-07-17T23:42:00Z</lastmod>
  </url>
  <url>
-  <loc>http://localhost:8000/publications/</loc>
-  <lastmod>2017-07-17T23:42:00Z</lastmod>
- </url>
- <url>
-  <loc>http://localhost:8000/research/</loc>
-  <lastmod>2017-07-17T23:42:00Z</lastmod>
- </url>
- <url>
-  <loc>http://localhost:8000/resources/</loc>
+  <loc>http://uibcdf.org/resources/</loc>
   <lastmod>2017-07-17T23:42:00Z</lastmod>
  </url>
 </urlset>
