@@ -166,7 +166,7 @@
 'render_galleries:output/galleries/himfg_completo.thumbnail.jpg', (210432, 281)
 'scale_images:output/images/about/general.jpg', (210944, 230)
 'copy_assets', (211456, 56)
-'sitemap:output/sitemap.xml', (211968, 4907)
+'sitemap:output/sitemap.xml', (211968, 4909)
 'render_pages:output/contact/index.html', (217088, 3292)
 'render_posts:cache/pages/funding.html', (220672, 355)
 'render_pages:output/members/index.html', (221184, 3292)
