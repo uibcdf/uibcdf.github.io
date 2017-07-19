@@ -21,10 +21,10 @@ BLOG_AUTHOR = "Liliana M. Moreno-Vargas & Diego Prada-Gracia"  # (translatable)
 BLOG_TITLE = "UIBCDF"  # (translatable)
 # This is the main URL for your site. It will be used
 # in a prominent link. Don't forget the protocol (http/https)!
-SITE_URL = "http://uibcdf.org/"
+SITE_URL = "http://www.uibcdf.org/"
 # This is the URL where Nikola's output will be deployed.
 # If not set, defaults to SITE_URL
-BASE_URL = "http://uibcdf.org/"
+BASE_URL = "http://www.uibcdf.org/"
 BLOG_EMAIL = "uibcdf@gmail.com"
 BLOG_DESCRIPTION = "Unit of Research on Computational Biology and Drug Design"  # (translatable)
 
