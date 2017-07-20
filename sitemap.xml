@@ -19,15 +19,19 @@
  </url>
  <url>
   <loc>http://www.uibcdf.org/archive.html</loc>
-  <lastmod>2017-07-19T22:29:00Z</lastmod>
+  <lastmod>2017-07-20T01:09:00Z</lastmod>
  </url>
  <url>
   <loc>http://www.uibcdf.org/blog/</loc>
-  <lastmod>2017-07-19T22:29:00Z</lastmod>
+  <lastmod>2017-07-20T01:09:00Z</lastmod>
  </url>
  <url>
   <loc>http://www.uibcdf.org/blog/the-first-version-of-our-web-page/</loc>
   <lastmod>2017-07-19T22:29:00Z</lastmod>
+ </url>
+ <url>
+  <loc>http://www.uibcdf.org/blog/the-microcal-peaq-itc-is-installed/</loc>
+  <lastmod>2017-07-20T01:09:00Z</lastmod>
  </url>
  <url>
   <loc>http://www.uibcdf.org/blog/the-uibcdf-has-a-new-logo/</loc>
@@ -55,16 +59,21 @@
  </url>
  <url>
   <loc>http://www.uibcdf.org/es/archive.html</loc>
-  <lastmod>2017-07-19T22:29:00Z</lastmod>
+  <lastmod>2017-07-20T01:09:00Z</lastmod>
  </url>
  <url>
   <loc>http://www.uibcdf.org/es/blog/</loc>
-  <lastmod>2017-07-19T22:29:00Z</lastmod>
+  <lastmod>2017-07-20T01:09:00Z</lastmod>
  </url>
  <url>
   <loc>http://www.uibcdf.org/es/blog/the-first-version-of-our-web-page/</loc>
   <lastmod>2017-07-19T22:29:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="en" href="http://www.uibcdf.org/blog/the-first-version-of-our-web-page/" />
+ </url>
+ <url>
+  <loc>http://www.uibcdf.org/es/blog/the-microcal-peaq-itc-is-installed/</loc>
+  <lastmod>2017-07-20T01:09:00Z</lastmod>
+  <xhtml:link rel="alternate" hreflang="en" href="http://www.uibcdf.org/blog/the-microcal-peaq-itc-is-installed/" />
  </url>
  <url>
   <loc>http://www.uibcdf.org/es/blog/the-uibcdf-has-a-new-logo/</loc>
