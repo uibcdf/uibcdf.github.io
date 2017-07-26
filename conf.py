@@ -134,7 +134,7 @@ TRANSLATIONS_PATTERN = "{path}.{lang}.{ext}"
 
 NAVIGATION_LINKS = {
     DEFAULT_LANG: (
-        ("/about/", "About"),
+        ("/about.html", "About"),
         ("/members/", "Members"),
         ("/research/", "Research"),
         ("/resources/", "Resources"),
@@ -331,7 +331,7 @@ COMPILERS = {
 # If this is set to False, then posts that are not translated to a language
 # LANG will not be visible at all in the pages in that language.
 # Formerly known as HIDE_UNTRANSLATED_POSTS (inverse)
-# SHOW_UNTRANSLATED_POSTS = True
+SHOW_UNTRANSLATED_POSTS = False
 
 # Nikola supports logo display.  If you have one, you can put the URL here.
 # Final output is <img src="LOGO_URL" id="logo" alt="BLOG_TITLE">.
@@ -843,16 +843,20 @@ GITHUB_COMMIT_SOURCE = False
 # (the thumbnail has ``.thumbnail`` added before the file extension by default,
 # but a different naming template can be configured with IMAGE_THUMBNAIL_FORMAT).
 
-IMAGE_FOLDERS = {'images': 'images',
-                 'images/members':'members',
-                 'images/resources':'resources',
-                 'images/about':'about',
-                 'images/funding':'funding',
-                 'images/research':'research',
-                 'images/publications':'publications',
-                 'images/positions':'positions',
-                 'images/contact':'contact',
-                 'images/blog':'blog'}
+# IMAGE_FOLDERS = {'images': 'images',
+#                  'images/members':'members',
+#                  'images/members':'members',
+#                  'images/resources':'resources',
+#                  'images/about':'about',
+#                  'images/funding':'funding',
+#                  'images/research':'research',
+#                  'images/publications':'publications',
+#                  'images/positions':'positions',
+#                  'images/contact':'contact',
+#                  'images/blog':'blog'}
+
+IMAGE_FOLDERS = {}
+
 # IMAGE_THUMBNAIL_SIZE = 400
 # IMAGE_THUMBNAIL_FORMAT = '{name}.thumbnail{ext}'
 
