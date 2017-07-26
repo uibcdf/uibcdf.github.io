@@ -26,7 +26,8 @@ SITE_URL = "http://www.uibcdf.org/"
 # If not set, defaults to SITE_URL
 BASE_URL = "http://www.uibcdf.org/"
 BLOG_EMAIL = "uibcdf@gmail.com"
-BLOG_DESCRIPTION = "Unit of Research on Computational Biology and Drug Design"  # (translatable)
+BLOG_DESCRIPTION = {"en": "Computational Biology and Drug Design Research Unit",
+                    "es": "Unidad de Investigación en Biología Computacional y Diseño de Fármacos"} # (translatable)
 
 # Nikola is multilingual!
 #
@@ -148,8 +149,15 @@ NAVIGATION_LINKS = {
     ),
 
     "es": (
+        ("/es/about/", "Acerca"),
         ("/es/members/", "Miembros"),
-        ("/es/blog.html", "Blog"),
+        ("/es/research/", "Investigación"),
+        ("/es/resources/", "Recursos"),
+        ("/es/publications/", "Publicaciones"),
+        ("/es/blog/", "Noticias"),
+        ("/es/funding/", "Financiación"),
+        ("/es/positions/", "Posiciones"),
+        ("/es/contacts/", "Contacto"),
         # ("/es/categories/", "Etiquetas"),
         # ("/es/rss.xml", "Canal RSS"),
     ),
