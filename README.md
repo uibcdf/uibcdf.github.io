@@ -1,6 +1,9 @@
 # Web_UIBCDF
 
-
+```
+nikola build
+nikola github_deploy
+```
 
 ### Fuentes de información para programar la web
 
