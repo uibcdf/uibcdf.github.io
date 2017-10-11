@@ -104,7 +104,8 @@
  </url>
  <url>
   <loc>http://www.uibcdf.org/es/members/</loc>
-  <lastmod>2017-10-11T23:46:00Z</lastmod>
+  <lastmod>2017-10-11T23:57:00Z</lastmod>
+  <xhtml:link rel="alternate" hreflang="en" href="http://www.uibcdf.org/members/" />
  </url>
  <url>
   <loc>http://www.uibcdf.org/es/members/dprada/</loc>
@@ -119,7 +120,6 @@
  <url>
   <loc>http://www.uibcdf.org/es/members/members/</loc>
   <lastmod>2017-10-11T23:41:00Z</lastmod>
-  <xhtml:link rel="alternate" hreflang="en" href="http://www.uibcdf.org/members/members/" />
  </url>
  <url>
   <loc>http://www.uibcdf.org/es/positions/</loc>
@@ -148,7 +148,8 @@
  </url>
  <url>
   <loc>http://www.uibcdf.org/members/</loc>
-  <lastmod>2017-10-11T23:46:00Z</lastmod>
+  <lastmod>2017-10-11T23:57:00Z</lastmod>
+  <xhtml:link rel="alternate" hreflang="es" href="http://www.uibcdf.org/es/members/" />
  </url>
  <url>
   <loc>http://www.uibcdf.org/members/dprada/</loc>
@@ -163,7 +164,6 @@
  <url>
   <loc>http://www.uibcdf.org/members/members/</loc>
   <lastmod>2017-10-11T23:41:00Z</lastmod>
-  <xhtml:link rel="alternate" hreflang="es" href="http://www.uibcdf.org/es/members/members/" />
  </url>
  <url>
   <loc>http://www.uibcdf.org/positions/</loc>
