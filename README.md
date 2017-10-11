@@ -1,6 +1,12 @@
 # Web_UIBCDF
 
 ```
+source activate webdevel
+nikola serve
+<< 0.0.0.0:8000 in browser >>
+```
+
+```
 nikola build
 nikola github_deploy
 ```

@@ -134,7 +134,7 @@ TRANSLATIONS_PATTERN = "{path}.{lang}.{ext}"
 
 NAVIGATION_LINKS = {
     DEFAULT_LANG: (
-        ("/about.html", "About"),
+        ("/about/", "About"),
         ("/members/", "Members"),
         ("/research/", "Research"),
         ("/resources/", "Resources"),
@@ -157,7 +157,7 @@ NAVIGATION_LINKS = {
         ("/es/blog/", "Noticias"),
         ("/es/funding/", "Financiación"),
         ("/es/positions/", "Posiciones"),
-        ("/es/contacts/", "Contacto"),
+        ("/es/contact/", "Contacto"),
         # ("/es/categories/", "Etiquetas"),
         # ("/es/rss.xml", "Canal RSS"),
     ),
@@ -336,7 +336,7 @@ SHOW_UNTRANSLATED_POSTS = False
 # Nikola supports logo display.  If you have one, you can put the URL here.
 # Final output is <img src="LOGO_URL" id="logo" alt="BLOG_TITLE">.
 # The URL may be relative to the site root.
-LOGO_URL = 'images/menu_logo.png'
+LOGO_URL = '/images/menu_logo.png'
 
 # If you want to hide the title of your website (for example, if your logo
 # already contains the text), set this to False.
@@ -855,7 +855,7 @@ GITHUB_COMMIT_SOURCE = False
 #                  'images/contact':'contact',
 #                  'images/blog':'blog'}
 
-IMAGE_FOLDERS = {}
+IMAGE_FOLDERS = {'images': 'images'}
 
 # IMAGE_THUMBNAIL_SIZE = 400
 # IMAGE_THUMBNAIL_FORMAT = '{name}.thumbnail{ext}'
