@@ -7,5 +7,5 @@
 .. description: 
 .. type: text
 
-There is a new public `UIBCDF's Mendeley group <https://www.mendeley.com/community/uibcdf-reading>` to follow what we are currently reading.
+There is a new public `UIBCDF's Mendeley group <https://www.mendeley.com/community/uibcdf-reading>`_ to follow what we are currently reading.
 

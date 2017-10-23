@@ -7,5 +7,5 @@
 .. description: 
 .. type: text
 
-La unidad tiene un nuevo `grupo de Mendeley <https://www.mendeley.com/community/uibcdf-reading>` público en el que puedes seguir que estamos leyendo en la actualidad.
+La unidad tiene un nuevo `grupo de Mendeley <https://www.mendeley.com/community/uibcdf-reading>`_ público en el que puedes seguir que estamos leyendo en la actualidad.
 
