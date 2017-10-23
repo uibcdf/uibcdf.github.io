@@ -21,11 +21,21 @@
  </url>
  <url>
   <loc>http://www.uibcdf.org/archive.html</loc>
-  <lastmod>2017-10-10T23:46:00Z</lastmod>
+  <lastmod>2017-10-23T21:58:00Z</lastmod>
  </url>
  <url>
   <loc>http://www.uibcdf.org/blog/</loc>
-  <lastmod>2017-07-26T23:51:00Z</lastmod>
+  <lastmod>2017-10-23T21:58:00Z</lastmod>
+ </url>
+ <url>
+  <loc>http://www.uibcdf.org/blog/d3-mexico-slack-workspace/</loc>
+  <lastmod>2017-10-23T21:58:00Z</lastmod>
+  <xhtml:link rel="alternate" hreflang="es" href="http://www.uibcdf.org/es/blog/d3-mexico-slack-workspace/" />
+ </url>
+ <url>
+  <loc>http://www.uibcdf.org/blog/mendeley_public_whatweread_feed/</loc>
+  <lastmod>2017-10-23T21:58:00Z</lastmod>
+  <xhtml:link rel="alternate" hreflang="es" href="http://www.uibcdf.org/es/blog/mendeley_que_leemos/" />
  </url>
  <url>
   <loc>http://www.uibcdf.org/blog/the-first-version-of-our-web-page/</loc>
@@ -65,11 +75,16 @@
  </url>
  <url>
   <loc>http://www.uibcdf.org/es/archive.html</loc>
-  <lastmod>2017-10-10T23:46:00Z</lastmod>
+  <lastmod>2017-10-23T21:58:00Z</lastmod>
  </url>
  <url>
   <loc>http://www.uibcdf.org/es/blog/</loc>
-  <lastmod>2017-07-26T23:51:00Z</lastmod>
+  <lastmod>2017-10-23T21:58:00Z</lastmod>
+ </url>
+ <url>
+  <loc>http://www.uibcdf.org/es/blog/d3-mexico-slack-workspace/</loc>
+  <lastmod>2017-10-23T21:58:00Z</lastmod>
+  <xhtml:link rel="alternate" hreflang="en" href="http://www.uibcdf.org/blog/d3-mexico-slack-workspace/" />
  </url>
  <url>
   <loc>http://www.uibcdf.org/es/blog/el-microcal-peaq-itc-esta-instalado/</loc>
@@ -85,6 +100,11 @@
   <loc>http://www.uibcdf.org/es/blog/la-uibcdf-tiene-un-logo-nuevo/</loc>
   <lastmod>2017-07-26T23:51:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="en" href="http://www.uibcdf.org/blog/the-uibcdf-has-a-new-logo/" />
+ </url>
+ <url>
+  <loc>http://www.uibcdf.org/es/blog/mendeley_que_leemos/</loc>
+  <lastmod>2017-10-23T21:58:00Z</lastmod>
+  <xhtml:link rel="alternate" hreflang="en" href="http://www.uibcdf.org/blog/mendeley_public_whatweread_feed/" />
  </url>
  <url>
   <loc>http://www.uibcdf.org/es/categories/</loc>
