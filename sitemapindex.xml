@@ -7,7 +7,7 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <sitemap>
   <loc>http://www.uibcdf.org/es/galleries/rss.xml</loc>
-  <lastmod>2018-02-02T18:44:00Z</lastmod>
+  <lastmod>2018-02-03T21:36:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>http://www.uibcdf.org/es/rss.xml</loc>
@@ -15,7 +15,7 @@
  </sitemap>
  <sitemap>
   <loc>http://www.uibcdf.org/galleries/rss.xml</loc>
-  <lastmod>2018-02-02T18:44:00Z</lastmod>
+  <lastmod>2018-02-03T21:36:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>http://www.uibcdf.org/rss.xml</loc>
@@ -23,6 +23,6 @@
  </sitemap>
  <sitemap>
   <loc>http://www.uibcdf.org/sitemap.xml</loc>
-  <lastmod>2018-02-02T18:44:00Z</lastmod>
+  <lastmod>2018-02-03T21:36:00Z</lastmod>
  </sitemap>
 </sitemapindex>

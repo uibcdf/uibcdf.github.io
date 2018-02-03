@@ -7,7 +7,7 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>http://www.uibcdf.org/</loc>
-  <lastmod>2017-10-10T18:29:00Z</lastmod>
+  <lastmod>2018-02-03T21:36:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="es" href="http://www.uibcdf.org/es/" />
  </url>
  <url>
@@ -21,7 +21,7 @@
  </url>
  <url>
   <loc>http://www.uibcdf.org/archive.html</loc>
-  <lastmod>2018-02-02T18:44:00Z</lastmod>
+  <lastmod>2018-02-03T21:36:00Z</lastmod>
  </url>
  <url>
   <loc>http://www.uibcdf.org/blog/</loc>
@@ -63,7 +63,7 @@
  </url>
  <url>
   <loc>http://www.uibcdf.org/es/</loc>
-  <lastmod>2017-07-26T23:51:00Z</lastmod>
+  <lastmod>2018-02-03T21:36:00Z</lastmod>
  </url>
  <url>
   <loc>http://www.uibcdf.org/es/2017/</loc>
@@ -123,6 +123,10 @@
   <lastmod>2017-07-26T23:51:00Z</lastmod>
  </url>
  <url>
+  <loc>http://www.uibcdf.org/es/journal_club/</loc>
+  <lastmod>2018-02-03T21:36:00Z</lastmod>
+ </url>
+ <url>
   <loc>http://www.uibcdf.org/es/members/</loc>
   <lastmod>2017-10-11T23:57:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="en" href="http://www.uibcdf.org/members/" />
@@ -161,6 +165,11 @@
  <url>
   <loc>http://www.uibcdf.org/galleries/</loc>
   <lastmod>2017-07-26T23:51:00Z</lastmod>
+ </url>
+ <url>
+  <loc>http://www.uibcdf.org/journal_club/</loc>
+  <lastmod>2018-02-03T21:36:00Z</lastmod>
+  <xhtml:link rel="alternate" hreflang="es" href="http://www.uibcdf.org/es/journal_club/" />
  </url>
  <url>
   <loc>http://www.uibcdf.org/members/</loc>
