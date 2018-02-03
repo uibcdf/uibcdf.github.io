@@ -139,6 +139,7 @@ NAVIGATION_LINKS = {
         ("/research/", "Research"),
         ("/resources/", "Resources"),
         ("/publications/", "Publications"),
+        ("/journal_club/", "Journal Club"),
         ("/blog/", "News"),
         ("/funding/", "Funding"),
         ("/positions/", "Positions"),
