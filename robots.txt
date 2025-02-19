@@ -1,4 +1,0 @@
-Sitemap: http://www.uibcdf.org/sitemapindex.xml
-
-User-Agent: *
-Host: www.uibcdf.org
