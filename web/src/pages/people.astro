@@ -1,5 +1,11 @@
 ---
+import { getCollection } from 'astro:content';
+import ContentCard from '../components/ContentCard.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const profiles = (await getCollection('people', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
 ---
 
 <BaseLayout
@@ -8,7 +14,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   ctaLabel="Contact UIBCDF"
   ctaHref="/contact"
 >
-  <section class="card">
-    <p>This route is part of the MVP sitemap and will render profile entries from content collections.</p>
-  </section>
+  {
+    profiles.length === 0 ? (
+      <p class="card">No published profiles yet.</p>
+    ) : (
+      <div class="grid">
+        {profiles.map((entry) => (
+          <ContentCard
+            title={entry.data.title}
+            summary={entry.data.summary}
+            date={entry.data.date}
+            tags={entry.data.tags}
+          />
+        ))}
+      </div>
+    )
+  }
 </BaseLayout>

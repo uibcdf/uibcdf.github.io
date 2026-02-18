@@ -1,14 +1,66 @@
 ---
+import { getCollection } from 'astro:content';
+import ContentCard from '../components/ContentCard.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const tags = ['all', 'seminar', 'news', 'publication', 'software', 'event', 'opportunity'];
+
+const updates = (await getCollection('updates', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
 ---
 
 <BaseLayout
   title="Updates"
   description="Unified stream for seminars, news, publications, software releases, events, and opportunities."
-  ctaLabel="Propose a collaboration"
+  ctaLabel="Contact UIBCDF"
   ctaHref="/contact"
 >
   <section class="card">
-    <p>This route is part of the MVP sitemap and will render updates with tag-based filtering.</p>
+    <h2>Filter by tag</h2>
+    <div class="tag-filters" role="group" aria-label="Update tags">
+      {
+        tags.map((tag) => (
+          <button class="tag-button" type="button" data-filter={tag}>
+            {tag}
+          </button>
+        ))
+      }
+    </div>
   </section>
+
+  {
+    updates.length === 0 ? (
+      <p class="card">No published updates yet.</p>
+    ) : (
+      <div class="grid" id="updates-grid">
+        {updates.map((entry) => (
+          <div data-tags={entry.data.tags.join(',')}>
+            <ContentCard
+              title={entry.data.title}
+              summary={entry.data.summary}
+              date={entry.data.date}
+              tags={entry.data.tags}
+            />
+          </div>
+        ))}
+      </div>
+    )
+  }
+
+  <script>
+    const buttons = document.querySelectorAll('.tag-button');
+    const cards = document.querySelectorAll('#updates-grid > div');
+
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const filter = button.getAttribute('data-filter');
+        cards.forEach((card) => {
+          const tagList = card.getAttribute('data-tags') ?? '';
+          const show = filter === 'all' || tagList.split(',').includes(filter ?? '');
+          card.style.display = show ? '' : 'none';
+        });
+      });
+    });
+  </script>
 </BaseLayout>

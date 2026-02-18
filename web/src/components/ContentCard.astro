@@ -1,0 +1,27 @@
+---
+interface Props {
+  title: string;
+  summary: string;
+  date: Date;
+  tags?: string[];
+}
+
+const { title, summary, date, tags = [] } = Astro.props;
+---
+
+<article class="card card-entry">
+  <div class="card-meta">
+    <p>{date.toISOString().slice(0, 10)}</p>
+    {
+      tags.length > 0 && (
+        <ul class="tag-list" aria-label="Tags">
+          {tags.map((tag) => (
+            <li>{tag}</li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+  <h2>{title}</h2>
+  <p>{summary}</p>
+</article>

@@ -1,15 +1,36 @@
 ---
+import { getCollection } from 'astro:content';
+import ContentCard from '../components/ContentCard.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const latestUpdates = (await getCollection('updates', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 5);
 ---
 
 <BaseLayout
-  title="Computational Biomedicine with scientific focus"
-  description="UIBCDF is a public research unit developing computational methods and open software for biomolecular science."
+  title="Computational biomedicine with scientific focus"
+  description="UIBCDF is a public research unit building computational methods and open software for biomolecular science."
   ctaLabel="Read latest updates"
   ctaHref="/updates"
 >
-  <section class="card">
-    <h2>Highlights</h2>
-    <p>Minimal MVP home scaffold. Next commits connect this page to real content collections.</p>
+  <section>
+    <h2>Latest updates</h2>
+    {
+      latestUpdates.length === 0 ? (
+        <p class="card">No published updates yet. Draft entries are currently hidden.</p>
+      ) : (
+        <div class="grid">
+          {latestUpdates.map((entry) => (
+            <ContentCard
+              title={entry.data.title}
+              summary={entry.data.summary}
+              date={entry.data.date}
+              tags={entry.data.tags}
+            />
+          ))}
+        </div>
+      )
+    }
   </section>
 </BaseLayout>
