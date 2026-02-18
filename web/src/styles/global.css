@@ -35,9 +35,15 @@ footer {
 }
 
 .brand {
-  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
   text-decoration: none;
-  color: var(--text);
+}
+
+.brand img {
+  display: block;
+  height: 1.95rem;
+  width: auto;
 }
 
 nav ul {

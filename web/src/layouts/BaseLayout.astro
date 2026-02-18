@@ -52,7 +52,9 @@ const navItems = [
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href="/">UIBCDF</a>
+      <a class="brand" href="/" aria-label="UIBCDF home">
+        <img src="/logo-uibcdf.svg" alt="UIBCDF" />
+      </a>
       <nav aria-label="Main navigation">
         <ul>
           {navItems.map((item) => (
