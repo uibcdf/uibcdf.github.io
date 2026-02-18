@@ -55,3 +55,17 @@ This repository is the org/user Pages site (`uibcdf.github.io`) and serves as th
 
 **Decision**  
 Configure Astro `site` and `base` accordingly (details in `devguide/05_build_and_deploy.md`).
+
+---
+
+## 2026-02-18 — MVP scaffold and deployment pipeline implemented
+
+**Context**  
+Planning decisions were approved and needed to be materialized in repository code.
+
+**Decision**  
+Implement the minimum executable Astro scaffold in `web/`, wire the MVP routes to content collections, and add GitHub Actions deployment to `gh-pages`.
+
+**Consequences**  
+- Repository now contains a buildable Astro project and locked dependencies (`web/package-lock.json`).
+- `main` branch changes are deployable through CI to GitHub Pages.
