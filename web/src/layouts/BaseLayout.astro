@@ -6,9 +6,13 @@ interface Props {
   description: string;
   ctaLabel: string;
   ctaHref: string;
+  ogImage?: string;
 }
 
-const { title, description, ctaLabel, ctaHref } = Astro.props;
+const { title, description, ctaLabel, ctaHref, ogImage } = Astro.props;
+const pageTitle = `${title} | UIBCDF`;
+const canonicalUrl = Astro.url.href;
+const ogImageUrl = new URL(ogImage ?? '/og-default.svg', Astro.site).toString();
 
 const navItems = [
   { href: '/research', label: 'Research' },
@@ -24,8 +28,22 @@ const navItems = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="index,follow" />
     <meta name="description" content={description} />
-    <title>{title} | UIBCDF</title>
+    <link rel="canonical" href={canonicalUrl} />
+    <title>{pageTitle}</title>
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="UIBCDF" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
   </head>
   <body>
     <header class="site-header">
