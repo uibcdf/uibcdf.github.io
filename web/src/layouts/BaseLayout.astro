@@ -1,0 +1,54 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  ctaLabel: string;
+  ctaHref: string;
+}
+
+const { title, description, ctaLabel, ctaHref } = Astro.props;
+
+const navItems = [
+  { href: '/research', label: 'Research' },
+  { href: '/people', label: 'People' },
+  { href: '/publications', label: 'Publications' },
+  { href: '/software', label: 'Software' },
+  { href: '/updates', label: 'Updates' },
+  { href: '/contact', label: 'Contact' },
+];
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <title>{title} | UIBCDF</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">UIBCDF</a>
+      <nav aria-label="Main navigation">
+        <ul>
+          {navItems.map((item) => (
+            <li><a href={item.href}>{item.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section class="hero">
+        <h1>{title}</h1>
+        <p>{description}</p>
+        <a class="cta" href={ctaHref}>{ctaLabel}</a>
+      </section>
+      <section class="content">
+        <slot />
+      </section>
+    </main>
+    <footer>
+      <p>UIBCDF · University of the Balearic Islands</p>
+    </footer>
+  </body>
+</html>

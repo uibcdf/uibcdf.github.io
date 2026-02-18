@@ -1,0 +1,94 @@
+:root {
+  --bg: #f6f7f7;
+  --surface: #ffffff;
+  --text: #11211f;
+  --muted: #4e615d;
+  --line: #d5dedc;
+  --accent: #0b6457;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  background: linear-gradient(180deg, #f8f9f8 0%, #f0f3f2 100%);
+  color: var(--text);
+  line-height: 1.55;
+}
+
+.site-header,
+main,
+footer {
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: 1.25rem;
+}
+
+.site-header {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--text);
+}
+
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: var(--accent);
+}
+
+.hero {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 1.5rem;
+}
+
+.hero h1 {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  margin-bottom: 0.5rem;
+}
+
+.cta {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.55rem 0.9rem;
+  text-decoration: none;
+  color: #fff;
+  background: var(--accent);
+  border-radius: 0.35rem;
+}
+
+.content {
+  padding-top: 1.75rem;
+}
+
+section + section {
+  margin-top: 1.5rem;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 0.45rem;
+  padding: 1rem;
+}
+
+footer {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
