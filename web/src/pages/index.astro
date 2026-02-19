@@ -274,9 +274,14 @@ const hubItems = [
     const updatesPin = document.querySelector('.updates-pin');
     const updatesTitle = document.querySelector('.updates-panel h2');
     const hubCue = document.querySelector('.scroll-cue--hub');
+    const updatesCue = document.querySelector('.scroll-cue--updates');
     const contactStage = document.querySelector('.contact-stage');
     const contactPanel = document.querySelector('.contact-panel');
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Ensure S0 starts visibly gray on first paint of Home.
+    document.documentElement.style.setProperty('--s0-gray-alpha', '0.85');
+    document.documentElement.style.setProperty('--s3-warm-alpha', '0');
 
     if (stage && figure && !reducedMotion) {
       let ticking = false;
@@ -350,6 +355,8 @@ const hubItems = [
         const span = Math.max(420, stageHeight - viewport * 0.6);
         const raw = (scrollY - start) / span;
         const progress = Math.max(0, Math.min(1, raw));
+        const grayAlpha = (0.85 * (1 - progress)).toFixed(3);
+        document.documentElement.style.setProperty('--s0-gray-alpha', grayAlpha);
 
         const translateY = -120 * progress;
         const opacity = 1 - 0.9 * progress;
@@ -416,6 +423,13 @@ const hubItems = [
           ? Math.max(0, Math.min(1, snakeRaw))
           : 0;
         targetLineSnake = snakeProgress;
+
+        // Fade out S2 cue during T23 so it is fully gone at S3.
+        if (updatesCue) updatesCue.style.opacity = (1 - snakeProgress).toFixed(3);
+
+        // Warm tint appears only in T23 and settles at S3.
+        const warmAlpha = (0.34 * snakeProgress).toFixed(3);
+        document.documentElement.style.setProperty('--s3-warm-alpha', warmAlpha);
 
         const panelHeight = contactPanel?.clientHeight ?? 0;
         const verticalTarget = Math.max(0, panelHeight - 18);

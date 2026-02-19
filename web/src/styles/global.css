@@ -9,6 +9,8 @@
   --warm-1: #ffcc00;
   --warm-2: #ce5027;
   --hero-lock-height: clamp(11.25rem, 21vh, 13.75rem);
+  --s0-gray-alpha: 0.85;
+  --s3-warm-alpha: 0;
 }
 
 * {
@@ -18,7 +20,18 @@
 body {
   margin: 0;
   font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
-  background: linear-gradient(180deg, #f8fbff 0%, #eff4fb 100%);
+  background:
+    linear-gradient(
+      180deg,
+      rgb(248 205 158 / var(--s3-warm-alpha, 0)) 0%,
+      rgb(239 187 137 / var(--s3-warm-alpha, 0)) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgb(217 222 227 / var(--s0-gray-alpha, 0)) 0%,
+      rgb(206 212 218 / var(--s0-gray-alpha, 0)) 100%
+    ),
+    linear-gradient(180deg, #f8fbff 0%, #eff4fb 100%);
   color: var(--text);
   line-height: 1.55;
 }
@@ -83,10 +96,11 @@ a {
 }
 
 .hero {
-  border-bottom: 1px solid var(--line);
+  border-bottom: none;
   padding-bottom: 1.5rem;
   position: relative;
   text-align: center;
+  background: transparent;
 }
 
 .hero h1 {
@@ -161,6 +175,15 @@ section + section {
   padding: 0.75rem;
   position: sticky;
   top: 1rem;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.hero-visual.card {
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
 
 .hero-visual img {
@@ -236,9 +259,9 @@ section + section {
   flex-direction: column;
   width: 100%;
   min-height: clamp(24rem, 62vh, 31rem);
-  border: 1px solid var(--line);
+  border: none;
   border-radius: 0.55rem;
-  background: var(--surface);
+  background: transparent;
   padding: 1.1rem;
 }
 
@@ -300,7 +323,7 @@ section + section {
   border: 1px solid #c8d8ef;
   border-radius: 999px;
   color: var(--accent);
-  background: #f3f8ff;
+  background: transparent;
 }
 
 .contact-icon svg {
@@ -379,8 +402,8 @@ section + section {
 }
 
 .scroll-cue svg {
-  width: 1.4rem;
-  height: 1.4rem;
+  width: 1.54rem;
+  height: 1.54rem;
   stroke: currentColor;
   stroke-width: 2;
   stroke-linecap: round;
@@ -512,7 +535,7 @@ footer {
   }
 
   50% {
-    transform: translateY(0.24rem);
+    transform: translateY(0.34rem);
   }
 }
 
@@ -526,7 +549,7 @@ footer {
     top: 0.5rem;
     z-index: 2;
     min-height: var(--hero-lock-height);
-    background: linear-gradient(180deg, #f8fbff 0%, #f8fbff 78%, rgba(248, 251, 255, 0.92) 100%);
+    background: transparent;
     backdrop-filter: blur(1px);
   }
 }
