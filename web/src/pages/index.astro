@@ -6,44 +6,442 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const latestUpdates = (await getCollection('updates', ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, 5);
+
+const homeTitle = 'Computational Biology and Drug Design Research Unit';
+const contactChannels = [
+  { id: 'email', label: 'Email' },
+  { id: 'phone', label: 'Phone' },
+  { id: 'x', label: 'X' },
+  { id: 'bluesky', label: 'Bluesky' },
+  { id: 'linkedin', label: 'LinkedIn' },
+  { id: 'github', label: 'GitHub' },
+  { id: 'youtube', label: 'YouTube' },
+  { id: 'osf', label: 'Open Science Framework' },
+];
+
+const hubItems = [
+  {
+    href: '/research',
+    title: 'Research',
+    description: 'Lines and methods',
+    icon: 'research',
+  },
+  {
+    href: '/people',
+    title: 'People',
+    description: 'Team and collaborators',
+    icon: 'people',
+  },
+  {
+    href: '/publications',
+    title: 'Publications',
+    description: 'Selected scientific output',
+    icon: 'publications',
+  },
+  {
+    href: '/software',
+    title: 'Software',
+    description: 'Open tools and docs',
+    icon: 'software',
+  },
+  {
+    href: '/updates',
+    title: 'Updates',
+    description: 'News and announcements',
+    icon: 'updates',
+  },
+  {
+    href: '/contact',
+    title: 'Contact',
+    description: 'Collaborate with us',
+    icon: 'contact',
+  },
+];
 ---
 
 <BaseLayout
-  title="Computational Biology and Drug Design Research Unit"
+  title={homeTitle}
+  heroClass="home-hero"
+  hideFooter={true}
   subtitle="Federico Gomez Children's Hospital of Mexico · Mexican National Institute of Health"
   description="Advancing open biomolecular science through computational methods and thermodynamic binding validation."
-  ctaLabel="Read latest updates"
-  ctaHref="/updates"
 >
-  <section class="hero-visual card">
-    <img
-      src="/images/mainboard1.png"
-      alt="Protein cartoon representation with bound ligand in UIBCDF brand colors."
-      loading="eager"
-    />
+  <section class="parallax-stage" data-parallax-stage>
+    <div class="parallax-figure" data-parallax-figure>
+      <div class="scroll-cue scroll-cue--between" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M5 9l7 7 7-7" />
+        </svg>
+      </div>
+      <div class="hero-visual card">
+        <img
+          src="/images/mainboard1.png"
+          alt="Protein cartoon representation with bound ligand in UIBCDF brand colors."
+          loading="eager"
+        />
+      </div>
+    </div>
   </section>
 
-  <section class="hero-frieze" aria-hidden="true">
-    <img src="/images/mainboard1-detail.png" alt="" loading="lazy" />
-  </section>
+  <section class="home-hub-stage">
+    <div class="home-hub-pin">
+      <section class="hero-frieze" aria-hidden="true">
+        <img src="/images/mainboard1-detail.png" alt="" loading="lazy" />
+      </section>
 
-  <section>
-    <h2>Latest updates</h2>
-    {
-      latestUpdates.length === 0 ? (
-        <p class="card">No published updates yet. Draft entries are currently hidden.</p>
-      ) : (
-        <div class="grid">
-          {latestUpdates.map((entry) => (
-            <ContentCard
-              title={entry.data.title}
-              summary={entry.data.summary}
-              date={entry.data.date}
-              tags={entry.data.tags}
-            />
-          ))}
+      <section aria-label="Main sections">
+        <div class="hub-grid">
+          {
+            hubItems.map((item) => (
+              <a class="hub-card" href={item.href}>
+                <span class="hub-icon" aria-hidden="true">
+                  {item.icon === 'research' && (
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <circle cx="11" cy="11" r="6.5" />
+                      <path d="M16 16L21 21" />
+                    </svg>
+                  )}
+                  {item.icon === 'people' && (
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <circle cx="8" cy="8" r="3.5" />
+                      <circle cx="16.5" cy="9.5" r="2.5" />
+                      <path d="M3 20c.8-3 2.8-4.5 5-4.5s4.2 1.5 5 4.5" />
+                      <path d="M13 20c.6-2 2-3.2 3.9-3.2 1.7 0 2.8.9 3.4 3.2" />
+                    </svg>
+                  )}
+                  {item.icon === 'publications' && (
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <rect x="5" y="3.5" width="14" height="17" rx="2" />
+                      <path d="M8.5 8h7M8.5 12h7M8.5 16h4.5" />
+                    </svg>
+                  )}
+                  {item.icon === 'software' && (
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <rect x="3.5" y="4" width="17" height="12.5" rx="2" />
+                      <path d="M7.5 20h9M12 16.5V20" />
+                    </svg>
+                  )}
+                  {item.icon === 'updates' && (
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M4 19.5V8.5m5 11V4.5m5 15V11m5 8.5V6.5" />
+                    </svg>
+                  )}
+                  {item.icon === 'contact' && (
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <rect x="3.5" y="5" width="17" height="14" rx="2" />
+                      <path d="M5 7l7 6 7-6" />
+                    </svg>
+                  )}
+                </span>
+                <h2>{item.title}</h2>
+                <p>{item.description}</p>
+              </a>
+            ))
+          }
         </div>
-      )
-    }
+      </section>
+
+      <div class="scroll-cue scroll-cue--hub" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M5 9l7 7 7-7" />
+        </svg>
+      </div>
+    </div>
   </section>
+
+  <section class="updates-stage">
+    <div class="updates-pin">
+      <section class="updates-panel">
+        <h2>Latest updates</h2>
+        {
+          latestUpdates.length === 0 ? (
+            <p class="card">No published updates yet. Draft entries are currently hidden.</p>
+          ) : (
+            <div class="grid">
+              {latestUpdates.map((entry) => (
+                <ContentCard
+                  title={entry.data.title}
+                  summary={entry.data.summary}
+                  date={entry.data.date}
+                  tags={entry.data.tags}
+                />
+              ))}
+            </div>
+          )
+        }
+      </section>
+
+      <div class="scroll-cue scroll-cue--updates" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M5 9l7 7 7-7" />
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-stage">
+    <div class="contact-panel">
+      <div class="contact-top-wrap">
+        <div class="contact-top">
+          <div class="contact-logo">
+            <img src="/logo-uibcdf-vertical-path.svg" alt="UIBCDF vertical logo" loading="lazy" />
+          </div>
+          <p class="contact-copy">
+            Unidad de Investigación en Biología Computacional y Diseño de Fármacos
+            <br />
+            Hospital Infantil de México Federico Gómez
+            <br />
+            Torre de Hemato-Oncología e Investigación
+            <br />
+            Calle Dr. Márquez 162, Delegación Cuauhtémoc
+            <br />
+            06720, Ciudad de México, México.
+          </p>
+        </div>
+      </div>
+
+      <div class="contact-icons" aria-label="Contact and social channels">
+        {
+          contactChannels.map((channel) => (
+            <div class="contact-icon-item" title={channel.label} aria-label={channel.label}>
+              <span class="contact-icon" aria-hidden="true">
+                {channel.id === 'email' && (
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <rect x="3.5" y="5" width="17" height="14" rx="2.2" />
+                    <path d="M5 7l7 6 7-6" />
+                  </svg>
+                )}
+                {channel.id === 'phone' && (
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M7.2 4.2h3.2l1 3.5-1.8 1.7a11.7 11.7 0 0 0 5 5l1.7-1.8 3.5 1v3.2a1.9 1.9 0 0 1-2.1 2A15.8 15.8 0 0 1 5.2 6.3a1.9 1.9 0 0 1 2-2.1Z" />
+                  </svg>
+                )}
+                {channel.id === 'x' && (
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M5 4.5h3.2L19 19.5h-3.2L5 4.5Z" />
+                    <path d="M19 4.5 5 19.5" />
+                  </svg>
+                )}
+                {channel.id === 'bluesky' && (
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M12 11.6c1.6-2.4 3.5-4 6.1-5-.4 2.7-1.5 4.7-3.3 6.1 1.5.1 2.8.5 3.9 1.4-1.8.8-3.6 1-5.4.6-.2 1.8-1.1 3.3-3.1 4.4-2-1.1-2.9-2.6-3.1-4.4-1.8.4-3.6.2-5.4-.6 1.1-.9 2.4-1.3 3.9-1.4-1.8-1.4-2.9-3.4-3.3-6.1 2.6 1 4.5 2.6 6.1 5Z" />
+                  </svg>
+                )}
+                {channel.id === 'linkedin' && (
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M5.2 6.3h.01" />
+                    <path d="M4.2 9.3h2v9.5h-2z" />
+                    <path d="M9.2 9.3h2v1.4h.1c.5-.9 1.5-1.8 3.2-1.8 2.6 0 3.4 1.8 3.4 4.2v5.7h-2.1v-5.1c0-1.2-.2-2.6-1.9-2.6-1.6 0-2.4 1.2-2.4 2.6v5.1H9.2V9.3Z" />
+                  </svg>
+                )}
+                {channel.id === 'github' && (
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M12 3.8a8.6 8.6 0 0 0-2.7 16.8v-2.7c-2.5.5-3-1.1-3-1.1-.4-1.1-1-1.4-1-1.4-.8-.5.1-.5.1-.5.9.1 1.4.9 1.4.9.8 1.3 2.1.9 2.6.7.1-.6.3-1 .6-1.3-2-.2-4.1-1-4.1-4.5 0-1 .4-1.9 1-2.6-.1-.3-.4-1.2.1-2.4 0 0 .9-.3 2.8 1a9.5 9.5 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .5 1.2.2 2.1.1 2.4.6.7 1 1.6 1 2.6 0 3.5-2.1 4.3-4.1 4.5.4.4.7 1 .7 2v3.1A8.6 8.6 0 0 0 12 3.8Z" />
+                  </svg>
+                )}
+                {channel.id === 'youtube' && (
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <rect x="3.5" y="6.5" width="17" height="11" rx="3" />
+                    <path d="m10 9.5 5 3-5 3v-6Z" />
+                  </svg>
+                )}
+                {channel.id === 'osf' && (
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="8.5" />
+                    <circle cx="8.7" cy="10.2" r="1.2" />
+                    <circle cx="15.3" cy="10.2" r="1.2" />
+                    <circle cx="12" cy="15.4" r="1.2" />
+                    <path d="M9.7 10.8 11.2 14" />
+                    <path d="M14.3 10.8 12.8 14" />
+                    <path d="M10 10.2h4" />
+                  </svg>
+                )}
+              </span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const stage = document.querySelector('[data-parallax-stage]');
+    const figure = stage?.querySelector('[data-parallax-figure]');
+    const hero = document.querySelector('.home-hero');
+    const hubStage = document.querySelector('.home-hub-stage');
+    const hubPin = document.querySelector('.home-hub-pin');
+    const updatesStage = document.querySelector('.updates-stage');
+    const updatesPin = document.querySelector('.updates-pin');
+    const updatesTitle = document.querySelector('.updates-panel h2');
+    const hubCue = document.querySelector('.scroll-cue--hub');
+    const contactStage = document.querySelector('.contact-stage');
+    const contactPanel = document.querySelector('.contact-panel');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (stage && figure && !reducedMotion) {
+      let ticking = false;
+      let startScale = 0.18;
+      let lineStartScroll = null;
+      let lineShiftStartScroll = null;
+      let targetLineScale = startScale;
+      let targetLineShift = 0;
+      let targetLineSnake = 0;
+      let targetLineVertical = 0;
+      let currentLineScale = startScale;
+      let currentLineShift = 0;
+      let currentLineSnake = 0;
+      let currentLineVertical = 0;
+      let smoothingFrame = null;
+
+      const runSmoothing = () => {
+        const lerp = 0.2;
+        currentLineScale += (targetLineScale - currentLineScale) * lerp;
+        currentLineShift += (targetLineShift - currentLineShift) * lerp;
+        currentLineSnake += (targetLineSnake - currentLineSnake) * lerp;
+        currentLineVertical += (targetLineVertical - currentLineVertical) * lerp;
+
+        hero?.style.setProperty('--hero-line-scale', currentLineScale.toFixed(4));
+        hero?.style.setProperty('--hero-line-shift', `${currentLineShift.toFixed(2)}px`);
+        hero?.style.setProperty('--hero-line-snake', currentLineSnake.toFixed(4));
+        hero?.style.setProperty('--hero-line-vertical', `${currentLineVertical.toFixed(2)}px`);
+
+        const scaleDone = Math.abs(targetLineScale - currentLineScale) < 0.0008;
+        const shiftDone = Math.abs(targetLineShift - currentLineShift) < 0.25;
+        const snakeDone = Math.abs(targetLineSnake - currentLineSnake) < 0.002;
+        const verticalDone = Math.abs(targetLineVertical - currentLineVertical) < 0.25;
+
+        if (scaleDone && shiftDone && snakeDone && verticalDone) {
+          hero?.style.setProperty('--hero-line-scale', targetLineScale.toFixed(4));
+          hero?.style.setProperty('--hero-line-shift', `${targetLineShift.toFixed(2)}px`);
+          hero?.style.setProperty('--hero-line-snake', targetLineSnake.toFixed(4));
+          hero?.style.setProperty('--hero-line-vertical', `${targetLineVertical.toFixed(2)}px`);
+          smoothingFrame = null;
+          return;
+        }
+
+        smoothingFrame = requestAnimationFrame(runSmoothing);
+      };
+
+      const scheduleSmoothing = () => {
+        if (smoothingFrame !== null) return;
+        smoothingFrame = requestAnimationFrame(runSmoothing);
+      };
+
+      const updateStartScale = () => {
+        if (!hero) return;
+        const rem = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+        const shortSegmentPx = 8.5 * rem;
+        const heroWidth = hero.clientWidth || 1;
+        startScale = Math.max(0.08, Math.min(0.96, shortSegmentPx / heroWidth));
+        targetLineScale = startScale;
+        currentLineScale = startScale;
+        hero.style.setProperty('--hero-line-scale', startScale.toFixed(4));
+        hero.style.setProperty('--hero-line-shift', '0px');
+        hero.style.setProperty('--hero-line-snake', '0');
+        hero.style.setProperty('--hero-line-vertical', '0px');
+      };
+
+      const updateParallax = () => {
+        const stageTop = stage.offsetTop;
+        const stageHeight = stage.offsetHeight;
+        const viewport = window.innerHeight || 1;
+        const scrollY = window.scrollY || window.pageYOffset;
+        const start = Math.max(0, stageTop - viewport * 0.05);
+        const span = Math.max(420, stageHeight - viewport * 0.6);
+        const raw = (scrollY - start) / span;
+        const progress = Math.max(0, Math.min(1, raw));
+
+        const translateY = -120 * progress;
+        const opacity = 1 - 0.9 * progress;
+        figure.style.transform = `translateY(${translateY}px)`;
+        figure.style.opacity = Math.max(0.08, opacity).toFixed(3);
+
+        // Start line growth exactly when the hero reaches its sticky lock point.
+        const heroStickyTop = hero ? parseFloat(getComputedStyle(hero).top) || 0 : 0;
+        const heroTopNow = hero?.getBoundingClientRect().top ?? Number.POSITIVE_INFINITY;
+        if (lineStartScroll === null && heroTopNow <= heroStickyTop + 0.5) {
+          lineStartScroll = scrollY;
+        }
+
+        const lineStart = lineStartScroll ?? Number.POSITIVE_INFINITY;
+
+        // End line growth at frieze lock (when hub pin reaches its sticky top).
+        const hubTop = hubStage?.offsetTop ?? stageTop;
+        const pinTop = hubPin ? parseFloat(getComputedStyle(hubPin).top) || 0 : 0;
+        const lineEnd = Math.max(lineStart + 1, hubTop - pinTop);
+        const lineRaw = Number.isFinite(lineStart)
+          ? (scrollY - lineStart) / Math.max(1, lineEnd - lineStart)
+          : 0;
+        const lineProgress = Math.max(0, Math.min(1, lineRaw));
+
+        const lineScale = startScale + (1 - startScale) * lineProgress;
+        targetLineScale = lineScale;
+        hero?.style.setProperty('--hero-line-progress', lineProgress.toFixed(3));
+
+        // Start moving the line only when the hub cue is about to pass below the line.
+        const heroBottom = hero?.getBoundingClientRect().bottom ?? 0;
+        const hubCueTop = hubCue?.getBoundingClientRect().top ?? Number.POSITIVE_INFINITY;
+        if (lineShiftStartScroll === null && hubCueTop <= heroBottom + 2) {
+          lineShiftStartScroll = scrollY;
+        }
+
+        // After that trigger, move the line down until it underlines "Latest updates" at the second lock.
+        const updatesTop = updatesStage?.offsetTop ?? hubTop;
+        const updatesPinTop = updatesPin ? parseFloat(getComputedStyle(updatesPin).top) || 0 : 0;
+        const updatesLock = Math.max((lineShiftStartScroll ?? lineEnd) + 1, updatesTop - updatesPinTop);
+        const shiftStart = lineShiftStartScroll ?? Number.POSITIVE_INFINITY;
+        const shiftRaw = Number.isFinite(shiftStart)
+          ? (scrollY - shiftStart) / Math.max(1, updatesLock - shiftStart)
+          : 0;
+        const shiftProgress = Math.max(0, Math.min(1, shiftRaw));
+
+        const updatesTitleBottom = updatesTitle?.getBoundingClientRect().bottom ?? heroBottom;
+        const targetShift = Math.max(0, updatesTitleBottom + 6 - heroBottom);
+        const lineShift = targetShift * shiftProgress;
+        targetLineShift = lineShift;
+
+        // Snake phase starts when "Latest updates" begins to move up (end of its sticky interval).
+        const contactTop = contactStage?.offsetTop ?? updatesTop + viewport;
+        const updatesStageHeight = updatesStage?.offsetHeight ?? 0;
+        const updatesPinHeight = updatesPin?.offsetHeight ?? 0;
+        const updatesRelease = updatesTop + updatesStageHeight - updatesPinHeight - updatesPinTop;
+        const snakeStart = Math.max(updatesLock, updatesRelease);
+        const snakeEnd = Number.isFinite(snakeStart)
+          ? Math.max(snakeStart + 1, contactTop - viewport * 0.18)
+          : Number.POSITIVE_INFINITY;
+        const snakeRaw = Number.isFinite(snakeStart) && Number.isFinite(snakeEnd)
+          ? (scrollY - snakeStart) / Math.max(1, snakeEnd - snakeStart)
+          : 0;
+        const snakeProgress = Number.isFinite(snakeRaw)
+          ? Math.max(0, Math.min(1, snakeRaw))
+          : 0;
+        targetLineSnake = snakeProgress;
+
+        const panelHeight = contactPanel?.clientHeight ?? 0;
+        const verticalTarget = Math.max(0, panelHeight - 18);
+        targetLineVertical = Number.isFinite(snakeProgress) ? verticalTarget * snakeProgress : 0;
+
+        scheduleSmoothing();
+
+        ticking = false;
+      };
+
+      const requestUpdate = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(updateParallax);
+      };
+
+      updateStartScale();
+      hero?.classList.add('line-animated');
+      updateParallax();
+      window.addEventListener('scroll', requestUpdate, { passive: true });
+      window.addEventListener('resize', () => {
+        updateStartScale();
+        targetLineScale = Math.max(targetLineScale, startScale);
+        currentLineScale = Math.max(currentLineScale, startScale);
+        requestUpdate();
+      });
+    }
+  </script>
 </BaseLayout>

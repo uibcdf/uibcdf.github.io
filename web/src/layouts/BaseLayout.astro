@@ -4,13 +4,16 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description: string;
-  ctaLabel: string;
-  ctaHref: string;
+  ctaLabel?: string;
+  ctaHref?: string;
   ogImage?: string;
   subtitle?: string;
+  heroClass?: string;
+  hideFooter?: boolean;
 }
 
-const { title, description, ctaLabel, ctaHref, ogImage, subtitle } = Astro.props;
+const { title, description, ctaLabel, ctaHref, ogImage, subtitle, heroClass, hideFooter } =
+  Astro.props;
 const pageTitle = `${title} | UIBCDF`;
 const canonicalUrl = Astro.url.href;
 const ogImageUrl = new URL(ogImage ?? '/og-default.svg', Astro.site).toString();
@@ -65,18 +68,22 @@ const navItems = [
       </nav>
     </header>
     <main>
-      <section class="hero">
+      <section class:list={['hero', heroClass]}>
         <h1>{title}</h1>
         {subtitle && <p class="hero-subtitle">{subtitle}</p>}
         <p>{description}</p>
-        <a class="cta" href={ctaHref}>{ctaLabel}</a>
+        {ctaLabel && ctaHref && <a class="cta" href={ctaHref}>{ctaLabel}</a>}
       </section>
       <section class="content">
         <slot />
       </section>
     </main>
-    <footer>
-      <p>Federico Gomez Children's Hospital of Mexico · Mexican National Institute of Health</p>
-    </footer>
+    {
+      !hideFooter && (
+        <footer>
+          <p>Federico Gomez Children's Hospital of Mexico · Mexican National Institute of Health</p>
+        </footer>
+      )
+    }
   </body>
 </html>
