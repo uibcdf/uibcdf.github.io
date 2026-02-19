@@ -553,3 +553,10 @@ footer {
     backdrop-filter: blur(1px);
   }
 }
+
+@media (min-width: 75rem) {
+  /* Desktop scale-up so 100% zoom resembles the previous 150% comfortable view. */
+  html {
+    font-size: 20px;
+  }
+}
