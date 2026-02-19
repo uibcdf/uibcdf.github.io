@@ -75,6 +75,12 @@ a {
   margin-bottom: 0.5rem;
 }
 
+.hero-subtitle {
+  margin: 0 0 0.35rem;
+  color: var(--muted);
+  font-size: 0.97rem;
+}
+
 .cta {
   display: inline-block;
   margin-top: 0.5rem;
@@ -102,6 +108,33 @@ a {
 
 section + section {
   margin-top: 1.5rem;
+}
+
+.hero-visual {
+  padding: 0.75rem;
+}
+
+.hero-visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0.35rem;
+}
+
+.hero-frieze {
+  border: 1px solid var(--line);
+  border-radius: 0.45rem;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.hero-frieze img {
+  display: block;
+  width: 100%;
+  height: clamp(5.2rem, 9vw, 7.5rem);
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.92;
 }
 
 .grid {

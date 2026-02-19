@@ -9,11 +9,24 @@ const latestUpdates = (await getCollection('updates', ({ data }) => !data.draft)
 ---
 
 <BaseLayout
-  title="Computational biomedicine with scientific focus"
-  description="UIBCDF is a public research unit building computational methods and open software for biomolecular science."
+  title="Computational Biology and Drug Design Research Unit"
+  subtitle="Federico Gomez Children's Hospital of Mexico · Mexican National Institute of Health"
+  description="Advancing open biomolecular science through computational methods and thermodynamic binding validation."
   ctaLabel="Read latest updates"
   ctaHref="/updates"
 >
+  <section class="hero-visual card">
+    <img
+      src="/images/mainboard1.png"
+      alt="Protein cartoon representation with bound ligand in UIBCDF brand colors."
+      loading="eager"
+    />
+  </section>
+
+  <section class="hero-frieze" aria-hidden="true">
+    <img src="/images/mainboard1-detail.png" alt="" loading="lazy" />
+  </section>
+
   <section>
     <h2>Latest updates</h2>
     {
