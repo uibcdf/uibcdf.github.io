@@ -31,7 +31,10 @@ const allNavItems = [
 
 const normalizePath = (value: string) => value.replace(/\/+$/, '') || '/';
 const currentPath = normalizePath(Astro.url.pathname);
-const navItems = allNavItems.filter((item) => normalizePath(item.href) !== currentPath);
+const navItems = allNavItems.map((item) => ({
+  ...item,
+  isCurrent: normalizePath(item.href) === currentPath,
+}));
 ---
 <!doctype html>
 <html lang="en">
@@ -68,7 +71,11 @@ const navItems = allNavItems.filter((item) => normalizePath(item.href) !== curre
       <nav aria-label="Main navigation">
         <ul>
           {navItems.map((item) => (
-            <li><a href={item.href}>{item.label}</a></li>
+            <li>
+              <a href={item.href} aria-current={item.isCurrent ? 'page' : undefined}>
+                {item.label}
+              </a>
+            </li>
           ))}
         </ul>
       </nav>
@@ -135,11 +142,6 @@ const navItems = allNavItems.filter((item) => normalizePath(item.href) !== curre
 
           window.addEventListener('hashchange', () => scrollToHashTarget(true));
           window.addEventListener('resize', syncOcclusionHeight);
-          window.addEventListener('load', syncOcclusionHeight);
-
-          if ('fonts' in document) {
-            document.fonts.ready.then(syncOcclusionHeight).catch(() => {});
-          }
 
           document.addEventListener('click', (event) => {
             const link = event.target instanceof Element ? event.target.closest('a[href^="#"]') : null;

@@ -69,7 +69,6 @@ body.internal-page .site-header {
   padding-bottom: 1.25rem;
   padding-inline: max(1.25rem, calc((100vw - 62rem) / 2 + 1.25rem));
   background-image: var(--internal-flat-bg);
-  background-attachment: fixed;
   background-position: top center;
   background-size: 100% 100vh;
   background-repeat: no-repeat;
@@ -96,7 +95,6 @@ body.internal-page .internal-page-shell {
   overflow-y: auto;
   padding-top: var(--internal-occlusion-height);
   background-image: var(--internal-flat-bg);
-  background-attachment: fixed;
   background-position: top center;
   background-size: 100% 100vh;
   background-repeat: no-repeat;
@@ -135,6 +133,15 @@ nav a {
 nav a:hover,
 nav a:focus-visible {
   color: #2f6eb0;
+}
+
+nav a[aria-current="page"] {
+  color: #6f7f93;
+}
+
+nav a[aria-current="page"]:hover,
+nav a[aria-current="page"]:focus-visible {
+  color: #6f7f93;
 }
 
 nav {
