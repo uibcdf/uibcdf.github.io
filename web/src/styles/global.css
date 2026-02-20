@@ -23,8 +23,8 @@ body {
   background:
     linear-gradient(
       180deg,
-      rgb(248 205 158 / var(--s3-warm-alpha, 0)) 0%,
-      rgb(239 187 137 / var(--s3-warm-alpha, 0)) 100%
+      rgb(255 226 172 / var(--s3-warm-alpha, 0)) 0%,
+      rgb(255 202 132 / var(--s3-warm-alpha, 0)) 100%
     ),
     linear-gradient(
       180deg,
@@ -272,6 +272,46 @@ section + section {
   justify-content: center;
 }
 
+.contact-upper {
+  display: grid;
+  gap: 0.8rem;
+  justify-items: center;
+  width: 100%;
+}
+
+.lead-panorama {
+  width: min(100%, 46rem);
+  transform: translateY(-0.7rem);
+}
+
+.lead-panorama img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 20 / 8;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 0.5rem;
+  border: 1px solid #c8d8ef;
+}
+
+.lead-panorama-caption {
+  margin: 0.4rem 0 0;
+  text-align: center;
+  color: #234266;
+  font-size: 0.94rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.contact-lower {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 1rem;
+  width: min(100%, 50rem);
+  transform: translateY(1rem);
+}
+
 .contact-top {
   display: grid;
   grid-template-columns: auto minmax(0, 44ch);
@@ -281,11 +321,12 @@ section + section {
   max-width: 100%;
   margin: 0 auto;
   gap: 2ch;
+  transform: translateX(3.5rem);
 }
 
 .contact-logo img {
   display: block;
-  width: clamp(5rem, 10.2vw, 6.9rem);
+  width: clamp(3.8rem, 7.2vw, 5.2rem);
   height: auto;
   margin: 0 auto;
 }
@@ -293,20 +334,21 @@ section + section {
 .contact-copy {
   margin: 0;
   color: #697b91;
-  font-size: 1.02rem;
-  line-height: 1.5;
-  max-width: 44ch;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  max-width: 40ch;
 }
 
 .contact-icons {
-  margin-top: 0;
-  margin-bottom: clamp(0.4rem, 1.6vh, 0.82rem);
+  margin-top: 0.2rem;
+  margin-bottom: 0;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  column-gap: 1.2rem;
-  row-gap: 0.9rem;
-  max-width: 28rem;
+  column-gap: 0.9rem;
+  row-gap: 0.7rem;
+  max-width: 18.5rem;
   margin-inline: auto;
+  transform: translateX(0.55rem);
 }
 
 .contact-icon-item {
@@ -316,19 +358,19 @@ section + section {
 
 .contact-icon {
   display: inline-flex;
-  width: 4.05rem;
-  height: 4.05rem;
+  width: 2.85rem;
+  height: 2.85rem;
   align-items: center;
   justify-content: center;
-  border: 1px solid #c8d8ef;
-  border-radius: 999px;
+  border: none;
+  border-radius: 0;
   color: var(--accent);
   background: transparent;
 }
 
 .contact-icon svg {
-  width: 2.14rem;
-  height: 2.14rem;
+  width: 1.52rem;
+  height: 1.52rem;
   fill: none;
   stroke: currentColor;
   stroke-width: 1.95;
@@ -506,6 +548,15 @@ footer {
 
   .contact-stage {
     min-height: auto;
+  }
+
+  .lead-panorama {
+    width: min(100%, 20rem);
+  }
+
+  .contact-lower {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
   }
 
   .contact-top {
