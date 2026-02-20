@@ -1,66 +1,175 @@
 ---
 import { getCollection } from 'astro:content';
-import ContentCard from '../components/ContentCard.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const tags = ['all', 'seminar', 'news', 'publication', 'software', 'event', 'opportunity'];
 
 const updates = (await getCollection('updates', ({ data }) => !data.draft)).sort(
-  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+const renderedUpdates = await Promise.all(
+  updates.map(async (entry) => {
+    const { Content } = await entry.render();
+    return { entry, Content };
+  })
 );
 ---
 
 <BaseLayout
   title="Updates"
   description="Unified stream for seminars, news, publications, software releases, events, and opportunities."
-  ctaLabel="Contact UIBCDF"
+  ctaLabel="Follow UIBCDF"
   ctaHref="/contact"
 >
-  <section class="card">
-    <h2>Filter by tag</h2>
+  <section class="card updates-filters">
+    <h2>Search and filter</h2>
     <div class="tag-filters" role="group" aria-label="Update tags">
       {
         tags.map((tag) => (
-          <button class="tag-button" type="button" data-filter={tag}>
+          <button class:list={['tag-button', tag === 'all' && 'is-active']} type="button" data-filter={tag}>
             {tag}
           </button>
         ))
       }
     </div>
+    <div class="updates-advanced-filters" aria-label="Advanced filters">
+      <label>
+        Search
+        <input id="updates-search" type="search" placeholder="Title, summary, keywords..." />
+      </label>
+      <label>
+        From
+        <input id="updates-from" type="date" />
+      </label>
+      <label>
+        To
+        <input id="updates-to" type="date" />
+      </label>
+      <button id="updates-clear" type="button" class="tag-button updates-clear">Clear filters</button>
+    </div>
   </section>
 
   {
-    updates.length === 0 ? (
+    renderedUpdates.length === 0 ? (
       <p class="card">No published updates yet.</p>
     ) : (
-      <div class="grid" id="updates-grid">
-        {updates.map((entry) => (
-          <div id={`update-${entry.slug.replaceAll('/', '-')}`} data-tags={entry.data.tags.join(',')}>
-            <ContentCard
-              title={entry.data.title}
-              summary={entry.data.summary}
-              date={entry.data.date}
-              tags={entry.data.tags}
-            />
-          </div>
-        ))}
+      <div class="updates-canvas" id="updates-grid">
+        {renderedUpdates.map(({ entry, Content }) => {
+          const anchorId = `update-${entry.slug.replaceAll('/', '-')}`;
+          const bodyText = (entry.body ?? '').trim();
+          const hasDetails = bodyText.length > 0;
+          const searchBlob = `${entry.data.title} ${entry.data.summary} ${bodyText}`.toLowerCase();
+          const entryDate = entry.data.date.toISOString().slice(0, 10);
+
+          return (
+            <article
+              class="update-card"
+              id={anchorId}
+              data-tags={entry.data.tags.join(',')}
+              data-date={entryDate}
+              data-search={searchBlob}
+            >
+              <div class="update-meta">
+                <p>{entryDate}</p>
+                {entry.data.tags.length > 0 && (
+                  <ul class="tag-list" aria-label="Tags">
+                    {entry.data.tags.map((tag) => (
+                      <li>{tag}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+
+              <h2>
+                <a href={`#${anchorId}`}>{entry.data.title}</a>
+              </h2>
+              <p class="update-summary">{entry.data.summary}</p>
+
+              {hasDetails && (
+                <details class="update-details">
+                  <summary>
+                    <span class="summary-closed">Show details</span>
+                    <span class="summary-open">Hide details</span>
+                  </summary>
+                  <div class="update-body">
+                    <Content />
+                  </div>
+                </details>
+              )}
+            </article>
+          );
+        })}
       </div>
     )
   }
 
   <script>
     const buttons = document.querySelectorAll('.tag-button');
-    const cards = document.querySelectorAll('#updates-grid > div');
+    const tagButtons = document.querySelectorAll('.tag-button[data-filter]');
+    const cards = document.querySelectorAll('#updates-grid > .update-card');
+    const searchInput = document.getElementById('updates-search');
+    const fromInput = document.getElementById('updates-from');
+    const toInput = document.getElementById('updates-to');
+    const clearButton = document.getElementById('updates-clear');
 
-    buttons.forEach((button) => {
-      button.addEventListener('click', () => {
-        const filter = button.getAttribute('data-filter');
-        cards.forEach((card) => {
-          const tagList = card.getAttribute('data-tags') ?? '';
-          const show = filter === 'all' || tagList.split(',').includes(filter ?? '');
-          card.style.display = show ? '' : 'none';
-        });
+    const state = {
+      tag: 'all',
+      query: '',
+      from: '',
+      to: '',
+    };
+
+    const applyFilters = () => {
+      cards.forEach((card) => {
+        const tagList = (card.getAttribute('data-tags') ?? '').split(',');
+        const cardDate = card.getAttribute('data-date') ?? '';
+        const cardSearch = card.getAttribute('data-search') ?? '';
+
+        const tagOk = state.tag === 'all' || tagList.includes(state.tag);
+        const textOk = state.query.length === 0 || cardSearch.includes(state.query);
+        const fromOk = state.from.length === 0 || cardDate >= state.from;
+        const toOk = state.to.length === 0 || cardDate <= state.to;
+
+        card.style.display = tagOk && textOk && fromOk && toOk ? '' : 'none';
       });
+    };
+
+    tagButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        tagButtons.forEach((item) => item.classList.remove('is-active'));
+        button.classList.add('is-active');
+        state.tag = button.getAttribute('data-filter') ?? 'all';
+        applyFilters();
+      });
+    });
+
+    searchInput?.addEventListener('input', () => {
+      state.query = (searchInput.value ?? '').trim().toLowerCase();
+      applyFilters();
+    });
+
+    fromInput?.addEventListener('change', () => {
+      state.from = fromInput.value ?? '';
+      applyFilters();
+    });
+
+    toInput?.addEventListener('change', () => {
+      state.to = toInput.value ?? '';
+      applyFilters();
+    });
+
+    clearButton?.addEventListener('click', () => {
+      state.tag = 'all';
+      state.query = '';
+      state.from = '';
+      state.to = '';
+      if (searchInput) searchInput.value = '';
+      if (fromInput) fromInput.value = '';
+      if (toInput) toInput.value = '';
+      tagButtons.forEach((item) => item.classList.remove('is-active'));
+      const allButton = document.querySelector('.tag-button[data-filter="all"]');
+      allButton?.classList.add('is-active');
+      applyFilters();
     });
   </script>
 </BaseLayout>

@@ -597,6 +597,135 @@ section + section {
   cursor: pointer;
 }
 
+.tag-button.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.updates-filters {
+  height: auto;
+  background: rgb(255 255 255 / 0.44);
+}
+
+.updates-filters h2 {
+  margin-top: 0;
+  margin-bottom: 0.55rem;
+}
+
+.updates-advanced-filters {
+  margin-top: 0.65rem;
+  display: grid;
+  grid-template-columns: minmax(14rem, 1fr) repeat(2, minmax(9rem, 12rem)) auto;
+  gap: 0.55rem;
+  align-items: end;
+}
+
+.updates-advanced-filters label {
+  display: grid;
+  gap: 0.22rem;
+  color: #4d637f;
+  font-size: 0.88rem;
+}
+
+.updates-advanced-filters input {
+  border: 1px solid #c8d8ef;
+  border-radius: 0.45rem;
+  background: #fff;
+  color: var(--text);
+  padding: 0.42rem 0.55rem;
+  font: inherit;
+}
+
+.updates-advanced-filters input:focus-visible {
+  outline: 2px solid #b7cceb;
+  outline-offset: 1px;
+}
+
+.updates-clear {
+  white-space: nowrap;
+}
+
+.updates-canvas {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.updates-filters + .updates-canvas {
+  margin-top: 0.9rem;
+}
+
+.update-card {
+  border: 1px solid var(--line);
+  border-radius: 0.5rem;
+  background: var(--surface);
+  padding: 0.85rem;
+}
+
+.update-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+  margin-bottom: 0.25rem;
+}
+
+.update-meta p {
+  margin: 0;
+}
+
+.update-card h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1.08rem;
+}
+
+.update-card h2 a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.update-card h2 a:hover,
+.update-card h2 a:focus-visible {
+  color: #2f6eb0;
+}
+
+.update-summary {
+  margin: 0;
+  color: var(--text);
+}
+
+.update-details {
+  margin-top: 0.42rem;
+}
+
+.update-details summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-weight: 400;
+}
+
+.update-details .summary-open {
+  display: none;
+}
+
+.update-details[open] .summary-closed {
+  display: none;
+}
+
+.update-details[open] .summary-open {
+  display: inline;
+}
+
+.update-body {
+  margin-top: 0.35rem;
+  color: var(--muted);
+}
+
+.update-body p {
+  margin: 0.28rem 0;
+}
+
 .research-canvas {
   display: grid;
   gap: 0.95rem;
@@ -1184,6 +1313,10 @@ footer {
 
   .publication-media {
     max-width: 11rem;
+  }
+
+  .updates-advanced-filters {
+    grid-template-columns: 1fr;
   }
 
   .software-card {
