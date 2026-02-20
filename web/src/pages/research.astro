@@ -1,33 +1,89 @@
 ---
 import { getCollection } from 'astro:content';
-import ContentCard from '../components/ContentCard.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const researchLines = (await getCollection('research', ({ data }) => !data.draft)).sort(
-  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+const researchLines = (await getCollection('research-lines', ({ data }) => !data.draft)).sort((a, b) => {
+  const aIndex = Number.parseInt(a.slug.split('/')[0] ?? '999', 10);
+  const bIndex = Number.parseInt(b.slug.split('/')[0] ?? '999', 10);
+  return aIndex - bIndex;
+});
+const renderedResearchLines = await Promise.all(
+  researchLines.map(async (line) => {
+    const { Content } = await line.render();
+    return { line, Content };
+  }),
+);
+
+const imageModules = import.meta.glob('/src/content/research-lines/*/image.png', { eager: true });
+const imageByIndex = new Map<string, string>(
+  Object.entries(imageModules).map(([path, mod]) => {
+    const index = path.split('/').at(-2) ?? '';
+    const imported = (mod as { default: string | { src: string } }).default;
+    const imageSrc = typeof imported === 'string' ? imported : imported.src;
+    return [index, imageSrc];
+  }),
 );
 ---
 
 <BaseLayout
   title="Research"
-  description="Core lines of work in computational biophysics, biomolecular modeling, and method development."
-  ctaLabel="Meet the team"
-  ctaHref="/people"
+  description="Drug discovery through computational biophysics and binding thermodynamics."
 >
-  {
-    researchLines.length === 0 ? (
-      <p class="card">No published research lines yet.</p>
-    ) : (
-      <div class="grid">
-        {researchLines.map((entry) => (
-          <ContentCard
-            title={entry.data.title}
-            summary={entry.data.summary}
-            date={entry.data.date}
-            tags={entry.data.tags}
-          />
-        ))}
-      </div>
-    )
-  }
+  <section class="research-canvas" aria-label="Research lines">
+    {
+      renderedResearchLines.map(({ line, Content }) => {
+        const index = line.slug.split('/')[0] ?? '';
+        const imageSrc = imageByIndex.get(index);
+        const bodyImageWidth = line.data.bodyImageWidth ?? 62;
+        const imageAlt = line.data.imageAlt ?? `${line.data.title} preview image`;
+        const anchorId = `line-${index}`;
+        const bodyText = (line.body ?? '').trim();
+        const hasDetails = bodyText.length > 0 && !/^Detailed body placeholder/i.test(bodyText);
+        return (
+          <article id={anchorId} class="research-line" style={`--research-body-img-width: ${bodyImageWidth}%`}>
+            <div class="research-line-media">
+              {imageSrc ? <img src={imageSrc} alt={imageAlt} loading="lazy" /> : <span>Missing image.png</span>}
+            </div>
+            <div class="research-line-body">
+              <h2>
+                <a href={`#${anchorId}`}>{line.data.title}</a>
+              </h2>
+              <p>{line.data.summary}</p>
+              {
+                hasDetails && (
+                  <details class="research-details">
+                    <summary>
+                      <span class="summary-closed">Show details</span>
+                      <span class="summary-open">Hide details</span>
+                    </summary>
+                    <div class="research-body">
+                      <Content />
+                    </div>
+                  </details>
+                )
+              }
+            </div>
+          </article>
+        );
+      })
+    }
+  </section>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const rawLine = params.get('line');
+    const lineFromQuery = rawLine ? rawLine.replace(/^line-?/i, '') : '';
+    const lineFromHash = window.location.hash.startsWith('#line-')
+      ? window.location.hash.replace('#line-', '')
+      : '';
+    const lineToken = (lineFromQuery || lineFromHash).trim();
+
+    if (lineToken) {
+      const normalized = lineToken.padStart(2, '0');
+      const targetId = `line-${normalized}`;
+      const target = document.getElementById(targetId);
+      const details = target?.querySelector('.research-details');
+      if (details && !details.hasAttribute('open')) details.setAttribute('open', '');
+      target?.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    }
+  </script>
 </BaseLayout>

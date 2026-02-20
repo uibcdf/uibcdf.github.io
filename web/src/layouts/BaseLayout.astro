@@ -14,6 +14,7 @@ interface Props {
 
 const { title, description, ctaLabel, ctaHref, ogImage, subtitle, heroClass, hideFooter } =
   Astro.props;
+const isHomeHero = heroClass?.includes('home-hero') ?? false;
 const pageTitle = `${title} | UIBCDF`;
 const canonicalUrl = Astro.url.href;
 const ogImageUrl = new URL(ogImage ?? '/og-default.svg', Astro.site).toString();
@@ -70,6 +71,7 @@ const navItems = [
     <main>
       <section class:list={['hero', heroClass]}>
         <h1>{title}</h1>
+        {!isHomeHero && <span class="hero-separator" aria-hidden="true"></span>}
         {subtitle && <p class="hero-subtitle">{subtitle}</p>}
         <p>{description}</p>
         {ctaLabel && ctaHref && <a class="cta" href={ctaHref}>{ctaLabel}</a>}
@@ -81,7 +83,10 @@ const navItems = [
     {
       !hideFooter && (
         <footer>
-          <p>Federico Gomez Children's Hospital of Mexico · Mexican National Institute of Health</p>
+          <p>
+            Computational Biology and Drug Design Research Unit · Federico Gómez Children's
+            Hospital of Mexico · Mexican National Institute of Health
+          </p>
         </footer>
       )
     }

@@ -1,0 +1,39 @@
+Research lines content convention
+
+Folder structure:
+- src/content/research-lines/01/
+- src/content/research-lines/02/
+- ...
+
+Each folder must include:
+1) line.md
+2) image.png
+
+Ordering rule:
+- Folders are sorted numerically (01, 02, 03, ...).
+- The page renders from top to bottom following that order.
+
+image.png specification:
+- Resolution: 1200 x 900 px
+- Aspect ratio: 4:3
+- Format: PNG
+- Keep the same dimensions for all lines for visual consistency.
+
+line.md frontmatter:
+- title: string
+- summary: string
+- draft: boolean
+- bodyImageWidth: optional number (20-100), controls body-image width in %
+- imageAlt: optional string, alt text for left-side image.png
+
+Body image caption support:
+- Use HTML figure + figcaption inside markdown, for example:
+  <figure>
+    <img src="./image.png" alt="Example" />
+    <figcaption>Caption text</figcaption>
+  </figure>
+
+Direct link to a specific line:
+- Use hash: /research/#line-02
+- Or query param: /research/?line=02
+- The page will auto-open that line details (if available).

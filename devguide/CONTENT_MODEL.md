@@ -2,9 +2,9 @@
 
 This document describes the editable content in `web/src/content/` and how it is used on the site.
 
-## Frontmatter conventions (all collections)
+## Frontmatter conventions (generic content collections)
 
-All markdown entries in `web/src/content/*` follow these fields:
+Most markdown entries in `web/src/content/*` follow these fields:
 
 - `title` (string) — page/post title
 - `date` (YYYY-MM-DD) — publication/event date (used for sorting)
@@ -28,7 +28,41 @@ Unified stream for seminars, news, publications announcements, software releases
 Profiles for team members (researchers, students, collaborators). Used on People page and optionally referenced elsewhere.
 
 ### `research/`
-One entry per research line. Keeps the Research page structured and editable.
+Legacy/simple collection for research entries. The current Research page uses `research-lines/` (see below).
+
+### `research-lines/` (active for Research page)
+Structured collection for the Research page with one directory per line, sorted by directory number.
+
+Folder layout:
+
+- `web/src/content/research-lines/01/line.md`
+- `web/src/content/research-lines/01/image.png`
+- `web/src/content/research-lines/02/line.md`
+- `web/src/content/research-lines/02/image.png`
+- ...
+
+Ordering:
+
+- Directories are numeric (`01`, `02`, `03`, ...).
+- Render order is top-to-bottom by numeric directory order.
+
+`line.md` frontmatter:
+
+- `title` (string)
+- `summary` (string) — shown in the card; can be multiline YAML
+- `draft` (boolean)
+- `bodyImageWidth` (number, optional, 20–100) — width (%) for images inside expanded body
+- `imageAlt` (string, optional) — alt text for the left-side `image.png`
+
+`line.md` body:
+
+- Rendered under “Show details / Hide details” in each line card.
+- Supports normal markdown and embedded HTML.
+- Image captions are supported with `<figure><img /><figcaption>...</figcaption></figure>`.
+
+Deep-link support:
+
+- `#line-02` or `?line=02` opens and focuses line 02 on load.
 
 ### `publications/`
 Curated publication entries. Start minimal; can be expanded later with citations/DOIs.

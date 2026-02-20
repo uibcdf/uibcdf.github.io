@@ -21,6 +21,7 @@ This repo is intended to be developed locally with Codex (CLI) after the initial
 - Prefer content-driven pages: add entries under `web/src/content/` rather than hard-coding.
 - Keep navigation minimal (see `devguide/02_information_architecture.md`).
 - Maintain one primary CTA per page.
+- For Research page content, use `web/src/content/research-lines/NN/` with `line.md` + `image.png` (numeric order defines render order).
 
 ## Home scroll notation (shared vocabulary)
 For iterative UI work on the Home page scroll choreography, use this notation:
