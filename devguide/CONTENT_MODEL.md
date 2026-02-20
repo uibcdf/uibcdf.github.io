@@ -141,6 +141,40 @@ Optional assets:
 ### `publications/` (legacy)
 Curated publication entries (generic schema). Kept for compatibility; current Publications page uses `publication-papers/`.
 
+### `software-tools/` (active for Code page)
+Structured collection for software cards shown in the Code page, grouped into two categories.
+
+Folder layout:
+
+- `web/src/content/software-tools/molsyssuite/01/line.md`
+- `web/src/content/software-tools/molsyssuite/01/thumbnail.png`
+- `web/src/content/software-tools/utilities/01/line.md`
+- `web/src/content/software-tools/utilities/01/thumbnail.png`
+
+Section order (fixed):
+
+1. `molsyssuite`
+2. `utilities`
+
+Item order:
+
+- Numeric directory order inside each section (`01`, `02`, `03`, ...).
+
+`line.md` frontmatter:
+
+- `title` (string)
+- `tagline` (string)
+- `summary` (string, currently not rendered in cards but kept for reuse)
+- `github` (URL)
+- `docs` (URL, optional)
+- `thumbnailAlt` (string, optional)
+- `draft` (boolean)
+
+Rendering notes:
+
+- Each card displays `title`, `tagline`, and links (`GitHub` plus optional `Docs`).
+- If `docs` is omitted, only `GitHub` is rendered.
+
 ## Tags vocabulary
 
 Use the following canonical tags (avoid ad-hoc tags unless you *intend* to expand the vocabulary):

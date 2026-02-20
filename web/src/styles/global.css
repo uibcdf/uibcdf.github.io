@@ -858,6 +858,119 @@ section + section {
   font-size: 0.82rem;
 }
 
+.software-canvas {
+  display: grid;
+  gap: 1.1rem;
+  margin-top: -1.35rem;
+}
+
+.software-group h2 {
+  margin: 0 0 0.55rem;
+  font-size: 1.35rem;
+  color: #132031;
+}
+
+.software-group h2 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.software-group-intro {
+  margin: 0 0 0.6rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #dccfb9;
+  border-radius: 0.45rem;
+  background: rgb(255 255 255 / 0.55);
+}
+
+.software-group-intro p {
+  margin: 0;
+  color: #33495f;
+}
+
+.software-group-intro p + p {
+  margin-top: 0.35rem;
+}
+
+.software-group-intro a {
+  text-decoration: none;
+}
+
+.software-group-grid {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.software-card {
+  display: grid;
+  grid-template-columns: 25% 75%;
+  gap: 0.9rem;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 0.5rem;
+  background: var(--surface);
+  padding: 0.85rem;
+}
+
+.software-media {
+  align-self: center;
+  height: 5.2rem;
+  border: 1px dashed #bdd0eb;
+  border-radius: 0.4rem;
+  background: linear-gradient(180deg, #eef4fd 0%, #dce8f8 100%);
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  color: #5e7596;
+  text-align: center;
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.software-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 0.35rem;
+  border-radius: 0.32rem;
+}
+
+.software-body {
+  padding-right: 0.75rem;
+}
+
+.software-body h3 {
+  margin: 0 0 0.22rem;
+  font-size: 1.08rem;
+}
+
+.software-body h3 a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.software-body h3 a:hover,
+.software-body h3 a:focus-visible {
+  color: #2f6eb0;
+}
+
+.software-tagline {
+  margin: 0 0 0.18rem;
+  color: #2d4c70;
+  font-weight: 600;
+}
+
+.software-links {
+  margin: 0.22rem 0 0;
+  color: #4d637f;
+}
+
+.software-links a {
+  text-decoration: none;
+}
+
 .people-page {
   display: grid;
   gap: 1.2rem;
@@ -1071,6 +1184,19 @@ footer {
 
   .publication-media {
     max-width: 11rem;
+  }
+
+  .software-card {
+    grid-template-columns: 1fr;
+  }
+
+  .software-media {
+    height: 6rem;
+    max-width: 13rem;
+  }
+
+  .software-body {
+    padding-right: 0;
   }
 }
 

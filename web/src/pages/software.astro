@@ -1,18 +1,120 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const tools = (await getCollection('software-tools', ({ data }) => !data.draft)).sort((a, b) => {
+  const [aGroup = 'zzz', aIndex = '999'] = a.slug.split('/');
+  const [bGroup = 'zzz', bIndex = '999'] = b.slug.split('/');
+  if (aGroup !== bGroup) return aGroup.localeCompare(bGroup);
+  return Number.parseInt(aIndex, 10) - Number.parseInt(bIndex, 10);
+});
+
+const categoryOrder = ['molsyssuite', 'utilities'] as const;
+const categoryTitles: Record<(typeof categoryOrder)[number], string> = {
+  molsyssuite: 'MolSysSuite ecosystem',
+  utilities: 'Software engineering utilities',
+};
+const categoryIntro: Partial<Record<(typeof categoryOrder)[number], { text: string; href: string; label: string }>> = {
+  molsyssuite: {
+    text: 'MolSysSuite is the integrated ecosystem developed in UIBCDF for computational biophysics and drug design workflows, connecting interoperable libraries for end-to-end scientific pipelines.',
+    href: 'https://molsyssuite.uibcdf.org',
+    label: 'Ecosystem website',
+  },
+};
+
+const toolThumbModules = import.meta.glob('/src/content/software-tools/*/*/thumbnail.png', { eager: true });
+const toolThumbByIndex = new Map<string, string>(
+  Object.entries(toolThumbModules).map(([path, mod]) => {
+    const parts = path.split('/');
+    const group = parts.at(-3) ?? '';
+    const index = parts.at(-2) ?? '';
+    const imported = (mod as { default: string | { src: string } }).default;
+    const src = typeof imported === 'string' ? imported : imported.src;
+    return [`${group}/${index}`, src];
+  }),
+);
+
+const groupedTools = categoryOrder
+  .map((category) => ({
+    category,
+    title: categoryTitles[category],
+    items: tools.filter((tool) => tool.slug.split('/')[0] === category),
+  }))
+  .filter((group) => group.items.length > 0);
 ---
 
 <BaseLayout
   title="Code"
-  description="Open software developed by the unit, including MolSysSuite and related tools."
-  ctaLabel="Explore MolSysSuite"
-  ctaHref="https://molsyssuite.uibcdf.org"
+  description="Open-source software for computational biophysics and drug design developed by UIBCDF."
+  ctaLabel="UIBCDF GitHub"
+  ctaHref="https://github.com/uibcdf"
 >
-  <section class="card" id="molsyssuite">
-    <h2>
-      <a href="#molsyssuite">MolSysSuite</a>
-    </h2>
-    <p>Integrated toolkit for molecular simulation workflows and reproducible computational research.</p>
-    <p><a href="https://github.com/uibcdf">Browse UIBCDF repositories on GitHub</a></p>
+  <section class="software-canvas" aria-label="Software tools">
+    {groupedTools.length === 0 ? (
+      <p class="card">No software entries published yet.</p>
+    ) : (
+      groupedTools.map((group) => (
+        <section class="software-group" id={`software-${group.category}`} aria-label={group.title}>
+          <h2>
+            <a href={`#software-${group.category}`}>{group.title}</a>
+          </h2>
+          {categoryIntro[group.category] && (
+            <div class="software-group-intro">
+              <p>{categoryIntro[group.category]!.text}</p>
+              <p>
+                <a href={categoryIntro[group.category]!.href} target="_blank" rel="noreferrer">
+                  {categoryIntro[group.category]!.label}
+                </a>
+              </p>
+            </div>
+          )}
+
+          <div class="software-group-grid">
+            {group.items.map((tool) => {
+              const [toolGroup = '', index = ''] = tool.slug.split('/');
+              const anchorId = `tool-${toolGroup}-${index}`;
+              const thumbSrc = toolThumbByIndex.get(`${toolGroup}/${index}`);
+              const thumbAlt = tool.data.thumbnailAlt ?? `${tool.data.title} logo`;
+              return (
+                <article class="software-card" id={anchorId}>
+                  <div class="software-media">
+                    {thumbSrc ? (
+                      <img src={thumbSrc} alt={thumbAlt} loading="lazy" />
+                    ) : (
+                      <span>Missing thumbnail.png</span>
+                    )}
+                  </div>
+                  <div class="software-body">
+                    <h3>
+                      <a href={`#${anchorId}`}>{tool.data.title}</a>
+                    </h3>
+                    <p class="software-tagline">{tool.data.tagline}</p>
+                    <p class="software-links">
+                      <a href={tool.data.github} target="_blank" rel="noreferrer">
+                        GitHub
+                      </a>
+                      {tool.data.docs && (
+                        <>
+                          <span aria-hidden="true"> · </span>
+                          <a href={tool.data.docs} target="_blank" rel="noreferrer">
+                            Docs
+                          </a>
+                        </>
+                      )}
+                    </p>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      ))
+    )}
   </section>
 </BaseLayout>
+
+<style is:global>
+  :root {
+    --internal-flat-bg: #f6e6d0;
+  }
+</style>

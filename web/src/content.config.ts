@@ -74,6 +74,19 @@ const publicationPapers = defineCollection({
   }),
 });
 
+const softwareTools = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    tagline: z.string(),
+    summary: z.string(),
+    github: z.string().url(),
+    docs: z.string().url().optional(),
+    thumbnailAlt: z.string().optional(),
+    draft: z.boolean().default(false),
+  }),
+});
+
 const publications = defineCollection({
   type: 'content',
   schema: baseSchema,
@@ -86,5 +99,6 @@ export const collections = {
   research,
   'research-lines': researchLines,
   'publication-papers': publicationPapers,
+  'software-tools': softwareTools,
   publications,
 };
