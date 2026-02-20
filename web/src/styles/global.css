@@ -765,6 +765,13 @@ section + section {
   margin: 0.25rem 0;
 }
 
+.publication-body-expanded .publication-caption {
+  text-align: center;
+  margin: -0.05rem auto 0.25rem;
+  color: #6a7f98;
+  font-size: 0.82rem;
+}
+
 .publication-body-expanded img {
   display: block;
   width: var(--publication-body-img-width, 62%);

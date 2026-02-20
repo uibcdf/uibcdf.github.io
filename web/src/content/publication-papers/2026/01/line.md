@@ -10,7 +10,6 @@ draft: false
 ---
 Detailed publication notes placeholder.
 
-<figure>
-  ![Example centered figure](./thumbnail.png)
-  <figcaption>Optional caption for a figure inside publication details.</figcaption>
-</figure>
+![Illustrative figure](./illustration.png)
+
+<p class="publication-caption">Optional caption for a figure inside publication details.</p>
