@@ -1,0 +1,39 @@
+People profiles content convention
+
+Folder structure:
+- src/content/people-profiles/researchers/01/
+- src/content/people-profiles/students/01/
+- src/content/people-profiles/former_members/01/
+
+Each profile folder must include:
+1) line.md
+2) image.png
+3) optional cv.pdf
+
+Ordering rule:
+- Profiles are sorted numerically inside each section folder.
+
+Section render order:
+1) researchers
+2) students
+3) former_members
+
+image.png specification:
+- Resolution: 1000 x 1250 px
+- Aspect ratio: 4:5
+- Format: PNG
+- Keep dimensions consistent across profiles.
+
+line.md frontmatter:
+- name: string
+- position: string
+- expertise: string
+- affiliation: string
+- linkedin/x/github/orcid/scholar: optional URLs
+- draft: boolean
+
+Body:
+- Markdown body is used as expanded CV text under the CV toggle.
+
+Affiliation rule:
+- For `researchers`, affiliation is expected to be `UIBCDF`.

@@ -4,7 +4,7 @@
 
     ## MVP (v1)
     - Home page with concise unit description and highlights.
-- Pages: Research, People, Publications, Software, Updates, Contact.
+- Pages: Research, Team, Publications, Software, Updates, Contact.
 - Updates: unified stream with tags (seminars/news/publications/software/events/opportunities).
 - Simple, readable design (“less is more”).
 - Deployed to GitHub Pages at `www.uibcdf.org`.

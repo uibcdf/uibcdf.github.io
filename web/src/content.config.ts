@@ -28,6 +28,22 @@ const people = defineCollection({
   schema: baseSchema,
 });
 
+const peopleProfiles = defineCollection({
+  type: 'content',
+  schema: z.object({
+    name: z.string(),
+    position: z.string(),
+    expertise: z.string(),
+    affiliation: z.string(),
+    linkedin: z.string().url().optional(),
+    x: z.string().url().optional(),
+    github: z.string().url().optional(),
+    orcid: z.string().url().optional(),
+    scholar: z.string().url().optional(),
+    draft: z.boolean().default(false),
+  }),
+});
+
 const research = defineCollection({
   type: 'content',
   schema: baseSchema,
@@ -52,6 +68,7 @@ const publications = defineCollection({
 export const collections = {
   updates,
   people,
+  'people-profiles': peopleProfiles,
   research,
   'research-lines': researchLines,
   publications,

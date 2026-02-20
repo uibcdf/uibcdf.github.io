@@ -5,7 +5,7 @@ This file freezes the MVP sitemap and navigation decisions.
 ## Top navigation (MVP)
 
 - Research
-- People
+- Team
 - Publications
 - Software
 - Updates

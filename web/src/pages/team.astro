@@ -1,0 +1,178 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+type GroupKey = 'researchers' | 'students' | 'former_members';
+
+const groupConfig: Record<GroupKey, { title: string; order: number }> = {
+  researchers: { title: 'Researchers', order: 1 },
+  students: { title: 'Students', order: 2 },
+  former_members: { title: 'Former members', order: 3 },
+};
+
+const peopleEntries = (await getCollection('people-profiles', ({ data }) => !data.draft)).sort((a, b) => {
+  const [aGroup = 'zzz', aIndex = '999'] = a.slug.split('/');
+  const [bGroup = 'zzz', bIndex = '999'] = b.slug.split('/');
+  const aGroupOrder = (groupConfig as Record<string, { order: number }>)[aGroup]?.order ?? 99;
+  const bGroupOrder = (groupConfig as Record<string, { order: number }>)[bGroup]?.order ?? 99;
+  if (aGroupOrder !== bGroupOrder) return aGroupOrder - bGroupOrder;
+  return Number.parseInt(aIndex, 10) - Number.parseInt(bIndex, 10);
+});
+
+const renderedPeople = await Promise.all(
+  peopleEntries.map(async (entry) => {
+    const { Content } = await entry.render();
+    return { entry, Content };
+  }),
+);
+
+const imageModules = import.meta.glob('/src/content/people-profiles/*/*/image.png', { eager: true });
+const cvModules = import.meta.glob('/src/content/people-profiles/*/*/cv.pdf', { eager: true });
+
+const imageByKey = new Map<string, string>(
+  Object.entries(imageModules).map(([path, mod]) => {
+    const parts = path.split('/');
+    const group = parts.at(-3) ?? '';
+    const index = parts.at(-2) ?? '';
+    const imported = (mod as { default: string | { src: string } }).default;
+    const src = typeof imported === 'string' ? imported : imported.src;
+    return [`${group}/${index}`, src];
+  }),
+);
+
+const cvByKey = new Map<string, string>(
+  Object.entries(cvModules).map(([path, mod]) => {
+    const parts = path.split('/');
+    const group = parts.at(-3) ?? '';
+    const index = parts.at(-2) ?? '';
+    const imported = (mod as { default: string | { src: string } }).default;
+    const src = typeof imported === 'string' ? imported : imported.src;
+    return [`${group}/${index}`, src];
+  }),
+);
+
+const sectioned = (['researchers', 'students', 'former_members'] as GroupKey[])
+  .map((group) => {
+    const members = renderedPeople.filter(({ entry }) => entry.slug.split('/')[0] === group);
+    return { group, title: groupConfig[group].title, members };
+  })
+  .filter((section) => section.members.length > 0);
+---
+
+<BaseLayout
+  title="Team"
+  description="Researchers, students, and former members of UIBCDF."
+>
+  <section class="people-page" aria-label="People directory">
+    {
+      sectioned.map((section) => (
+        <section class="people-section" aria-label={section.title}>
+          <h2>{section.title}</h2>
+          <div class="people-grid">
+            {section.members.map(({ entry, Content }) => {
+              const [group = '', index = ''] = entry.slug.split('/');
+              const key = `${group}/${index}`;
+              const imageSrc = imageByKey.get(key);
+              const cvSrc = cvByKey.get(key);
+              const affiliationText = group === 'researchers' ? 'UIBCDF' : entry.data.affiliation;
+              const bodyText = (entry.body ?? '').trim();
+              const hasCvText = bodyText.length > 0 && !/^Detailed CV placeholder/i.test(bodyText);
+              const showCv = hasCvText || Boolean(cvSrc);
+
+              return (
+                <article class="person-card">
+                  <div class="person-media">
+                    {imageSrc ? (
+                      <img src={imageSrc} alt={`${entry.data.name} profile photo`} loading="lazy" />
+                    ) : (
+                      <span>Missing image.png</span>
+                    )}
+                  </div>
+
+                  <div class="person-body">
+                    <h3>{entry.data.name}</h3>
+                    <p class="person-position">{entry.data.position}</p>
+                    <p class="person-expertise">{entry.data.expertise}</p>
+                    <p class="person-affiliation">{affiliationText}</p>
+
+                    <div class="person-links" aria-label={`${entry.data.name} links`}>
+                      {entry.data.linkedin && (
+                        <a href={entry.data.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" title="LinkedIn">
+                          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M5.2 6.3h.01" />
+                            <path d="M4.2 9.3h2v9.5h-2z" />
+                            <path d="M9.2 9.3h2v1.4h.1c.5-.9 1.5-1.8 3.2-1.8 2.6 0 3.4 1.8 3.4 4.2v5.7h-2.1v-5.1c0-1.2-.2-2.6-1.9-2.6-1.6 0-2.4 1.2-2.4 2.6v5.1H9.2V9.3Z" />
+                          </svg>
+                        </a>
+                      )}
+                      {entry.data.x && (
+                        <a href={entry.data.x} target="_blank" rel="noreferrer" aria-label="X" title="X">
+                          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M5 4.5h3.2L19 19.5h-3.2L5 4.5Z" />
+                            <path d="M19 4.5 5 19.5" />
+                          </svg>
+                        </a>
+                      )}
+                      {entry.data.github && (
+                        <a href={entry.data.github} target="_blank" rel="noreferrer" aria-label="GitHub" title="GitHub">
+                          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M12 3.8a8.6 8.6 0 0 0-2.7 16.8v-2.7c-2.5.5-3-1.1-3-1.1-.4-1.1-1-1.4-1-1.4-.8-.5.1-.5.1-.5.9.1 1.4.9 1.4.9.8 1.3 2.1.9 2.6.7.1-.6.3-1 .6-1.3-2-.2-4.1-1-4.1-4.5 0-1 .4-1.9 1-2.6-.1-.3-.4-1.2.1-2.4 0 0 .9-.3 2.8 1a9.5 9.5 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .5 1.2.2 2.1.1 2.4.6.7 1 1.6 1 2.6 0 3.5-2.1 4.3-4.1 4.5.4.4.7 1 .7 2v3.1A8.6 8.6 0 0 0 12 3.8Z" />
+                          </svg>
+                        </a>
+                      )}
+                      {entry.data.orcid && (
+                        <a href={entry.data.orcid} target="_blank" rel="noreferrer" aria-label="ORCID" title="ORCID">
+                          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <circle cx="12" cy="12" r="8.5" />
+                            <path d="M9.2 9.1v5.8" />
+                            <circle cx="9.2" cy="7.4" r=".8" />
+                            <path d="M11.6 14.9v-3.5c0-1.2.8-2 2-2 1.1 0 1.8.7 1.8 1.8 0 1-.7 1.7-1.8 1.7h-2" />
+                          </svg>
+                        </a>
+                      )}
+                      {entry.data.scholar && (
+                        <a href={entry.data.scholar} target="_blank" rel="noreferrer" aria-label="Google Scholar" title="Google Scholar">
+                          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M3.8 10.2 12 5l8.2 5.2L12 15.3 3.8 10.2Z" />
+                            <path d="M7.2 12.6v3.1c0 1.3 2.2 2.4 4.8 2.4s4.8-1.1 4.8-2.4v-3.1" />
+                          </svg>
+                        </a>
+                      )}
+                    </div>
+
+                    {
+                      showCv && (
+                        <details class="person-cv">
+                          <summary>CV</summary>
+                          {hasCvText && (
+                            <div class="person-cv-body">
+                              <Content />
+                            </div>
+                          )}
+                          {cvSrc && (
+                            <p class="person-cv-download">
+                              <a href={cvSrc} download>
+                                Download
+                              </a>
+                            </p>
+                          )}
+                        </details>
+                      )
+                    }
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      ))
+    }
+  </section>
+</BaseLayout>
+
+<style is:global>
+  :root {
+    --s3-warm-alpha: 0.39;
+    --s0-gray-alpha: 0;
+  }
+</style>

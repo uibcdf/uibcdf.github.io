@@ -25,7 +25,7 @@ Most markdown entries in `web/src/content/*` follow these fields:
 Unified stream for seminars, news, publications announcements, software releases, events, and opportunities. Used on the Updates page and (subset) on Home.
 
 ### `people/`
-Profiles for team members (researchers, students, collaborators). Used on People page and optionally referenced elsewhere.
+Profiles for team members (researchers, students, collaborators). Used on Team page and optionally referenced elsewhere.
 
 ### `research/`
 Legacy/simple collection for research entries. The current Research page uses `research-lines/` (see below).
