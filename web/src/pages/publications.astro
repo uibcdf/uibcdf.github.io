@@ -50,11 +50,14 @@ const grouped = Array.from(
       <p class="card">No publications published yet.</p>
     ) : (
       grouped.map(([year, items]) => (
-        <section class="publications-year" aria-label={`Publications ${year}`}>
-          <h2>{year}</h2>
+        <section class="publications-year" aria-label={`Publications ${year}`} id={`year-${year}`}>
+          <h2>
+            <a href={`#year-${year}`}>{year}</a>
+          </h2>
           <div class="publications-grid">
             {items.map(({ entry, Content }) => {
               const [entryYear = '', entryIndex = ''] = entry.slug.split('/');
+              const paperAnchor = `paper-${entryYear}-${entryIndex}`;
               const key = `${entryYear}/${entryIndex}`;
               const thumbSrc = thumbByKey.get(key);
               const bodyImageWidth = entry.data.bodyImageWidth ?? 62;
@@ -66,6 +69,7 @@ const grouped = Array.from(
 
               return (
                 <article
+                  id={paperAnchor}
                   class="publication-card"
                   style={`--publication-body-img-width: ${bodyImageWidth}%`}
                 >
@@ -74,7 +78,9 @@ const grouped = Array.from(
                   </div>
 
                   <div class="publication-body">
-                    <h3>{entry.data.title}</h3>
+                    <h3>
+                      <a href={`#${paperAnchor}`}>{entry.data.title}</a>
+                    </h3>
                     <p class="publication-authors">{entry.data.authors}</p>
 
                     <p class="publication-links">

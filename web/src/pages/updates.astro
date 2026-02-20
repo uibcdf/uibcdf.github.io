@@ -35,7 +35,7 @@ const updates = (await getCollection('updates', ({ data }) => !data.draft)).sort
     ) : (
       <div class="grid" id="updates-grid">
         {updates.map((entry) => (
-          <div data-tags={entry.data.tags.join(',')}>
+          <div id={`update-${entry.slug.replaceAll('/', '-')}`} data-tags={entry.data.tags.join(',')}>
             <ContentCard
               title={entry.data.title}
               summary={entry.data.summary}

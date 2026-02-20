@@ -97,5 +97,71 @@ const navItems = allNavItems.filter((item) => normalizePath(item.href) !== curre
         )
       }
     </div>
+    {
+      !isHomeHero && (
+        <script>
+          const root = document.documentElement;
+          const header = document.querySelector('.site-header');
+          const shell = document.querySelector('.internal-page-shell');
+
+          const syncOcclusionHeight = () => {
+            if (!header) return;
+            const headerRect = header.getBoundingClientRect();
+            const descendants = Array.from(header.querySelectorAll('*'));
+            let visualBottom = headerRect.bottom;
+            for (const element of descendants) {
+              const rect = element.getBoundingClientRect();
+              if (rect.bottom > visualBottom) visualBottom = rect.bottom;
+            }
+            // +1px avoids thin seams caused by subpixel rounding on some displays.
+            const occlusion = Math.ceil(visualBottom - headerRect.top) + 1;
+            root.style.setProperty('--internal-occlusion-height', `${occlusion}px`);
+          };
+
+          const scrollToHashTarget = (smooth = false) => {
+            const hash = window.location.hash;
+            if (!hash || hash.length < 2 || !shell) return;
+            const target = document.getElementById(decodeURIComponent(hash.slice(1)));
+            if (!target) return;
+
+            const shellRect = shell.getBoundingClientRect();
+            const targetRect = target.getBoundingClientRect();
+            const top = targetRect.top - shellRect.top + shell.scrollTop - 10;
+            shell.scrollTo({
+              top: Math.max(0, top),
+              behavior: smooth ? 'smooth' : 'auto',
+            });
+          };
+
+          window.addEventListener('hashchange', () => scrollToHashTarget(true));
+          window.addEventListener('resize', syncOcclusionHeight);
+          window.addEventListener('load', syncOcclusionHeight);
+
+          if ('fonts' in document) {
+            document.fonts.ready.then(syncOcclusionHeight).catch(() => {});
+          }
+
+          document.addEventListener('click', (event) => {
+            const link = event.target instanceof Element ? event.target.closest('a[href^="#"]') : null;
+            if (!link) return;
+            const href = link.getAttribute('href') ?? '';
+            if (href.length < 2) return;
+            event.preventDefault();
+            if (window.location.hash === href) {
+              scrollToHashTarget(true);
+              return;
+            }
+            history.pushState(null, '', href);
+            scrollToHashTarget(true);
+          });
+
+          // Run after layout/paint so offsets are stable.
+          requestAnimationFrame(() => {
+            syncOcclusionHeight();
+            scrollToHashTarget(false);
+          });
+        </script>
+      )
+    }
   </body>
 </html>

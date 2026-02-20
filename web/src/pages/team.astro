@@ -68,12 +68,21 @@ const sectioned = (['researchers', 'students', 'former_members'] as GroupKey[])
       <p class="card">No team profiles published yet.</p>
     ) : (
       sectioned.map((section) => (
-        <section class="people-section" aria-label={section.title}>
-          <h2>{section.title}</h2>
+        <section
+          class="people-section"
+          aria-label={section.title}
+          id={section.group === 'former_members' ? 'former-members' : section.group}
+        >
+          <h2>
+            <a href={`#${section.group === 'former_members' ? 'former-members' : section.group}`}>
+              {section.title}
+            </a>
+          </h2>
           <div class="people-grid">
             {section.members.map(({ entry, Content }) => {
               const [group = '', index = ''] = entry.slug.split('/');
               const key = `${group}/${index}`;
+              const personAnchor = `person-${group.replace('_', '-')}-${index}`;
               const imageSrc = imageByKey.get(key);
               const cvSrc = cvByKey.get(key);
               const affiliationText = group === 'researchers' ? 'UIBCDF' : entry.data.affiliation;
@@ -82,7 +91,7 @@ const sectioned = (['researchers', 'students', 'former_members'] as GroupKey[])
               const showCv = hasCvText || Boolean(cvSrc);
 
               return (
-                <article class="person-card">
+                <article class="person-card" id={personAnchor}>
                   <div class="person-media">
                     {imageSrc ? (
                       <img src={imageSrc} alt={`${entry.data.name} profile photo`} loading="lazy" />
@@ -92,7 +101,9 @@ const sectioned = (['researchers', 'students', 'former_members'] as GroupKey[])
                   </div>
 
                   <div class="person-body">
-                    <h3>{entry.data.name}</h3>
+                    <h3>
+                      <a href={`#${personAnchor}`}>{entry.data.name}</a>
+                    </h3>
                     <p class="person-position">{entry.data.position}</p>
                     <p class="person-expertise">{entry.data.expertise}</p>
                     <p class="person-affiliation">{affiliationText}</p>
@@ -176,6 +187,6 @@ const sectioned = (['researchers', 'students', 'former_members'] as GroupKey[])
   :root {
     --s3-warm-alpha: 0.39;
     --s0-gray-alpha: 0;
-    --header-solid-bg: linear-gradient(180deg, #fbf1df 0%, #f5e4cd 100%);
+    --internal-flat-bg: linear-gradient(180deg, #fbf1df 0%, #f5e4cd 100%);
   }
 </style>
