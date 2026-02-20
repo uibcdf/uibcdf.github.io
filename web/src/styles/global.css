@@ -13,16 +13,8 @@
   --s3-warm-alpha: 0;
   --header-solid-bg: linear-gradient(180deg, #f8fbff 0%, #eff4fb 100%);
   --internal-header-height: 4.85rem;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
-  background:
+  --internal-occlusion-height: var(--internal-header-height);
+  --site-background:
     linear-gradient(
       180deg,
       rgb(255 226 172 / var(--s3-warm-alpha, 0)) 0%,
@@ -34,6 +26,16 @@ body {
       rgb(206 212 218 / var(--s0-gray-alpha, 0)) 100%
     ),
     linear-gradient(180deg, #f8fbff 0%, #eff4fb 100%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  background: var(--site-background);
   color: var(--text);
   line-height: 1.55;
 }
@@ -60,13 +62,36 @@ body.internal-page .site-header {
   right: 0;
   width: 100%;
   z-index: 150;
-  background: transparent;
+  max-width: none;
+  margin: 0;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  padding-inline: max(1.25rem, calc((100vw - 62rem) / 2 + 1.25rem));
+  background: var(--site-background);
   border: 0;
   box-shadow: none;
 }
 
 body.internal-page main {
-  padding-top: calc(var(--internal-header-height) + 0.35rem);
+  padding-top: 0;
+}
+
+body.internal-page {
+  overflow: hidden;
+}
+
+.page-shell {
+  width: 100%;
+}
+
+body.internal-page .internal-page-shell {
+  position: fixed;
+  inset: 0;
+  overflow-y: auto;
+  padding-top: var(--internal-occlusion-height);
+  background: var(--site-background);
+  -webkit-clip-path: inset(var(--internal-occlusion-height) 0 0 0);
+  clip-path: inset(var(--internal-occlusion-height) 0 0 0);
 }
 
 .brand {

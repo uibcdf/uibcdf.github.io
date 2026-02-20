@@ -73,27 +73,29 @@ const navItems = allNavItems.filter((item) => normalizePath(item.href) !== curre
         </ul>
       </nav>
     </header>
-    <main>
-      <section class:list={['hero', heroClass]}>
-        <h1>{title}</h1>
-        {!isHomeHero && <span class="hero-separator" aria-hidden="true"></span>}
-        {subtitle && <p class="hero-subtitle">{subtitle}</p>}
-        <p>{description}</p>
-        {ctaLabel && ctaHref && <a class="cta" href={ctaHref}>{ctaLabel}</a>}
-      </section>
-      <section class="content">
-        <slot />
-      </section>
-    </main>
-    {
-      !hideFooter && (
-        <footer>
-          <p>
-            Computational Biology and Drug Design Research Unit · Federico Gómez Children's
-            Hospital of Mexico · Mexican National Institute of Health
-          </p>
-        </footer>
-      )
-    }
+    <div class:list={['page-shell', !isHomeHero && 'internal-page-shell']}>
+      <main>
+        <section class:list={['hero', heroClass]}>
+          <h1>{title}</h1>
+          {!isHomeHero && <span class="hero-separator" aria-hidden="true"></span>}
+          {subtitle && <p class="hero-subtitle">{subtitle}</p>}
+          <p>{description}</p>
+          {ctaLabel && ctaHref && <a class="cta" href={ctaHref}>{ctaLabel}</a>}
+        </section>
+        <section class="content">
+          <slot />
+        </section>
+      </main>
+      {
+        !hideFooter && (
+          <footer>
+            <p>
+              Computational Biology and Drug Design Research Unit · Federico Gómez Children's
+              Hospital of Mexico · Mexican National Institute of Health
+            </p>
+          </footer>
+        )
+      }
+    </div>
   </body>
 </html>
