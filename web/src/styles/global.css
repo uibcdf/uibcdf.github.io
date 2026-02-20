@@ -605,7 +605,10 @@ section + section {
 
 .updates-filters {
   height: auto;
-  background: rgb(255 255 255 / 0.44);
+  background: #e9ecf1;
+  position: sticky;
+  top: calc(var(--internal-occlusion-height) - 4rem);
+  z-index: 20;
 }
 
 .updates-filters h2 {
