@@ -60,6 +60,20 @@ const researchLines = defineCollection({
   }),
 });
 
+const publicationPapers = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    authors: z.string(),
+    doi: z.string().url().optional(),
+    preprint: z.string().url().optional(),
+    abstract: z.string().optional(),
+    bodyImageWidth: z.number().min(20).max(100).optional(),
+    thumbnailAlt: z.string().optional(),
+    draft: z.boolean().default(false),
+  }),
+});
+
 const publications = defineCollection({
   type: 'content',
   schema: baseSchema,
@@ -71,5 +85,6 @@ export const collections = {
   'people-profiles': peopleProfiles,
   research,
   'research-lines': researchLines,
+  'publication-papers': publicationPapers,
   publications,
 };

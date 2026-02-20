@@ -1,0 +1,33 @@
+Publication papers content convention
+
+Folder structure:
+- src/content/publication-papers/2026/01/
+- src/content/publication-papers/2026/02/
+- src/content/publication-papers/2025/01/
+
+Each paper folder must include:
+1) line.md
+2) thumbnail.png
+
+Ordering rule:
+- Years are grouped and displayed descending.
+- Inside each year, papers are sorted by numeric folder order (01, 02, ...).
+
+thumbnail.png specification:
+- Resolution: 1000 x 1414 px
+- Aspect ratio: 1:1.414 (A4-like first page)
+- Format: PNG
+
+line.md frontmatter:
+- title: string
+- authors: string
+- doi: optional URL
+- preprint: optional URL
+- abstract: optional string
+- bodyImageWidth: optional number (20-100)
+- thumbnailAlt: optional string
+- draft: boolean
+
+Body:
+- Markdown body is rendered inside publication details.
+- Supports text, figures, and image captions.

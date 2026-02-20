@@ -662,6 +662,131 @@ section + section {
   font-size: 0.82rem;
 }
 
+.publications-page {
+  display: grid;
+  gap: 1.15rem;
+  margin-top: -1.35rem;
+}
+
+.publications-year h2 {
+  margin: 0 0 0.55rem;
+  font-size: 1.35rem;
+  color: #132031;
+}
+
+.publications-grid {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.publication-card {
+  display: grid;
+  grid-template-columns: 20% 80%;
+  gap: 0.9rem;
+  align-items: start;
+  border: 1px solid var(--line);
+  border-radius: 0.5rem;
+  background: var(--surface);
+  padding: 0.85rem;
+}
+
+.publication-media {
+  align-self: start;
+  aspect-ratio: 1 / 1.414;
+  max-width: 8.8rem;
+  border: 1px dashed #c3d5ee;
+  border-radius: 0.4rem;
+  overflow: hidden;
+  background: linear-gradient(180deg, #eef4fd 0%, #dce8f8 100%);
+  display: grid;
+  place-items: center;
+  color: #5e7596;
+}
+
+.publication-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.publication-body h3 {
+  margin: 0 0 0.25rem;
+  color: var(--accent);
+  font-size: 1.08rem;
+}
+
+.publication-authors {
+  margin: 0;
+  color: #2d4c70;
+  font-weight: 600;
+}
+
+.publication-links {
+  margin: 0.22rem 0 0;
+  color: #4d637f;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.publication-details {
+  margin-top: 0.45rem;
+}
+
+.publication-details summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-weight: 400;
+}
+
+.publication-details .summary-open {
+  display: none;
+}
+
+.publication-details[open] .summary-closed {
+  display: none;
+}
+
+.publication-details[open] .summary-open {
+  display: inline;
+}
+
+.publication-abstract {
+  margin: 0.4rem 0 0;
+  color: #475f7c;
+}
+
+.publication-body-expanded {
+  margin-top: 0.3rem;
+  color: var(--muted);
+}
+
+.publication-body-expanded p {
+  margin: 0.25rem 0;
+}
+
+.publication-body-expanded img {
+  display: block;
+  width: var(--publication-body-img-width, 62%);
+  max-width: 22rem;
+  min-width: 12rem;
+  height: auto;
+  border-radius: 0.35rem;
+  border: 1px solid var(--line);
+  margin: 0.45rem auto;
+}
+
+.publication-body-expanded figure {
+  margin: 0.5rem auto;
+  text-align: center;
+}
+
+.publication-body-expanded figcaption {
+  margin-top: 0.2rem;
+  color: #6a7f98;
+  font-size: 0.82rem;
+}
+
 .people-page {
   display: grid;
   gap: 1.2rem;
@@ -867,6 +992,14 @@ footer {
 
   .person-media {
     max-width: 13rem;
+  }
+
+  .publication-card {
+    grid-template-columns: 1fr;
+  }
+
+  .publication-media {
+    max-width: 11rem;
   }
 }
 

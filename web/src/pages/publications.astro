@@ -1,33 +1,131 @@
 ---
 import { getCollection } from 'astro:content';
-import ContentCard from '../components/ContentCard.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const publicationEntries = (await getCollection('publications', ({ data }) => !data.draft)).sort(
-  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+const publicationEntries = (await getCollection('publication-papers', ({ data }) => !data.draft)).sort((a, b) => {
+  const [aYear = '0', aIndex = '999'] = a.slug.split('/');
+  const [bYear = '0', bIndex = '999'] = b.slug.split('/');
+  const yearDiff = Number.parseInt(bYear, 10) - Number.parseInt(aYear, 10);
+  if (yearDiff !== 0) return yearDiff;
+  return Number.parseInt(aIndex, 10) - Number.parseInt(bIndex, 10);
+});
+
+const renderedPublications = await Promise.all(
+  publicationEntries.map(async (entry) => {
+    const { Content } = await entry.render();
+    return { entry, Content };
+  }),
 );
+
+const thumbModules = import.meta.glob('/src/content/publication-papers/*/*/thumbnail.png', { eager: true });
+const thumbByKey = new Map<string, string>(
+  Object.entries(thumbModules).map(([path, mod]) => {
+    const parts = path.split('/');
+    const year = parts.at(-3) ?? '';
+    const index = parts.at(-2) ?? '';
+    const imported = (mod as { default: string | { src: string } }).default;
+    const src = typeof imported === 'string' ? imported : imported.src;
+    return [`${year}/${index}`, src];
+  }),
+);
+
+const grouped = Array.from(
+  renderedPublications.reduce((map, item) => {
+    const [year = 'Unknown'] = item.entry.slug.split('/');
+    if (!map.has(year)) map.set(year, [] as typeof renderedPublications);
+    map.get(year)!.push(item);
+    return map;
+  }, new Map<string, typeof renderedPublications>()),
+).sort((a, b) => Number.parseInt(b[0], 10) - Number.parseInt(a[0], 10));
 ---
 
 <BaseLayout
   title="Publications"
-  description="Curated list of recent and representative scientific outputs."
-  ctaLabel="See updates"
-  ctaHref="/updates"
+  description="Curated papers, preprints, and scientific outputs from UIBCDF."
+  ctaLabel="UIBCDF Google Scholar"
+  ctaHref="https://scholar.google.com/"
 >
-  {
-    publicationEntries.length === 0 ? (
-      <p class="card">No published publications yet.</p>
+  <section class="publications-page" aria-label="Publications directory">
+    {grouped.length === 0 ? (
+      <p class="card">No publications published yet.</p>
     ) : (
-      <div class="grid">
-        {publicationEntries.map((entry) => (
-          <ContentCard
-            title={entry.data.title}
-            summary={entry.data.summary}
-            date={entry.data.date}
-            tags={entry.data.tags}
-          />
-        ))}
-      </div>
-    )
-  }
+      grouped.map(([year, items]) => (
+        <section class="publications-year" aria-label={`Publications ${year}`}>
+          <h2>{year}</h2>
+          <div class="publications-grid">
+            {items.map(({ entry, Content }) => {
+              const [entryYear = '', entryIndex = ''] = entry.slug.split('/');
+              const key = `${entryYear}/${entryIndex}`;
+              const thumbSrc = thumbByKey.get(key);
+              const bodyImageWidth = entry.data.bodyImageWidth ?? 62;
+              const thumbAlt = entry.data.thumbnailAlt ?? `${entry.data.title} first page thumbnail`;
+              const bodyText = (entry.body ?? '').trim();
+              const hasAbstract = Boolean(entry.data.abstract?.trim());
+              const hasBody = bodyText.length > 0 && !/^Detailed publication placeholder/i.test(bodyText);
+              const showDetails = hasAbstract || hasBody;
+
+              return (
+                <article
+                  class="publication-card"
+                  style={`--publication-body-img-width: ${bodyImageWidth}%`}
+                >
+                  <div class="publication-media">
+                    {thumbSrc ? <img src={thumbSrc} alt={thumbAlt} loading="lazy" /> : <span>Missing thumbnail.png</span>}
+                  </div>
+
+                  <div class="publication-body">
+                    <h3>{entry.data.title}</h3>
+                    <p class="publication-authors">{entry.data.authors}</p>
+
+                    <p class="publication-links">
+                      <strong>DOI:</strong>{' '}
+                      {entry.data.doi ? (
+                        <a href={entry.data.doi} target="_blank" rel="noreferrer">
+                          {entry.data.doi}
+                        </a>
+                      ) : (
+                        <span>—</span>
+                      )}
+                    </p>
+
+                    <p class="publication-links">
+                      <strong>Preprint:</strong>{' '}
+                      {entry.data.preprint ? (
+                        <a href={entry.data.preprint} target="_blank" rel="noreferrer">
+                          {entry.data.preprint}
+                        </a>
+                      ) : (
+                        <span>—</span>
+                      )}
+                    </p>
+
+                    {showDetails && (
+                      <details class="publication-details">
+                        <summary>
+                          <span class="summary-closed">Show details</span>
+                          <span class="summary-open">Hide details</span>
+                        </summary>
+
+                        {hasAbstract && (
+                          <p class="publication-abstract">
+                            <strong>Abstract.</strong> {entry.data.abstract}
+                          </p>
+                        )}
+
+                        {hasBody && (
+                          <div class="publication-body-expanded">
+                            <Content />
+                          </div>
+                        )}
+                      </details>
+                    )}
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      ))
+    )}
+  </section>
 </BaseLayout>
