@@ -17,6 +17,7 @@ A lightweight backlog to keep scope under control.
 - [x] Build Home page hero + latest updates widget
 - [x] Create Updates index with filtering by tag
 - [x] Create Team page and profile cards
+- [x] Create Publications page with year sections and `publication-papers/YYYY/NN` content model
 - [x] Create Software page with MolSysSuite highlight and links
 - [x] Add Contact page with institutional context
 - [x] Add GitHub Actions workflow to publish to `gh-pages`

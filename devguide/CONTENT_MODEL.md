@@ -99,8 +99,47 @@ Deep-link support:
 
 - `#line-02` or `?line=02` opens and focuses line 02 on load.
 
-### `publications/`
-Curated publication entries. Start minimal; can be expanded later with citations/DOIs.
+### `publication-papers/` (active for Publications page)
+Structured collection for Publications, grouped by year and ordered within each year.
+
+Folder layout:
+
+- `web/src/content/publication-papers/2026/01/line.md`
+- `web/src/content/publication-papers/2026/01/thumbnail.png`
+- `web/src/content/publication-papers/2026/02/line.md`
+- `web/src/content/publication-papers/2025/01/line.md`
+
+Ordering:
+
+- Year sections sort descending (`2026`, `2025`, ...).
+- Inside each year, numeric directory order (`01`, `02`, `03`, ...).
+
+`line.md` frontmatter:
+
+- `title` (string)
+- `authors` (string)
+- `doi` (URL, optional)
+- `preprint` (URL, optional)
+- `abstract` (string, optional)
+- `bodyImageWidth` (number, optional, 20–100) — width (%) for images inside expanded details
+- `thumbnailAlt` (string, optional)
+- `draft` (boolean)
+
+`line.md` body:
+
+- Optional expanded details (`Show details / Hide details`).
+- Supports markdown/HTML, including inline images.
+
+Required assets:
+
+- `thumbnail.png` = left-side paper preview card image.
+
+Optional assets:
+
+- Extra illustrative images can be placed in the same paper folder and referenced from `line.md` (example: `illustration.png`).
+
+### `publications/` (legacy)
+Curated publication entries (generic schema). Kept for compatibility; current Publications page uses `publication-papers/`.
 
 ## Tags vocabulary
 
