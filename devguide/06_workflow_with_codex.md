@@ -22,6 +22,7 @@ This repo is intended to be developed locally with Codex (CLI) after the initial
 - Keep navigation minimal (see `devguide/02_information_architecture.md`).
 - Maintain one primary CTA per page.
 - For Research page content, use `web/src/content/research-lines/NN/` with `line.md` + `image.png` (numeric order defines render order).
+- For Team page content, use `web/src/content/people-profiles/{researchers|students|former_members}/NN/` with `line.md` + `image.png` (and optional `cv.pdf`).
 
 ## Home scroll notation (shared vocabulary)
 For iterative UI work on the Home page scroll choreography, use this notation:

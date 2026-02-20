@@ -69,3 +69,20 @@ Implement the minimum executable Astro scaffold in `web/`, wire the MVP routes t
 **Consequences**  
 - Repository now contains a buildable Astro project and locked dependencies (`web/package-lock.json`).
 - `main` branch changes are deployable through CI to GitHub Pages.
+
+---
+
+## 2026-02-19 — Team route, structured Team content, and navigation behavior
+
+**Context**  
+The People page evolved into a richer Team page with grouped member cards, social links, and optional CV expansion. Navigation also needed an explicit Home option while avoiding redundant current-page links.
+
+**Decision**  
+- Replace `/people` with `/team` as the canonical route.
+- Use structured content under `web/src/content/people-profiles/`:
+  `researchers/`, `students/`, `former_members/`, each with numeric member folders.
+- Add `Home` to top navigation and hide the current page item so 6 items are shown consistently.
+
+**Consequences**  
+- Team content editing is now directory-driven and predictable.
+- Navigation back to home is explicit and discoverable.

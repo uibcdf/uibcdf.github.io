@@ -4,6 +4,7 @@ This file freezes the MVP sitemap and navigation decisions.
 
 ## Top navigation (MVP)
 
+- Home
 - Research
 - Team
 - Publications
@@ -12,6 +13,7 @@ This file freezes the MVP sitemap and navigation decisions.
 - Contact
 
 ## Notes
+- Menu behavior: show `Home` as first item and hide the current page from the menu, so 6 items are visible at any time.
 - Updates are **one section** with **tags** to avoid fragmentation.
 - Home shows only the latest 3–5 updates, plus a link to the full index.
 - Publications can start as a simple curated list; later we can add BibTeX/DOI tooling if useful.

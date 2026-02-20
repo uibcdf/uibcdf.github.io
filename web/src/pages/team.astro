@@ -64,7 +64,9 @@ const sectioned = (['researchers', 'students', 'former_members'] as GroupKey[])
   description="Researchers, students, and former members of UIBCDF."
 >
   <section class="people-page" aria-label="People directory">
-    {
+    {sectioned.length === 0 ? (
+      <p class="card">No team profiles published yet.</p>
+    ) : (
       sectioned.map((section) => (
         <section class="people-section" aria-label={section.title}>
           <h2>{section.title}</h2>
@@ -166,7 +168,7 @@ const sectioned = (['researchers', 'students', 'former_members'] as GroupKey[])
           </div>
         </section>
       ))
-    }
+    )}
   </section>
 </BaseLayout>
 

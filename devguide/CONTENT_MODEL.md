@@ -27,6 +27,41 @@ Unified stream for seminars, news, publications announcements, software releases
 ### `people/`
 Profiles for team members (researchers, students, collaborators). Used on Team page and optionally referenced elsewhere.
 
+### `people-profiles/` (active for Team page)
+Structured Team content with one directory per member, grouped by section and sorted numerically.
+
+Folder layout:
+
+- `web/src/content/people-profiles/researchers/01/line.md`
+- `web/src/content/people-profiles/researchers/01/image.png`
+- `web/src/content/people-profiles/researchers/01/cv.pdf` (optional)
+- `web/src/content/people-profiles/students/01/line.md`
+- `web/src/content/people-profiles/former_members/01/line.md`
+
+Section order:
+
+1. `researchers`
+2. `students`
+3. `former_members`
+
+Member order:
+
+- Numeric directory order (`01`, `02`, `03`, ...).
+
+`line.md` frontmatter:
+
+- `name` (string)
+- `position` (string)
+- `expertise` (string)
+- `affiliation` (string)
+- `linkedin`, `x`, `github`, `orcid`, `scholar` (optional URLs)
+- `draft` (boolean)
+
+Notes:
+
+- Team cards show a `CV` toggle only when CV text and/or `cv.pdf` exists.
+- Researchers display affiliation as `UIBCDF` in the UI.
+
 ### `research/`
 Legacy/simple collection for research entries. The current Research page uses `research-lines/` (see below).
 

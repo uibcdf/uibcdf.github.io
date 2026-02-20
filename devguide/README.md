@@ -37,5 +37,5 @@
 ## Current status (2026-02-18)
 - Astro MVP scaffold is implemented under `web/`.
 - MVP routes are live in source: Home, Research, Team, Publications, Software, Updates, Contact.
-- Content Collections are configured for `updates`, `people`, `research`, `research-lines`, and `publications`.
+- Content Collections are configured for `updates`, `people`, `people-profiles`, `research`, `research-lines`, and `publications`.
 - CI workflow exists at `.github/workflows/deploy-gh-pages.yml` and deploys to `gh-pages`.

@@ -19,7 +19,8 @@ const pageTitle = `${title} | UIBCDF`;
 const canonicalUrl = Astro.url.href;
 const ogImageUrl = new URL(ogImage ?? '/og-default.svg', Astro.site).toString();
 
-const navItems = [
+const allNavItems = [
+  { href: '/', label: 'Home' },
   { href: '/research', label: 'Research' },
   { href: '/team', label: 'Team' },
   { href: '/publications', label: 'Publications' },
@@ -27,6 +28,10 @@ const navItems = [
   { href: '/updates', label: 'Updates' },
   { href: '/contact', label: 'Contact' },
 ];
+
+const normalizePath = (value: string) => value.replace(/\/+$/, '') || '/';
+const currentPath = normalizePath(Astro.url.pathname);
+const navItems = allNavItems.filter((item) => normalizePath(item.href) !== currentPath);
 ---
 <!doctype html>
 <html lang="en">
