@@ -11,6 +11,8 @@
   --hero-lock-height: clamp(11.25rem, 21vh, 13.75rem);
   --s0-gray-alpha: 0.85;
   --s3-warm-alpha: 0;
+  --header-solid-bg: linear-gradient(180deg, #f8fbff 0%, #eff4fb 100%);
+  --internal-header-height: 4.85rem;
 }
 
 * {
@@ -49,6 +51,22 @@ footer {
   gap: 1rem;
   align-items: flex-end;
   justify-content: space-between;
+}
+
+body.internal-page .site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 150;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+body.internal-page main {
+  padding-top: calc(var(--internal-header-height) + 0.35rem);
 }
 
 .brand {
@@ -727,6 +745,10 @@ section + section {
   color: #4d637f;
   overflow-wrap: anywhere;
   word-break: break-word;
+}
+
+.publication-links a {
+  text-decoration: none;
 }
 
 .publication-details {

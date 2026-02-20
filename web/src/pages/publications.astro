@@ -78,25 +78,18 @@ const grouped = Array.from(
                     <p class="publication-authors">{entry.data.authors}</p>
 
                     <p class="publication-links">
-                      <strong>DOI:</strong>{' '}
-                      {entry.data.doi ? (
+                      {entry.data.doi && (
                         <a href={entry.data.doi} target="_blank" rel="noreferrer">
-                          {entry.data.doi}
+                          DOI
                         </a>
-                      ) : (
-                        <span>—</span>
                       )}
-                    </p>
-
-                    <p class="publication-links">
-                      <strong>Preprint:</strong>{' '}
-                      {entry.data.preprint ? (
+                      {entry.data.doi && entry.data.preprint && <span aria-hidden="true"> · </span>}
+                      {entry.data.preprint && (
                         <a href={entry.data.preprint} target="_blank" rel="noreferrer">
-                          {entry.data.preprint}
+                          Preprint
                         </a>
-                      ) : (
-                        <span>—</span>
                       )}
+                      {!entry.data.doi && !entry.data.preprint && <span>—</span>}
                     </p>
 
                     {showDetails && (

@@ -60,7 +60,7 @@ const navItems = allNavItems.filter((item) => normalizePath(item.href) !== curre
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
   </head>
-  <body>
+  <body class:list={[!isHomeHero && 'internal-page']}>
     <header class="site-header">
       <a class="brand" href="/" aria-label="UIBCDF home">
         <img src="/logo-uibcdf.svg" alt="UIBCDF" />
