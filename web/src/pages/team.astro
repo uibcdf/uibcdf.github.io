@@ -2,12 +2,13 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-type GroupKey = 'researchers' | 'students' | 'former_members';
+type GroupKey = 'researchers' | 'students' | 'collaborators' | 'former_members';
 
 const groupConfig: Record<GroupKey, { title: string; order: number }> = {
   researchers: { title: 'Researchers', order: 1 },
   students: { title: 'Students', order: 2 },
-  former_members: { title: 'Former members', order: 3 },
+  collaborators: { title: 'Collaborators', order: 3 },
+  former_members: { title: 'Former members', order: 4 },
 };
 
 const peopleEntries = (await getCollection('people-profiles', ({ data }) => !data.draft)).sort((a, b) => {
@@ -51,7 +52,7 @@ const cvByKey = new Map<string, string>(
   }),
 );
 
-const sectioned = (['researchers', 'students', 'former_members'] as GroupKey[])
+const sectioned = (['researchers', 'students', 'collaborators', 'former_members'] as GroupKey[])
   .map((group) => {
     const members = renderedPeople.filter(({ entry }) => entry.slug.split('/')[0] === group);
     return { group, title: groupConfig[group].title, members };
@@ -61,7 +62,7 @@ const sectioned = (['researchers', 'students', 'former_members'] as GroupKey[])
 
 <BaseLayout
   title="Team"
-  description="Researchers, students, and former members of UIBCDF."
+  description="Researchers, students, collaborators, and former members of UIBCDF."
 >
   <section class="people-page" aria-label="People directory">
     {sectioned.length === 0 ? (
