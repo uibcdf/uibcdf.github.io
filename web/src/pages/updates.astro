@@ -47,6 +47,9 @@ const renderedUpdates = await Promise.all(
       </label>
       <button id="updates-clear" type="button" class="tag-button updates-clear">Clear filters</button>
     </div>
+    <div class="updates-progress" aria-hidden="true">
+      <span class="updates-progress-thumb"></span>
+    </div>
   </section>
 
   {
@@ -104,13 +107,19 @@ const renderedUpdates = await Promise.all(
   }
 
   <script>
-    const buttons = document.querySelectorAll('.tag-button');
+    const shell = document.querySelector('.internal-page-shell');
+    const updatesFilters = document.querySelector('.updates-filters');
+    const updatesCanvas = document.getElementById('updates-grid');
+    const progressRail = document.querySelector('.updates-progress');
+    const progressThumb = document.querySelector('.updates-progress-thumb');
     const tagButtons = document.querySelectorAll('.tag-button[data-filter]');
     const cards = document.querySelectorAll('#updates-grid > .update-card');
     const searchInput = document.getElementById('updates-search');
     const fromInput = document.getElementById('updates-from');
     const toInput = document.getElementById('updates-to');
     const clearButton = document.getElementById('updates-clear');
+    let hideRaf = null;
+    const CUTLINE_OFFSET_PX = 14;
 
     const state = {
       tag: 'all',
@@ -132,7 +141,112 @@ const renderedUpdates = await Promise.all(
 
         card.style.display = tagOk && textOk && fromOk && toOk ? '' : 'none';
       });
+      requestHideUpdate();
     };
+
+    const updateProgress = () => {
+      if (!shell || !updatesCanvas || !updatesFilters) return;
+      const shellRect = shell.getBoundingClientRect();
+      const filtersRect = updatesFilters.getBoundingClientRect();
+      const cutoff = filtersRect.bottom + 1 + CUTLINE_OFFSET_PX;
+      const cutoffInShell = shell.scrollTop + (cutoff - shellRect.top);
+      const canvasTop = updatesCanvas.offsetTop;
+      const canvasBottom = canvasTop + updatesCanvas.scrollHeight;
+      const ratio = (cutoffInShell - canvasTop) / Math.max(1, canvasBottom - canvasTop);
+      const clamped = Math.max(0, Math.min(1, ratio));
+      updatesFilters.style.setProperty('--updates-progress', clamped.toFixed(4));
+    };
+
+    const applyHideByCutline = () => {
+      hideRaf = null;
+      if (!updatesFilters) return;
+      const cutoff = updatesFilters.getBoundingClientRect().bottom + 1 + CUTLINE_OFFSET_PX;
+      cards.forEach((card) => {
+        if (card.style.display === 'none') {
+          card.style.clipPath = '';
+          card.style.webkitClipPath = '';
+          card.style.opacity = '';
+          return;
+        }
+        const rect = card.getBoundingClientRect();
+        const overlap = cutoff - rect.top;
+        if (overlap <= 0) {
+          card.style.clipPath = '';
+          card.style.webkitClipPath = '';
+          card.style.opacity = '';
+          return;
+        }
+        if (overlap >= rect.height) {
+          card.style.clipPath = `inset(${Math.ceil(rect.height)}px 0 0 0)`;
+          card.style.webkitClipPath = `inset(${Math.ceil(rect.height)}px 0 0 0)`;
+          card.style.opacity = '0';
+          return;
+        }
+        const clip = Math.max(0, Math.ceil(overlap));
+        card.style.clipPath = `inset(${clip}px 0 0 0 round 0.5rem)`;
+        card.style.webkitClipPath = `inset(${clip}px 0 0 0 round 0.5rem)`;
+        card.style.opacity = '1';
+      });
+      updateProgress();
+    };
+
+    const requestHideUpdate = () => {
+      if (hideRaf !== null) return;
+      hideRaf = requestAnimationFrame(applyHideByCutline);
+    };
+
+    const clamp01 = (value) => Math.max(0, Math.min(1, value));
+
+    const scrollToProgress = (ratio) => {
+      if (!shell || !updatesCanvas || !updatesFilters) return;
+      const shellRect = shell.getBoundingClientRect();
+      const filtersRect = updatesFilters.getBoundingClientRect();
+      const cutoffOffset = filtersRect.bottom + 1 + CUTLINE_OFFSET_PX - shellRect.top;
+      const canvasTop = updatesCanvas.offsetTop;
+      const canvasBottom = canvasTop + updatesCanvas.scrollHeight;
+      const range = Math.max(1, canvasBottom - canvasTop);
+      const targetCutoffInShell = canvasTop + clamp01(ratio) * range;
+      const rawTargetScrollTop = targetCutoffInShell - cutoffOffset;
+      const maxScrollTop = Math.max(0, shell.scrollHeight - shell.clientHeight);
+      shell.scrollTop = Math.max(0, Math.min(maxScrollTop, rawTargetScrollTop));
+    };
+
+    const ratioFromPointer = (clientY) => {
+      if (!progressRail || !progressThumb) return 0;
+      const railRect = progressRail.getBoundingClientRect();
+      const thumbRect = progressThumb.getBoundingClientRect();
+      const track = Math.max(1, railRect.height - thumbRect.height);
+      const localY = clientY - railRect.top - thumbRect.height / 2;
+      return clamp01(localY / track);
+    };
+
+    let draggingProgress = false;
+
+    progressRail?.addEventListener('pointerdown', (event) => {
+      draggingProgress = true;
+      progressRail.classList.add('is-dragging');
+      progressRail.setPointerCapture?.(event.pointerId);
+      scrollToProgress(ratioFromPointer(event.clientY));
+      requestHideUpdate();
+      event.preventDefault();
+    });
+
+    progressRail?.addEventListener('pointermove', (event) => {
+      if (!draggingProgress) return;
+      scrollToProgress(ratioFromPointer(event.clientY));
+      requestHideUpdate();
+      event.preventDefault();
+    });
+
+    const stopProgressDrag = (event) => {
+      if (!draggingProgress || !progressRail) return;
+      draggingProgress = false;
+      progressRail.classList.remove('is-dragging');
+      progressRail.releasePointerCapture?.(event.pointerId);
+    };
+
+    progressRail?.addEventListener('pointerup', stopProgressDrag);
+    progressRail?.addEventListener('pointercancel', stopProgressDrag);
 
     tagButtons.forEach((button) => {
       button.addEventListener('click', () => {
@@ -171,5 +285,9 @@ const renderedUpdates = await Promise.all(
       allButton?.classList.add('is-active');
       applyFilters();
     });
+
+    shell?.addEventListener('scroll', requestHideUpdate, { passive: true });
+    window.addEventListener('resize', requestHideUpdate);
+    requestHideUpdate();
   </script>
 </BaseLayout>

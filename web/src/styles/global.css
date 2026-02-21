@@ -604,11 +604,43 @@ section + section {
 }
 
 .updates-filters {
+  --updates-progress: 0;
   height: auto;
   background: #e9ecf1;
   position: sticky;
   top: calc(var(--internal-occlusion-height) - 4rem);
   z-index: 20;
+  padding-right: 1.7rem;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.updates-progress {
+  --thumb-h: 1.1rem;
+  position: absolute;
+  top: 0.95rem;
+  bottom: 0.95rem;
+  right: 0.55rem;
+  width: 0.28rem;
+  border-radius: 999px;
+  background: #cdd6e2;
+  cursor: pointer;
+  touch-action: none;
+}
+
+.updates-progress-thumb {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: var(--thumb-h);
+  border-radius: 999px;
+  background: var(--accent);
+  top: calc(var(--updates-progress) * (100% - var(--thumb-h)));
+  transition: none;
+}
+
+.updates-progress.is-dragging .updates-progress-thumb {
+  transition: none;
 }
 
 .updates-filters h2 {
@@ -663,6 +695,8 @@ section + section {
   border-radius: 0.5rem;
   background: var(--surface);
   padding: 0.85rem;
+  will-change: clip-path, opacity;
+  transition: none;
 }
 
 .update-meta {

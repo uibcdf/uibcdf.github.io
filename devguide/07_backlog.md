@@ -16,6 +16,7 @@ A lightweight backlog to keep scope under control.
 - [x] Implement Content Collections schemas for updates/people/research/publications
 - [x] Build Home page hero + latest updates widget
 - [x] Create Updates index with filtering by tag
+- [x] Enhance Updates UX with text/date filters, sticky filter panel, and draggable vertical scroll indicator
 - [x] Create Team page and profile cards
 - [x] Create Publications page with year sections and `publication-papers/YYYY/NN` content model
 - [x] Create Code page with structured `software-tools/{molsyssuite|utilities}/NN` content model

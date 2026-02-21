@@ -19,4 +19,7 @@
 
     ## Project-specific notes
     - Updates page shows a unified feed with tag filtering.
-- Optionally, link to GitHub releases and social accounts, but avoid auto-fetching.
+    - Updates page includes client-side text search and date range filters (`from` / `to`).
+    - The "Search and filter" panel is sticky while browsing posts.
+    - A vertical progress bar on the filter panel acts as scroll indicator and draggable slider.
+    - Optionally, link to GitHub releases and social accounts, but avoid auto-fetching.

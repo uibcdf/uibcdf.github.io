@@ -34,8 +34,9 @@
 - Editing is via GitHub (no CMS in v1). Decap CMS is an optional phase-2 accelerator.
 - Publications start curated/minimal; do not over-engineer a bibliography system in v1.
 
-## Current status (2026-02-18)
+## Current status (2026-02-21)
 - Astro MVP scaffold is implemented under `web/`.
 - MVP routes are live in source: Home, Research, Team, Publications, Software, Updates, Contact.
 - Content Collections are configured for `updates`, `people`, `people-profiles`, `research`, `research-lines`, `publications` (legacy), `publication-papers` (active for Publications page), and `software-tools` (active for Code page).
 - CI workflow exists at `.github/workflows/deploy-gh-pages.yml` and deploys to `gh-pages`.
+- Updates page currently supports: tag filters, text search, date range filters, sticky filter panel, and draggable vertical progress slider.
