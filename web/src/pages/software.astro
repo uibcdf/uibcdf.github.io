@@ -22,18 +22,6 @@ const categoryIntro: Partial<Record<(typeof categoryOrder)[number], { text: stri
   },
 };
 
-const toolThumbModules = import.meta.glob('/src/content/software-tools/*/*/thumbnail.png', { eager: true });
-const toolThumbByIndex = new Map<string, string>(
-  Object.entries(toolThumbModules).map(([path, mod]) => {
-    const parts = path.split('/');
-    const group = parts.at(-3) ?? '';
-    const index = parts.at(-2) ?? '';
-    const imported = (mod as { default: string | { src: string } }).default;
-    const src = typeof imported === 'string' ? imported : imported.src;
-    return [`${group}/${index}`, src];
-  }),
-);
-
 const groupedTools = categoryOrder
   .map((category) => ({
     category,
@@ -73,7 +61,7 @@ const groupedTools = categoryOrder
             {group.items.map((tool) => {
               const [toolGroup = '', index = ''] = tool.slug.split('/');
               const anchorId = `tool-${toolGroup}-${index}`;
-              const thumbSrc = toolThumbByIndex.get(`${toolGroup}/${index}`);
+              const thumbSrc = `/software-tools/${toolGroup}/${index}/thumbnail.png`;
               const thumbAlt = tool.data.thumbnailAlt ?? `${tool.data.title} logo`;
               return (
                 <article class="software-card" id={anchorId}>

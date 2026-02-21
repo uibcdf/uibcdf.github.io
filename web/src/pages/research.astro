@@ -13,16 +13,6 @@ const renderedResearchLines = await Promise.all(
     return { line, Content };
   }),
 );
-
-const imageModules = import.meta.glob('/src/content/research-lines/*/image.png', { eager: true });
-const imageByIndex = new Map<string, string>(
-  Object.entries(imageModules).map(([path, mod]) => {
-    const index = path.split('/').at(-2) ?? '';
-    const imported = (mod as { default: string | { src: string } }).default;
-    const imageSrc = typeof imported === 'string' ? imported : imported.src;
-    return [index, imageSrc];
-  }),
-);
 ---
 
 <BaseLayout
@@ -33,7 +23,7 @@ const imageByIndex = new Map<string, string>(
     {
       renderedResearchLines.map(({ line, Content }) => {
         const index = line.slug.split('/')[0] ?? '';
-        const imageSrc = imageByIndex.get(index);
+        const imageSrc = `/research-lines/${index}/image.png`;
         const bodyImageWidth = line.data.bodyImageWidth ?? 62;
         const imageAlt = line.data.imageAlt ?? `${line.data.title} preview image`;
         const anchorId = `line-${index}`;
