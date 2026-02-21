@@ -415,18 +415,47 @@ section + section {
 .contact-icons {
   margin-top: 0.2rem;
   margin-bottom: 0;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  column-gap: 0.9rem;
+  display: flex;
+  flex-direction: column;
   row-gap: 0.7rem;
-  max-width: 18.5rem;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 19.5rem;
   margin-inline: auto;
   transform: translateX(0.55rem);
+}
+
+.contact-icons-row {
+  display: flex;
+  justify-content: center;
+  gap: 0.9rem;
+  width: 100%;
+}
+
+.contact-icons-row--top {
+  max-width: 14.2rem;
+}
+
+.contact-icons-row--bottom {
+  max-width: 18.8rem;
 }
 
 .contact-icon-item {
   display: flex;
   justify-content: center;
+}
+
+.contact-icons-row .contact-icon-item {
+  flex: 0 0 auto;
+}
+
+.contact-icons-row--top .contact-icon-item {
+  width: 2.85rem;
+}
+
+.contact-icons-row--bottom .contact-icon-item {
+  width: 2.85rem;
 }
 
 .contact-icon {
@@ -449,6 +478,22 @@ section + section {
   stroke-width: 1.95;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+.contact-icons-row .contact-icon-item {
+  min-width: 2.85rem;
+}
+
+.contact-icons-row + .contact-icons-row {
+  margin-top: 0.05rem;
+}
+
+.contact-icons-row .contact-icon {
+  margin: 0 auto;
+}
+
+.contact-icons-row {
+  margin: 0 auto;
 }
 
 .hub-grid {
@@ -1376,7 +1421,7 @@ footer {
   }
 
   .contact-icons {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    transform: none;
   }
 }
 
