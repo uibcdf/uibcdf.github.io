@@ -23,11 +23,6 @@ const updates = defineCollection({
   schema: baseSchema,
 });
 
-const people = defineCollection({
-  type: 'content',
-  schema: baseSchema,
-});
-
 const peopleProfiles = defineCollection({
   type: 'content',
   schema: z.object({
@@ -42,11 +37,6 @@ const peopleProfiles = defineCollection({
     scholar: z.string().url().optional(),
     draft: z.boolean().default(false),
   }),
-});
-
-const research = defineCollection({
-  type: 'content',
-  schema: baseSchema,
 });
 
 const researchLines = defineCollection({
@@ -87,18 +77,10 @@ const softwareTools = defineCollection({
   }),
 });
 
-const publications = defineCollection({
-  type: 'content',
-  schema: baseSchema,
-});
-
 export const collections = {
   updates,
-  people,
   'people-profiles': peopleProfiles,
-  research,
   'research-lines': researchLines,
   'publication-papers': publicationPapers,
   'software-tools': softwareTools,
-  publications,
 };

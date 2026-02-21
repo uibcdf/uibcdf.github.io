@@ -24,9 +24,6 @@ Most markdown entries in `web/src/content/*` follow these fields:
 ### `updates/`
 Unified stream for seminars, news, publications announcements, software releases, events, and opportunities. Used on the Updates page and (subset) on Home.
 
-### `people/`
-Profiles for team members (researchers, students, collaborators). Used on Team page and optionally referenced elsewhere.
-
 ### `people-profiles/` (active for Team page)
 Structured Team content with one directory per member, grouped by section and sorted numerically.
 
@@ -42,7 +39,8 @@ Section order:
 
 1. `researchers`
 2. `students`
-3. `former_members`
+3. `collaborators`
+4. `former_members`
 
 Member order:
 
@@ -61,9 +59,6 @@ Notes:
 
 - Team cards show a `CV` toggle only when CV text and/or `cv.pdf` exists.
 - Researchers display affiliation as `UIBCDF` in the UI.
-
-### `research/`
-Legacy/simple collection for research entries. The current Research page uses `research-lines/` (see below).
 
 ### `research-lines/` (active for Research page)
 Structured collection for the Research page with one directory per line, sorted by directory number.
@@ -137,9 +132,6 @@ Required assets:
 Optional assets:
 
 - Extra illustrative images can be placed in the same paper folder and referenced from `line.md` (example: `illustration.png`).
-
-### `publications/` (legacy)
-Curated publication entries (generic schema). Kept for compatibility; current Publications page uses `publication-papers/`.
 
 ### `software-tools/` (active for Code page)
 Structured collection for software cards shown in the Code page, grouped into two categories.

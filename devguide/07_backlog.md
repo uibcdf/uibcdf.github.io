@@ -13,7 +13,7 @@ A lightweight backlog to keep scope under control.
 ## Done
 - [x] Initial planning & repo skeleton
 - [x] Create Astro project under `web/` with minimal routes for MVP pages
-- [x] Implement Content Collections schemas for updates/people/research/publications
+- [x] Implement Content Collections schemas for updates/team/research/publications/code
 - [x] Build Home page hero + latest updates widget
 - [x] Create Updates index with filtering by tag
 - [x] Enhance Updates UX with text/date filters, sticky filter panel, and draggable vertical scroll indicator
