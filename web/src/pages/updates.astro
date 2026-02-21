@@ -128,7 +128,20 @@ const renderedUpdates = await Promise.all(
       to: '',
     };
 
+    const getCurrentProgress = () => {
+      if (!shell || !updatesCanvas || !updatesFilters) return 0;
+      const shellRect = shell.getBoundingClientRect();
+      const filtersRect = updatesFilters.getBoundingClientRect();
+      const cutoff = filtersRect.bottom + 1 + CUTLINE_OFFSET_PX;
+      const cutoffInShell = shell.scrollTop + (cutoff - shellRect.top);
+      const canvasTop = updatesCanvas.offsetTop;
+      const canvasBottom = canvasTop + updatesCanvas.scrollHeight;
+      const ratio = (cutoffInShell - canvasTop) / Math.max(1, canvasBottom - canvasTop);
+      return Math.max(0, Math.min(1, ratio));
+    };
+
     const applyFilters = () => {
+      const previousProgress = getCurrentProgress();
       cards.forEach((card) => {
         const tagList = (card.getAttribute('data-tags') ?? '').split(',');
         const cardDate = card.getAttribute('data-date') ?? '';
@@ -141,7 +154,10 @@ const renderedUpdates = await Promise.all(
 
         card.style.display = tagOk && textOk && fromOk && toOk ? '' : 'none';
       });
-      requestHideUpdate();
+      requestAnimationFrame(() => {
+        scrollToProgress(previousProgress);
+        requestHideUpdate();
+      });
     };
 
     const updateProgress = () => {
@@ -249,7 +265,8 @@ const renderedUpdates = await Promise.all(
     progressRail?.addEventListener('pointercancel', stopProgressDrag);
 
     tagButtons.forEach((button) => {
-      button.addEventListener('click', () => {
+      button.addEventListener('click', (event) => {
+        event.preventDefault();
         tagButtons.forEach((item) => item.classList.remove('is-active'));
         button.classList.add('is-active');
         state.tag = button.getAttribute('data-filter') ?? 'all';
