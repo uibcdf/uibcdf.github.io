@@ -1,18 +1,228 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const socialChannels = [
+  { id: 'linkedin', label: 'LinkedIn' },
+  { id: 'x', label: 'X' },
+  { id: 'bluesky', label: 'Bluesky' },
+  { id: 'youtube', label: 'YouTube' },
+  { id: 'github', label: 'GitHub', href: 'https://github.com/uibcdf' },
+  { id: 'osf', label: 'Open Science Framework' },
+];
 ---
 
 <BaseLayout
   title="Contact"
-  description="Institutional contact details for collaborations, visits, and graduate opportunities."
-  ctaLabel="Read updates"
-  ctaHref="/updates"
+  description="Institutional contact and social channels for collaboration and outreach."
 >
-  <section class="card" id="institutional-contact">
-    <h2>
-      <a href="#institutional-contact">Institutional contact</a>
-    </h2>
-    <p>Email: contact@uibcdf.org</p>
-    <p>Federico Gómez Children's Hospital of Mexico · Mexican National Institute of Health</p>
+  <section class="contact-showcase" id="institutional-contact">
+    <div class="contact-top-row">
+      <figure class="contact-photo-wrap">
+        <img src="/images/chin-chin-final.png" alt="UIBCDF researchers." loading="lazy" />
+      </figure>
+
+      <div class="contact-institutional">
+        <p>
+          Unidad de Investigación en Biología Computacional y Diseño de Fármacos
+          <br />
+          Hospital Infantil de México Federico Gómez
+          <br />
+          Torre de Hemato-Oncología e Investigación
+          <br />
+          Calle Dr. Márquez 162, Delegación Cuauhtémoc
+          <br />
+          06720, Ciudad de México, México.
+        </p>
+        <p class="contact-email">Email: uibcdf@gmail.com</p>
+        <p>Phone: +52 55 5228 9917, ext. 3503</p>
+        <div class="contact-social-row" aria-label="Social channels">
+          {
+            socialChannels.map((channel) => (
+              channel.href ? (
+                <a
+                  href={channel.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={channel.label}
+                  title={channel.label}
+                  class="contact-social-link"
+                >
+                  {channel.id === 'linkedin' && (
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M5.2 6.3h.01" />
+                      <path d="M4.2 9.3h2v9.5h-2z" />
+                      <path d="M9.2 9.3h2v1.4h.1c.5-.9 1.5-1.8 3.2-1.8 2.6 0 3.4 1.8 3.4 4.2v5.7h-2.1v-5.1c0-1.2-.2-2.6-1.9-2.6-1.6 0-2.4 1.2-2.4 2.6v5.1H9.2V9.3Z" />
+                    </svg>
+                  )}
+                  {channel.id === 'x' && (
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M5 4.5h3.2L19 19.5h-3.2L5 4.5Z" />
+                      <path d="M19 4.5 5 19.5" />
+                    </svg>
+                  )}
+                  {channel.id === 'bluesky' && (
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M12 11.6c1.6-2.4 3.5-4 6.1-5-.4 2.7-1.5 4.7-3.3 6.1 1.5.1 2.8.5 3.9 1.4-1.8.8-3.6 1-5.4.6-.2 1.8-1.1 3.3-3.1 4.4-2-1.1-2.9-2.6-3.1-4.4-1.8.4-3.6.2-5.4-.6 1.1-.9 2.4-1.3 3.9-1.4-1.8-1.4-2.9-3.4-3.3-6.1 2.6 1 4.5 2.6 6.1 5Z" />
+                    </svg>
+                  )}
+                  {channel.id === 'youtube' && (
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <rect x="3.5" y="6.5" width="17" height="11" rx="3" />
+                      <path d="m10 9.5 5 3-5 3v-6Z" />
+                    </svg>
+                  )}
+                  {channel.id === 'github' && (
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M12 3.8a8.6 8.6 0 0 0-2.7 16.8v-2.7c-2.5.5-3-1.1-3-1.1-.4-1.1-1-1.4-1-1.4-.8-.5.1-.5.1-.5.9.1 1.4.9 1.4.9.8 1.3 2.1.9 2.6.7.1-.6.3-1 .6-1.3-2-.2-4.1-1-4.1-4.5 0-1 .4-1.9 1-2.6-.1-.3-.4-1.2.1-2.4 0 0 .9-.3 2.8 1a9.5 9.5 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .5 1.2.2 2.1.1 2.4.6.7 1 1.6 1 2.6 0 3.5-2.1 4.3-4.1 4.5.4.4.7 1 .7 2v3.1A8.6 8.6 0 0 0 12 3.8Z" />
+                    </svg>
+                  )}
+                  {channel.id === 'osf' && (
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <circle cx="12" cy="12" r="8.5" />
+                      <circle cx="8.7" cy="10.2" r="1.2" />
+                      <circle cx="15.3" cy="10.2" r="1.2" />
+                      <circle cx="12" cy="15.4" r="1.2" />
+                      <path d="M9.7 10.8 11.2 14" />
+                      <path d="M14.3 10.8 12.8 14" />
+                      <path d="M10 10.2h4" />
+                    </svg>
+                  )}
+                </a>
+              ) : (
+                <span aria-label={channel.label} title={channel.label} class="contact-social-link">
+                  {channel.id === 'linkedin' && (
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M5.2 6.3h.01" />
+                      <path d="M4.2 9.3h2v9.5h-2z" />
+                      <path d="M9.2 9.3h2v1.4h.1c.5-.9 1.5-1.8 3.2-1.8 2.6 0 3.4 1.8 3.4 4.2v5.7h-2.1v-5.1c0-1.2-.2-2.6-1.9-2.6-1.6 0-2.4 1.2-2.4 2.6v5.1H9.2V9.3Z" />
+                    </svg>
+                  )}
+                  {channel.id === 'x' && (
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M5 4.5h3.2L19 19.5h-3.2L5 4.5Z" />
+                      <path d="M19 4.5 5 19.5" />
+                    </svg>
+                  )}
+                  {channel.id === 'bluesky' && (
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M12 11.6c1.6-2.4 3.5-4 6.1-5-.4 2.7-1.5 4.7-3.3 6.1 1.5.1 2.8.5 3.9 1.4-1.8.8-3.6 1-5.4.6-.2 1.8-1.1 3.3-3.1 4.4-2-1.1-2.9-2.6-3.1-4.4-1.8.4-3.6.2-5.4-.6 1.1-.9 2.4-1.3 3.9-1.4-1.8-1.4-2.9-3.4-3.3-6.1 2.6 1 4.5 2.6 6.1 5Z" />
+                    </svg>
+                  )}
+                  {channel.id === 'youtube' && (
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <rect x="3.5" y="6.5" width="17" height="11" rx="3" />
+                      <path d="m10 9.5 5 3-5 3v-6Z" />
+                    </svg>
+                  )}
+                  {channel.id === 'github' && (
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M12 3.8a8.6 8.6 0 0 0-2.7 16.8v-2.7c-2.5.5-3-1.1-3-1.1-.4-1.1-1-1.4-1-1.4-.8-.5.1-.5.1-.5.9.1 1.4.9 1.4.9.8 1.3 2.1.9 2.6.7.1-.6.3-1 .6-1.3-2-.2-4.1-1-4.1-4.5 0-1 .4-1.9 1-2.6-.1-.3-.4-1.2.1-2.4 0 0 .9-.3 2.8 1a9.5 9.5 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .5 1.2.2 2.1.1 2.4.6.7 1 1.6 1 2.6 0 3.5-2.1 4.3-4.1 4.5.4.4.7 1 .7 2v3.1A8.6 8.6 0 0 0 12 3.8Z" />
+                    </svg>
+                  )}
+                  {channel.id === 'osf' && (
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <circle cx="12" cy="12" r="8.5" />
+                      <circle cx="8.7" cy="10.2" r="1.2" />
+                      <circle cx="15.3" cy="10.2" r="1.2" />
+                      <circle cx="12" cy="15.4" r="1.2" />
+                      <path d="M9.7 10.8 11.2 14" />
+                      <path d="M14.3 10.8 12.8 14" />
+                      <path d="M10 10.2h4" />
+                    </svg>
+                  )}
+                </span>
+              )
+            ))
+          }
+        </div>
+      </div>
+    </div>
   </section>
 </BaseLayout>
+
+<style>
+  .contact-showcase {
+    padding: 1rem;
+    margin-top: -3rem;
+  }
+
+  .contact-top-row {
+    display: grid;
+    grid-template-columns: minmax(0, 16rem) minmax(0, 1fr);
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .contact-photo-wrap {
+    margin: 0;
+    border-radius: 0.55rem;
+    overflow: hidden;
+    border: 1px solid #d2dbe9;
+    background: #eff4fb;
+  }
+
+  .contact-photo-wrap img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .contact-institutional p {
+    margin: 0.2rem 0 0;
+    color: #30465f;
+  }
+
+  .contact-institutional {
+    padding-left: 2rem;
+    transform: translateY(2.25rem);
+  }
+
+  .contact-institutional .contact-email {
+    margin-top: 2rem;
+  }
+
+  .contact-social-row {
+    margin-top: 2rem;
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .contact-social-link {
+    display: inline-flex;
+    width: 2.5rem;
+    height: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .contact-social-link svg {
+    width: 1.7rem;
+    height: 1.7rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .contact-social-link:hover,
+  .contact-social-link:focus-visible {
+    color: #2f6eb0;
+  }
+
+  @media (max-width: 800px) {
+    .contact-top-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<style is:global>
+  :root {
+    --internal-flat-bg: #f7f9fc;
+  }
+</style>

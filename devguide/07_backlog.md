@@ -21,4 +21,5 @@ A lightweight backlog to keep scope under control.
 - [x] Create Publications page with year sections and `publication-papers/YYYY/NN` content model
 - [x] Create Code page with structured `software-tools/{molsyssuite|utilities}/NN` content model
 - [x] Add Contact page with institutional context
+- [x] Redesign Contact page with photo + institutional data + social icon row
 - [x] Add GitHub Actions workflow to publish to `gh-pages`

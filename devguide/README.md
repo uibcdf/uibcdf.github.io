@@ -40,3 +40,4 @@
 - Content Collections are configured for `updates`, `people`, `people-profiles`, `research`, `research-lines`, `publications` (legacy), `publication-papers` (active for Publications page), and `software-tools` (active for Code page).
 - CI workflow exists at `.github/workflows/deploy-gh-pages.yml` and deploys to `gh-pages`.
 - Updates page currently supports: tag filters, text search, date range filters, sticky filter panel, and draggable vertical progress slider.
+- Contact page now uses a two-column layout: group photo (left), institutional address + email + phone (right), and a horizontal social icon row under the contact block.
