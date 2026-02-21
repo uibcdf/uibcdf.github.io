@@ -1,5 +1,5 @@
 ---
-name: "Senior Researcher Name 2"
+name: "Liliana M. Moreno Vargas"
 position: "Co-PI, Senior Researcher"
 expertise: "Computational biophysics and drug discovery workflows"
 affiliation: "UIBCDF"

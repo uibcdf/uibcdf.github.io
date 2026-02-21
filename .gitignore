@@ -12,7 +12,3 @@ Thumbs.db
 
 # Logs
 *.log
-
-# Generated from content directories
-web/public/research-lines/
-web/public/software-tools/

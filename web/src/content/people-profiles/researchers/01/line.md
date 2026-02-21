@@ -1,5 +1,5 @@
 ---
-name: "Senior Researcher Name"
+name: "Diego Prada Gracia"
 position: "Co-PI, Senior Researcher"
 expertise: "Computational biophysics and drug discovery workflows"
 affiliation: "UIBCDF"
