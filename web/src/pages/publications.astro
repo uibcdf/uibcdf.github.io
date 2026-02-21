@@ -63,9 +63,10 @@ const grouped = Array.from(
               const bodyImageWidth = entry.data.bodyImageWidth ?? 62;
               const thumbAlt = entry.data.thumbnailAlt ?? `${entry.data.title} first page thumbnail`;
               const bodyText = (entry.body ?? '').trim();
-              const hasAbstract = Boolean(entry.data.abstract?.trim());
               const hasBody = bodyText.length > 0 && !/^Detailed publication placeholder/i.test(bodyText);
-              const showDetails = hasAbstract || hasBody;
+              const showDetails = hasBody;
+              const printUrl = entry.data.print ?? entry.data.Print ?? entry.data.doi;
+              const preprintUrl = entry.data.preprint ?? entry.data.Preprint;
 
               return (
                 <article
@@ -81,35 +82,29 @@ const grouped = Array.from(
                     <h3>
                       <a href={`#${paperAnchor}`}>{entry.data.title}</a>
                     </h3>
-                    <p class="publication-authors">{entry.data.authors}</p>
+                    <p class="publication-authors" set:html={entry.data.authors}></p>
 
                     <p class="publication-links">
-                      {entry.data.doi && (
-                        <a href={entry.data.doi} target="_blank" rel="noreferrer">
-                          DOI
+                      {printUrl && (
+                        <a href={printUrl} target="_blank" rel="noreferrer">
+                          Print
                         </a>
                       )}
-                      {entry.data.doi && entry.data.preprint && <span aria-hidden="true"> · </span>}
-                      {entry.data.preprint && (
-                        <a href={entry.data.preprint} target="_blank" rel="noreferrer">
+                      {printUrl && preprintUrl && <span aria-hidden="true"> · </span>}
+                      {preprintUrl && (
+                        <a href={preprintUrl} target="_blank" rel="noreferrer">
                           Preprint
                         </a>
                       )}
-                      {!entry.data.doi && !entry.data.preprint && <span>—</span>}
+                      {!printUrl && !preprintUrl && <span>—</span>}
                     </p>
 
                     {showDetails && (
                       <details class="publication-details">
                         <summary>
-                          <span class="summary-closed">Show details</span>
-                          <span class="summary-open">Hide details</span>
+                          <span class="summary-closed">Show abstract</span>
+                          <span class="summary-open">Hide abstract</span>
                         </summary>
-
-                        {hasAbstract && (
-                          <p class="publication-abstract">
-                            <strong>Abstract.</strong> {entry.data.abstract}
-                          </p>
-                        )}
 
                         {hasBody && (
                           <div class="publication-body-expanded">

@@ -987,6 +987,10 @@ section + section {
   font-size: 1.08rem;
 }
 
+.publication-body h3 a {
+  text-decoration: none;
+}
+
 .publication-authors {
   margin: 0;
   color: #2d4c70;
@@ -1002,6 +1006,10 @@ section + section {
 
 .publication-links a {
   text-decoration: none;
+}
+
+.publication-body {
+  padding-right: 2rem;
 }
 
 .publication-details {
@@ -1032,12 +1040,17 @@ section + section {
 }
 
 .publication-body-expanded {
-  margin-top: 0.3rem;
+  margin-top: 0.75rem;
   color: var(--muted);
+  text-align: justify;
 }
 
 .publication-body-expanded p {
   margin: 0.25rem 0;
+}
+
+.publication-body-expanded p + p {
+  margin-top: 1.5rem;
 }
 
 .publication-body-expanded .publication-caption {

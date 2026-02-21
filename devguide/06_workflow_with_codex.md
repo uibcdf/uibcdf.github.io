@@ -22,8 +22,8 @@ This repo is intended to be developed locally with Codex (CLI) after the initial
 - Keep navigation minimal (see `devguide/02_information_architecture.md`).
 - Maintain one primary CTA per page.
 - For Research page content, use `web/src/content/research-lines/NN/` with `line.md` + `image.png` (numeric order defines render order).
-- For Team page content, use `web/src/content/people-profiles/{researchers|students|former_members}/NN/` with `line.md` + `image.png` (and optional `cv.pdf`).
-- For Publications page content, use `web/src/content/publication-papers/YYYY/NN/` with `line.md` + `thumbnail.png` (year sections sort descending, items sort by numeric `NN`).
+- For Team page content, use `web/src/content/people-profiles/{researchers|students|collaborators|former_members}/NN/` with `line.md` + `image.png` (and optional `cv.pdf`).
+- For Publications page content, use `web/src/content/publication-papers/YYYY/NN/` with `paper.md` + `thumbnail.png` (year sections sort descending, items sort by numeric `NN`).
 - For Code page content, use `web/src/content/software-tools/{molsyssuite|utilities}/NN/` with `line.md` + `thumbnail.png` (section order is fixed by category, item order is numeric `NN`).
 
 ## Home scroll notation (shared vocabulary)

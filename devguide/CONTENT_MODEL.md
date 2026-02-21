@@ -99,30 +99,31 @@ Structured collection for Publications, grouped by year and ordered within each 
 
 Folder layout:
 
-- `web/src/content/publication-papers/2026/01/line.md`
+- `web/src/content/publication-papers/2026/01/paper.md`
 - `web/src/content/publication-papers/2026/01/thumbnail.png`
-- `web/src/content/publication-papers/2026/02/line.md`
-- `web/src/content/publication-papers/2025/01/line.md`
+- `web/src/content/publication-papers/2026/02/paper.md`
+- `web/src/content/publication-papers/2025/01/paper.md`
 
 Ordering:
 
 - Year sections sort descending (`2026`, `2025`, ...).
 - Inside each year, numeric directory order (`01`, `02`, `03`, ...).
 
-`line.md` frontmatter:
+`paper.md` frontmatter:
 
 - `title` (string)
 - `authors` (string)
-- `doi` (URL, optional)
+- `print` (URL, optional)
 - `preprint` (URL, optional)
-- `abstract` (string, optional)
+- `doi` (URL, optional, legacy compatibility key)
 - `bodyImageWidth` (number, optional, 20–100) — width (%) for images inside expanded details
 - `thumbnailAlt` (string, optional)
 - `draft` (boolean)
 
-`line.md` body:
+`paper.md` body:
 
-- Optional expanded details (`Show details / Hide details`).
+- Optional expanded details (`Show abstract / Hide abstract`).
+- Body text is used as the abstract/details content.
 - Supports markdown/HTML, including inline images.
 
 Required assets:
@@ -131,7 +132,7 @@ Required assets:
 
 Optional assets:
 
-- Extra illustrative images can be placed in the same paper folder and referenced from `line.md` (example: `illustration.png`).
+- Extra illustrative images can be placed in the same paper folder and referenced from `paper.md` (example: `illustration.png`).
 
 ### `software-tools/` (active for Code page)
 Structured collection for software cards shown in the Code page, grouped into two categories.

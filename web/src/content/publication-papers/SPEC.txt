@@ -6,7 +6,7 @@ Folder structure:
 - src/content/publication-papers/2025/01/
 
 Each paper folder must include:
-1) line.md
+1) paper.md
 2) thumbnail.png
 
 Ordering rule:
@@ -18,16 +18,16 @@ thumbnail.png specification:
 - Aspect ratio: 1:1.414 (A4-like first page)
 - Format: PNG
 
-line.md frontmatter:
+paper.md frontmatter:
 - title: string
 - authors: string
-- doi: optional URL
+- print: optional URL
 - preprint: optional URL
-- abstract: optional string
+- doi: optional URL (legacy compatibility key)
 - bodyImageWidth: optional number (20-100)
 - thumbnailAlt: optional string
 - draft: boolean
 
 Body:
-- Markdown body is rendered inside publication details.
+- Markdown body is rendered as the publication abstract/details.
 - Supports text, figures, and image captions.

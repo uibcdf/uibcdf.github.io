@@ -18,6 +18,14 @@ const baseSchema = z.object({
   featured: z.boolean().optional(),
 });
 
+const emptyStringToUndefined = (value: unknown) => {
+  if (typeof value !== 'string') return value;
+  const trimmed = value.trim();
+  return trimmed.length === 0 ? undefined : trimmed;
+};
+
+const optionalUrlField = z.preprocess(emptyStringToUndefined, z.string().url().optional());
+
 const updates = defineCollection({
   type: 'content',
   schema: baseSchema,
@@ -55,9 +63,12 @@ const publicationPapers = defineCollection({
   schema: z.object({
     title: z.string(),
     authors: z.string(),
-    doi: z.string().url().optional(),
-    preprint: z.string().url().optional(),
-    abstract: z.string().optional(),
+    // Legacy key kept for backwards compatibility with older entries.
+    doi: optionalUrlField,
+    print: optionalUrlField,
+    Print: optionalUrlField,
+    preprint: optionalUrlField,
+    Preprint: optionalUrlField,
     bodyImageWidth: z.number().min(20).max(100).optional(),
     thumbnailAlt: z.string().optional(),
     draft: z.boolean().default(false),
