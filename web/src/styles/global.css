@@ -67,7 +67,7 @@ body.internal-page .site-header {
   margin: 0;
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
-  padding-inline: max(1.25rem, calc((100vw - 62rem) / 2 + 1.25rem));
+  padding-inline: max(1.25rem, calc((100% - 62rem) / 2 + 1.25rem));
   background-image: var(--internal-flat-bg);
   background-position: top center;
   background-size: 100% 100vh;
@@ -91,15 +91,16 @@ body.internal-page {
 
 body.internal-page .internal-page-shell {
   position: fixed;
-  inset: 0;
+  top: var(--internal-occlusion-height);
+  right: 0;
+  bottom: 0;
+  left: 0;
   overflow-y: auto;
-  padding-top: var(--internal-occlusion-height);
+  padding-top: 0;
   background-image: var(--internal-flat-bg);
   background-position: top center;
   background-size: 100% 100vh;
   background-repeat: no-repeat;
-  -webkit-clip-path: inset(calc(var(--internal-occlusion-height) - 1px) 0 0 0);
-  clip-path: inset(calc(var(--internal-occlusion-height) - 1px) 0 0 0);
 }
 
 .brand {
