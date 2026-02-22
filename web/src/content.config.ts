@@ -40,6 +40,8 @@ const peopleProfiles = defineCollection({
     affiliation: z.string(),
     linkedin: z.string().url().optional(),
     x: z.string().url().optional(),
+    bluesky: z.string().url().optional(),
+    bsky: z.string().url().optional(),
     github: z.string().url().optional(),
     orcid: z.string().url().optional(),
     scholar: z.string().url().optional(),
