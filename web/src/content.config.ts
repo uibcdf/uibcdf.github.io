@@ -82,7 +82,6 @@ const softwareTools = defineCollection({
   schema: z.object({
     title: z.string(),
     tagline: z.string(),
-    summary: z.string(),
     github: z.string().url(),
     docs: z.string().url().optional(),
     thumbnailAlt: z.string().optional(),

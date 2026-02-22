@@ -1,0 +1,40 @@
+# Software Tools Content Specs
+
+This directory powers the **Code** page cards.
+
+## Directory layout
+
+Each tool must live in:
+
+`web/src/content/software-tools/<category>/<index>/`
+
+- `<category>`: currently `molsyssuite`, `utilities`, or `github-actions`
+- `<index>`: numeric order key (`01`, `02`, `03`, ...)
+
+## Required files
+
+- `tool.md`: metadata and card text
+- `logo.svg`: logo with transparent background (required in `molsyssuite` and `utilities`, not used in `github-actions`)
+
+## `logo.svg` specs
+
+- Format: `SVG`
+- Transparent background
+- Keep a consistent visual baseline and similar typographic height across tools
+
+## `tool.md` frontmatter fields
+
+- `title` (string)
+- `tagline` (string)
+- `github` (URL)
+- `docs` (URL, optional)
+- `thumbnailAlt` (string, optional)
+- `draft` (boolean, default `false`)
+
+## Editorial guide (Code page)
+
+- `title`: short canonical tool name.
+- `tagline`: one sentence, concise, no Markdown/HTML styling.
+- In cards with logo (MolSysSuite, utilities), avoid repeating the tool name in tagline.
+- In `github-actions`, cards render inline as: `Title · Tagline · GitHub Marketplace`.
+- Keep style factual and specific (what it does, for whom, where it fits).

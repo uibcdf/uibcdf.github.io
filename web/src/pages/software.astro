@@ -1,7 +1,5 @@
 ---
 import { getCollection } from 'astro:content';
-import { Image } from 'astro:assets';
-import type { ImageMetadata } from 'astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const tools = (await getCollection('software-tools', ({ data }) => !data.draft)).sort((a, b) => {
@@ -11,30 +9,47 @@ const tools = (await getCollection('software-tools', ({ data }) => !data.draft))
   return Number.parseInt(aIndex, 10) - Number.parseInt(bIndex, 10);
 });
 
-const categoryOrder = ['molsyssuite', 'utilities'] as const;
+const categoryOrder = ['molsyssuite', 'utilities', 'github-actions'] as const;
 const categoryTitles: Record<(typeof categoryOrder)[number], string> = {
   molsyssuite: 'MolSysSuite ecosystem',
   utilities: 'Software engineering utilities',
+  'github-actions': 'GitHub Actions',
 };
 const categoryIntro: Partial<Record<(typeof categoryOrder)[number], { text: string; href: string; label: string }>> = {
   molsyssuite: {
     text: 'MolSysSuite is the integrated ecosystem developed in UIBCDF for computational biophysics and drug design workflows, connecting interoperable libraries for end-to-end scientific pipelines.',
-    href: 'https://molsyssuite.uibcdf.org',
+    href: 'https://github.com/uibcdf/molsyssuite',
     label: 'Ecosystem website',
   },
 };
-const thumbModules = import.meta.glob<{ default: ImageMetadata }>(
-  '/src/content/software-tools/*/*/thumbnail.png',
+const categoryLogoModules = import.meta.glob<string>(
+  '/src/content/software-tools/*/logo.svg',
   {
     eager: true,
+    import: 'default',
+    query: '?url',
   },
 );
-const thumbByKey = new Map<string, ImageMetadata>(
-  Object.entries(thumbModules).map(([path, mod]) => {
+const categoryLogoByKey = new Map<string, string>(
+  Object.entries(categoryLogoModules).map(([path, mod]) => {
+    const category = path.split('/').at(-2) ?? '';
+    return [category, mod];
+  }),
+);
+const logoModules = import.meta.glob<string>(
+  '/src/content/software-tools/*/*/logo.svg',
+  {
+    eager: true,
+    import: 'default',
+    query: '?url',
+  },
+);
+const logoByKey = new Map<string, string>(
+  Object.entries(logoModules).map(([path, mod]) => {
     const parts = path.split('/');
     const group = parts.at(-3) ?? '';
     const index = parts.at(-2) ?? '';
-    return [`${group}/${index}`, mod.default];
+    return [`${group}/${index}`, mod];
   }),
 );
 
@@ -63,41 +78,61 @@ const groupedTools = categoryOrder
             <a href={`#software-${group.category}`}>{group.title}</a>
           </h2>
           {categoryIntro[group.category] && (
-            <div class="software-group-intro">
-              <p>{categoryIntro[group.category]!.text}</p>
-              <p>
-                <a href={categoryIntro[group.category]!.href} target="_blank" rel="noreferrer">
-                  {categoryIntro[group.category]!.label}
-                </a>
-              </p>
-            </div>
+            <article class="software-card software-group-intro-card">
+              {categoryLogoByKey.get(group.category) && (
+                <div class="software-header">
+                  <span class="software-logo-link" aria-hidden="true">
+                    <img
+                      src={categoryLogoByKey.get(group.category)}
+                      alt={`${group.title} logo`}
+                      loading="lazy"
+                    />
+                  </span>
+                </div>
+              )}
+              <div class="software-body">
+                <p>{categoryIntro[group.category]!.text}</p>
+                <p class="software-links">
+                  <a href={categoryIntro[group.category]!.href} target="_blank" rel="noreferrer">
+                    {categoryIntro[group.category]!.label}
+                  </a>
+                </p>
+              </div>
+            </article>
           )}
 
           <div class="software-group-grid">
             {group.items.map((tool) => {
               const [toolGroup = '', index = ''] = tool.slug.split('/');
               const anchorId = `tool-${toolGroup}-${index}`;
-              const thumbSrc = thumbByKey.get(`${toolGroup}/${index}`);
+              const logoSrc = logoByKey.get(`${toolGroup}/${index}`);
+              const hideLogo = group.category === 'github-actions';
+              const isGithubActions = group.category === 'github-actions';
               const thumbAlt = tool.data.thumbnailAlt ?? `${tool.data.title} logo`;
               return (
-                <article class="software-card" id={anchorId}>
-                  <div class="software-media">
-                    {thumbSrc ? (
-                      <Image src={thumbSrc} alt={thumbAlt} loading="lazy" />
-                    ) : (
-                      <span>Missing thumbnail.png</span>
-                    )}
-                  </div>
+                <article class:list={['software-card', isGithubActions && 'software-card--inline']} id={anchorId}>
+                  {!hideLogo && (
+                    <div class="software-header">
+                      {logoSrc ? (
+                        <a class="software-logo-link" href={`#${anchorId}`} aria-label={tool.data.title}>
+                          <img src={logoSrc} alt={thumbAlt} loading="lazy" />
+                        </a>
+                      ) : (
+                        <span>Missing logo.svg</span>
+                      )}
+                    </div>
+                  )}
                   <div class="software-body">
-                    <h3>
+                    <h3 class:list={['software-title', !hideLogo && 'software-title-sr']}>
                       <a href={`#${anchorId}`}>{tool.data.title}</a>
                     </h3>
+                    {isGithubActions && <span class="software-inline-sep" aria-hidden="true">·</span>}
                     <p class="software-tagline">{tool.data.tagline}</p>
                     <p class="software-links">
                       <a href={tool.data.github} target="_blank" rel="noreferrer">
-                        GitHub
+                        {isGithubActions ? 'GitHub Marketplace' : 'GitHub'}
                       </a>
-                      {tool.data.docs && (
+                      {!isGithubActions && tool.data.docs && (
                         <>
                           <span aria-hidden="true"> · </span>
                           <a href={tool.data.docs} target="_blank" rel="noreferrer">
@@ -119,6 +154,6 @@ const groupedTools = categoryOrder
 
 <style is:global>
   :root {
-    --internal-flat-bg: #f6e6d0;
+    --internal-flat-bg: #f8ecd9;
   }
 </style>

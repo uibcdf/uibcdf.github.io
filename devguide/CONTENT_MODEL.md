@@ -135,29 +135,30 @@ Optional assets:
 - Extra illustrative images can be placed in the same paper folder and referenced from `paper.md` (example: `illustration.png`).
 
 ### `software-tools/` (active for Code page)
-Structured collection for software cards shown in the Code page, grouped into two categories.
+Structured collection for software cards shown in the Code page, grouped by category.
 
 Folder layout:
 
-- `web/src/content/software-tools/molsyssuite/01/line.md`
-- `web/src/content/software-tools/molsyssuite/01/thumbnail.png`
-- `web/src/content/software-tools/utilities/01/line.md`
-- `web/src/content/software-tools/utilities/01/thumbnail.png`
+- `web/src/content/software-tools/molsyssuite/01/tool.md`
+- `web/src/content/software-tools/molsyssuite/01/logo.svg`
+- `web/src/content/software-tools/utilities/01/tool.md`
+- `web/src/content/software-tools/utilities/01/logo.svg`
+- `web/src/content/software-tools/github-actions/01/tool.md`
 
 Section order (fixed):
 
 1. `molsyssuite`
 2. `utilities`
+3. `github-actions`
 
 Item order:
 
 - Numeric directory order inside each section (`01`, `02`, `03`, ...).
 
-`line.md` frontmatter:
+`tool.md` frontmatter:
 
 - `title` (string)
 - `tagline` (string)
-- `summary` (string, currently not rendered in cards but kept for reuse)
 - `github` (URL)
 - `docs` (URL, optional)
 - `thumbnailAlt` (string, optional)
@@ -165,8 +166,10 @@ Item order:
 
 Rendering notes:
 
-- Each card displays `title`, `tagline`, and links (`GitHub` plus optional `Docs`).
-- If `docs` is omitted, only `GitHub` is rendered.
+- `molsyssuite` and `utilities` cards display a centered `logo.svg`, `tagline`, and links.
+- `github-actions` cards render as inline text entries (no logo): `Title · Tagline · GitHub Marketplace`.
+- In non-`github-actions` cards, links render as `GitHub` plus optional `Docs`.
+- Item order is numeric folder order inside each category.
 
 ## Tags vocabulary
 
