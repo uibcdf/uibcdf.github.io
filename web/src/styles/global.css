@@ -652,7 +652,7 @@ section + section {
 .updates-filters {
   --updates-progress: 0;
   height: auto;
-  background: #e9ecf1;
+  background: #f3f5f8;
   position: sticky;
   top: calc(var(--internal-occlusion-height) - 4rem);
   z-index: 20;
