@@ -1,7 +1,7 @@
 ---
 title: "Opitz GBBB syndrome with total anomalous pulmonary venous connection: a new MID1 gene variant"
-authors: "Maryangel Perea‐Cabrera, Javier T Granados‐Riveron, Begoña Segura‐Stanford, Liliana M Moreno‐Vargas, Diego
-Prada‐Gracia, Mari C Moran‐Espinosa, Julio Erdmenger, Hector Diaz‐Garcia, Rocío Sánchez‐Urbina<sup>*</sup>"
+authors: "Maryangel Perea‐Cabrera, Javier T. Granados‐Riveron, Begoña Segura‐Stanford, <strong>Liliana M. Moreno‐Vargas</strong>, <strong>Diego
+Prada‐Gracia</strong>, Mari C. Moran‐Espinosa, Julio Erdmenger, Hector Diaz‐Garcia, Rocío Sánchez‐Urbina"
 print: "https://doi.org/10.1002/mgg3.2234"
 preprint: ""
 bodyImageWidth: 68

@@ -1,6 +1,6 @@
 ---
 title: "Exploring the Chemical Features and Biomedical Relevance of Cell-Penetrating Peptides"
-authors: "Liliana M. Moreno-Vargas<sup>*</sup> and Diego Prada-Gracia<sup>*</sup>"
+authors: "<strong>Liliana M. Moreno-Vargas</strong> and <strong>Diego Prada-Gracia</strong>"
 print: "https://doi.org/10.3390/ijms26010059"
 preprint: ""
 bodyImageWidth: 68

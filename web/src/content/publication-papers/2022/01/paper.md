@@ -1,6 +1,6 @@
 ---
 title: "Exploring the druggability of the binding site of aurovertin, an exogenous allosteric inhibitor of FOF1-ATP synthase"
-authors: "Luis Fernando Cofas-Vargas, Paola Mendoza-Espinosa, Luis Pablo Avila-Barrientos, Diego Prada-Gracia, Héctor Riveros-Rosas, Enrique García-Hernández"
+authors: "Luis F. Cofas-Vargas, Paola Mendoza-Espinosa, Luis Pablo Avila-Barrientos, <strong>Diego Prada-Gracia</strong>, Héctor Riveros-Rosas, Enrique García-Hernández"
 print: "https://doi.org/10.1002/mgg3.2234"
 preprint: ""
 bodyImageWidth: 68

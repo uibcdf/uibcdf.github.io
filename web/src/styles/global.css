@@ -995,7 +995,12 @@ section + section {
 .publication-authors {
   margin: 0;
   color: #2d4c70;
-  font-weight: 600;
+  font-weight: 400;
+}
+
+.publication-authors strong {
+  font-weight: 700;
+  color: #173f6b;
 }
 
 .publication-links {
