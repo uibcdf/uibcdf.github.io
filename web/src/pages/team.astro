@@ -29,6 +29,7 @@ const renderedPeople = await Promise.all(
 
 const imageModules = import.meta.glob('/src/content/people-profiles/*/*/image.png', { eager: true });
 const cvModules = import.meta.glob('/src/content/people-profiles/*/*/cv.pdf', { eager: true });
+const hiddenSectionMarkers = import.meta.glob('/src/content/people-profiles/*/hide', { eager: true });
 
 const imageByKey = new Map<string, string>(
   Object.entries(imageModules).map(([path, mod]) => {
@@ -52,12 +53,18 @@ const cvByKey = new Map<string, string>(
   }),
 );
 
+const hiddenSections = new Set<GroupKey>(
+  Object.keys(hiddenSectionMarkers)
+    .map((path) => path.split('/').at(-2))
+    .filter((value): value is GroupKey => Boolean(value && value in groupConfig)),
+);
+
 const sectioned = (['researchers', 'students', 'collaborators', 'former_members'] as GroupKey[])
   .map((group) => {
     const members = renderedPeople.filter(({ entry }) => entry.slug.split('/')[0] === group);
     return { group, title: groupConfig[group].title, members };
   })
-  .filter((section) => section.members.length > 0);
+  .filter((section) => section.members.length > 0 && !hiddenSections.has(section.group));
 ---
 
 <BaseLayout
@@ -157,7 +164,10 @@ const sectioned = (['researchers', 'students', 'collaborators', 'former_members'
                     {
                       showCv && (
                         <details class="person-cv">
-                          <summary>CV</summary>
+                          <summary>
+                            <span class="summary-closed">Show details</span>
+                            <span class="summary-open">Hide details</span>
+                          </summary>
                           {hasCvText && (
                             <div class="person-cv-body">
                               <Content />
@@ -166,7 +176,7 @@ const sectioned = (['researchers', 'students', 'collaborators', 'former_members'
                           {cvSrc && (
                             <p class="person-cv-download">
                               <a href={cvSrc} download>
-                                Download
+                                Download CV
                               </a>
                             </p>
                           )}
