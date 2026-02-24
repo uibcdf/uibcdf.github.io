@@ -1,20 +1,20 @@
 # Information architecture (IA) — UIBCDF Lab Website
 
-This file freezes the MVP sitemap and navigation decisions.
+This file freezes the sitemap and navigation for version `1.0.0`.
 
-## Top navigation (MVP)
+## Top navigation
 
 - Home
 - Research
 - Team
 - Publications
-- Software
+- >Code (route `/software`)
 - Updates
 - Contact
 
 ## Notes
-- Menu behavior: show `Home` as first item and keep all main sections visible; mark current page with visual attenuation (`aria-current="page"`).
+- Menu behavior: keep `Home` as first item; current page is visually attenuated and marked with `aria-current="page"`.
 - Updates are **one section** with **tags** to avoid fragmentation.
-- Home shows only the latest 3–5 updates, plus a link to the full index.
-- Publications can start as a simple curated list; later we can add BibTeX/DOI tooling if useful.
-- Software page should highlight MolSysSuite and link out to per-repo Sphinx docs.
+- Home highlights latest updates and links to the full Updates page.
+- Publications are grouped by year (descending).
+- Code is grouped in three sections: MolSysSuite ecosystem, Software engineering utilities, GitHub Actions.

@@ -86,3 +86,31 @@ The People page evolved into a richer Team page with grouped member cards, socia
 **Consequences**  
 - Team content editing is now directory-driven and predictable.
 - Navigation back to home is explicit and discoverable.
+
+---
+
+## 2026-02-24 — Freeze public release `1.0.0`
+
+**Context**  
+The website reached a stable and publishable state across all MVP routes, content collections, and deployment pipeline.
+
+**Decision**  
+Freeze the current state as version `1.0.0`.
+
+**Consequences**  
+- `devguide/` documentation is synchronized to the implemented architecture.
+- Subsequent changes should be treated as post-1.0 iterative improvements.
+
+---
+
+## 2026-02-24 — Version tag format without `v` prefix
+
+**Context**  
+Release naming should be explicit and simple for this repository.
+
+**Decision**  
+Use release tags in `MAJOR.MINOR.PATCH` format (example: `1.0.0`), without `v` prefix.
+
+**Consequences**  
+- First frozen release tag is `1.0.0`.
+- Future tags should follow the same format (for example: `1.0.1`, `1.1.0`, `2.0.0`).

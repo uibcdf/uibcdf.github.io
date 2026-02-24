@@ -1,22 +1,21 @@
 # MVP scope — UIBCDF Lab Website
 
-    This file defines what “version 1” includes, what it explicitly excludes, and what is planned next.
+This file defines what version `1.0.0` includes and what remains out of scope.
 
-    ## MVP (v1)
-    - Home page with concise unit description and highlights.
-- Pages: Research, Team, Publications, Software, Updates, Contact.
-- Updates: unified stream with tags (seminars/news/publications/software/events/opportunities).
-- Simple, readable design (“less is more”).
-- Deployed to GitHub Pages at `www.uibcdf.org`.
+## MVP (`1.0.0`) included
+- Home page with staged scroll narrative (`S0` to `S3`) and hub navigation.
+- Pages: Research, Team, Publications, `>Code` (route `/software`), Updates, Contact.
+- Structured content collections for research lines, member profiles, publications, software tools, and updates.
+- Unified updates stream with tag/date/text filtering.
+- Static deploy to `https://www.uibcdf.org` through GitHub Pages (`gh-pages` branch).
 
-    ## Non-goals (v1)
-    - No CMS in v1 (GitHub editing only).
-- No automated social feeds (no fragile API dependencies).
-- No full internal member portal, logins, or backend.
-- No heavy interactive dashboards.
+## Not in MVP
+- CMS/editor backend (Git-based editing only).
+- Live external feeds as primary content source.
+- User accounts, private member area, or any dynamic backend.
+- Full bibliographic automation pipeline.
 
-    ## Phase 2 ideas
-    - Decap CMS for easier editing (if/when needed).
-- Calendar integration for seminars (embed or .ics rendering).
-- Optional lightweight “latest GitHub releases” widget for software highlights.
-- Multilingual support if desired (ES/EN), keeping pages minimal.
+## Next-phase candidates
+- Optional CMS layer (only if content editing load requires it).
+- Automated bibliographic helpers (import/check tooling).
+- Internationalization if needed (ES/EN).

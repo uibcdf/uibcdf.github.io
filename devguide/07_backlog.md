@@ -4,8 +4,9 @@ A lightweight backlog to keep scope under control.
 
 ## TODO
 
-- [ ] Add basic SEO: titles, descriptions, OpenGraph
-- [ ] Add `resources/` placeholders for logos and OG images
+- [ ] Curate real production content for all placeholders.
+- [ ] Add automated content lint/check scripts for frontmatter consistency.
+- [ ] Evaluate optional CMS adoption only if editing throughput requires it.
 
 ## Doing
 - [ ] (empty)
@@ -23,3 +24,4 @@ A lightweight backlog to keep scope under control.
 - [x] Add Contact page with institutional context
 - [x] Redesign Contact page with photo + institutional data + social icon row
 - [x] Add GitHub Actions workflow to publish to `gh-pages`
+- [x] Freeze release `1.0.0` and synchronize `devguide/` with implemented architecture

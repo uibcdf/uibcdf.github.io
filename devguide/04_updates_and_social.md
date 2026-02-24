@@ -1,25 +1,21 @@
 # Updates & social diffusion policy — UIBCDF Lab Website
 
-    This site is Markdown-first and static. Social platforms are treated as **distribution channels**.
+This site is Markdown-first and static. Social platforms are distribution channels, not source of truth.
 
-    ## Canonical source of truth
-    - Posts on this site (under `web/src/content/`) are canonical.
-    - Social networks link back to the canonical post/page.
+## Canonical source of truth
+- Posts under `web/src/content/updates/` are canonical.
+- Social posts should link back to this site.
 
-    ## Embeds
-    - Embeds are optional and must never be required for core content.
-    - Place embeds below the fold and provide explicit “Follow us” links.
+## Embeds and external dependencies
+- Embeds are optional and never required for core content.
+- Avoid fragile auto-fetch dependencies for MVP and stable operation.
 
-    ## OpenGraph & sharing
-    - Every post should have a strong title + 1–2 line summary (used for previews).
-    - Provide a default OpenGraph image and allow post-specific OG images later.
+## Sharing
+- Each update should have a clear title and concise summary.
+- Keep OpenGraph metadata strong so links preview well across platforms.
 
-    ## Practical rule
-    Prefer a stable, curated “Latest updates” list over a fragile live timeline.
-
-    ## Project-specific notes
-    - Updates page shows a unified feed with tag filtering.
-    - Updates page includes client-side text search and date range filters (`from` / `to`).
-    - The "Search and filter" panel is sticky while browsing posts.
-    - A vertical progress bar on the filter panel acts as scroll indicator and draggable slider.
-    - Optionally, link to GitHub releases and social accounts, but avoid auto-fetching.
+## Project-specific behavior
+- Updates uses one unified stream (no separate news/blog/seminars sections).
+- Client-side filters: tag, text search, and date range.
+- Sticky “Search and filter” panel while scrolling posts.
+- Vertical progress bar acts as scroll indicator and draggable slider.

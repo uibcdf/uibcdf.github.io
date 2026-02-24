@@ -20,11 +20,16 @@ In `web/astro.config.mjs`:
 
 ## Local dev workflow
 - `cd web`
-- install dependencies
-- run dev server
-- build and preview before pushing
+- `npm install`
+- `npm run dev`
+- `npm run build` before pushing
+- optional: `npm run preview`
 
 ## Deployment invariants (do not break these)
 - For subpath sites, `base` must match the published path exactly.
 - Avoid absolute links that assume root, unless they are external.
 - Keep assets referenced via Astro helpers so paths resolve correctly.
+
+## Versioning policy
+- Release tags use `MAJOR.MINOR.PATCH` without `v` prefix.
+- Current frozen release: `1.0.0`.
