@@ -1,5 +1,5 @@
 ---
-title: "Open-Source Software for Computational Analysis and Modeling of Molecular Systems in Drug Discovery"
+title: "Open-Source Software for Computational Analysis and Modeling of Molecular Systems in Drug Design and Discovery"
 summary: >
   Open-source scientific software is a key enabler of reproducible and integrative research in computational biology. This
   line focuses on the development of interoperable computational tools that support the study, characterization, and

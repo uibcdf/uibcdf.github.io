@@ -1,5 +1,5 @@
 ---
-title: "AI-Driven Computational Methods for Functional Peptide Discovery and Design"
+title: "AI-Driven Computational Methods for Functional Peptide Design and Discovery"
 summary: >
   Functional peptides, including cell-penetrating, antimicrobial, anticancer, and metabolic regulatory peptides, represent
   a versatile class of therapeutic agents with broad biomedical potential. This research area develops integrative

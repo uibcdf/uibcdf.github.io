@@ -1,7 +1,7 @@
 ---
 title: "Ligand recognition properties of the vasopressin V2 receptor studied under QSAR and molecular modeling strategies"
-authors: "Marlet Martínez‐Archundia, Brenda Colín‐Astudillo, Liliana M Moreno‐Vargas, Guillermo Ramírez‐Galicia, Ramón
-Garduño‐Juárez, Omar Deeb, Martha Citlalli Contreras‐Romo, Andres Quintanar‐Stephano, Edgar Abarca‐Rojano, José
+authors: "Marlet Martínez‐Archundia, Brenda Colín‐Astudillo, <strong>Liliana. M Moreno‐Vargas</strong>, Guillermo Ramírez‐Galicia, Ramón
+Garduño‐Juárez, Omar Deeb, Martha C. Contreras‐Romo, Andres Quintanar‐Stephano, Edgar Abarca‐Rojano, José
 Correa‐Basurto"
 print: "https://doi.org/10.1111/cbdd.13005"
 preprint: ""
