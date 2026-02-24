@@ -23,7 +23,7 @@ resources, facilitating data-driven research.
 
 </br>
 
-> More details can be found in the [Code](/software) section of this website.
+> More details can be found in the [>Code](/software) section of this website.
 
 </br>
 
