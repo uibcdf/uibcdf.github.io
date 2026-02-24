@@ -16,7 +16,7 @@ Current frozen release: `1.0.0`
 - Research
 - Team
 - Publications
-- >Code (route: `/software`)
+- \>Code (route: `/software`)
 - Updates
 - Contact
 
