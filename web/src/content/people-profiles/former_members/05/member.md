@@ -1,6 +1,6 @@
 ---
 name: "Juan C. Islas Arciga"
-position: "Former Undegraduate Student"
+position: "Former Undergraduate Student"
 expertise: ""
 affiliation: ""
 draft: false
