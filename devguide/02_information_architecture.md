@@ -18,3 +18,7 @@ This file freezes the sitemap and navigation for version `1.0.0`.
 - Home highlights latest updates and links to the full Updates page.
 - Publications are grouped by year (descending).
 - Code is grouped in three sections: MolSysSuite ecosystem, Software engineering utilities, GitHub Actions.
+
+## Next-version IA note
+- Positioning/mission content is currently under-specified and should be made explicit.
+- Preferred approach: add a dedicated mission block in Home (early in scroll flow) instead of adding a new top-level `About` menu item.

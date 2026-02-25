@@ -4,6 +4,10 @@ A lightweight backlog to keep scope under control.
 
 ## TODO
 
+- [ ] Add an explicit positioning/mission block in Home to better explain lab identity and what UIBCDF does.
+- [ ] Decide implementation for mission positioning: new `About` page vs. new Home section (preferred: Home section to avoid increasing main menu items).
+- [ ] Draft and integrate the following candidate mission text in Home (as first stop in scroll narrative):
+  `What we do: We develop computational and experimental approaches to understand, design, and discover biomolecular systems, integrating molecular modeling, quantitative analysis, and open scientific practices. Our work combines software development with quantitative experimental binding measurements to advance reproducible strategies for molecular science and drug discovery, contributing to translational research through open tools and collaborative science.`
 - [ ] Curate real production content for all placeholders.
 - [ ] Unify microcopy style across all pages (tone, length, consistency).
 - [ ] Run full responsive QA pass (mobile/tablet/desktop) for Home transitions and cards.
