@@ -32,15 +32,17 @@ This repo is intended to be developed locally with Codex (CLI) after the initial
 For iterative UI work on the Home page scroll choreography, use this notation:
 
 - `S0` = `cover`
-- `S1` = `hub`
-- `S2` = `latest-updates`
-- `S3` = `final`
+- `S1` = `message`
+- `S2` = `hub`
+- `S3` = `latest-updates`
+- `S4` = `final`
 
 Transitions:
 
 - `T01` = scroll from `S0` to `S1`
 - `T12` = scroll from `S1` to `S2`
 - `T23` = scroll from `S2` to `S3`
+- `T34` = scroll from `S3` to `S4`
 
 Rule: when requesting visual tweaks, specify whether the change targets a state (`S*`) or a transition (`T*`).
 

@@ -211,8 +211,9 @@ a {
 }
 
 .home-hero::after {
-  width: 8.5rem;
-  transform: none;
+  width: 100%;
+  transform-origin: right center;
+  transform: scaleX(var(--hero-line-scale, 0.18));
 }
 
 .home-hero.line-animated::after {
@@ -269,7 +270,7 @@ section + section {
 
 .parallax-stage {
   position: relative;
-  min-height: clamp(26rem, 122vh, 54rem);
+  min-height: clamp(20rem, 80vh, 36rem);
 }
 
 .parallax-figure {
@@ -299,7 +300,59 @@ section + section {
   min-height: clamp(42rem, 130vh, 62rem);
 }
 
+.home-what-stage {
+  position: relative;
+  min-height: clamp(38rem, 160vh, 78rem);
+}
+
+.home-what-pin {
+  position: sticky;
+  top: calc(var(--hero-lock-height) + 0.35rem);
+  padding-top: clamp(1.7rem, 12vh, 5.2rem);
+}
+
+.home-what-block {
+  width: min(100%, 49rem);
+  margin: 0 auto;
+}
+
+.home-what-copy {
+  margin: 0;
+  text-align: center;
+  font-size: clamp(1.03rem, 1.03rem + 0.28vw, 1.3rem);
+  line-height: 1.58;
+  font-weight: 520;
+  color: #13263d;
+  letter-spacing: 0.002em;
+}
+
+.home-what-cta {
+  display: flex;
+  justify-content: flex-end;
+  margin: 2.35rem 0 0;
+}
+
+.home-what-cta .cta {
+  margin-top: 0;
+}
+
+.home-what-cta a {
+  font-size: 0.98rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--accent);
+}
+
+.home-what-cta a:hover,
+.home-what-cta a:focus-visible {
+  color: #2f6eb0;
+}
+
 .parallax-stage + .home-hub-stage {
+  margin-top: 0.75rem;
+}
+
+.home-what-stage + .home-hub-stage {
   margin-top: 0.75rem;
 }
 
@@ -574,6 +627,10 @@ section + section {
 
 .scroll-cue--between {
   margin: 0.2rem 0 0.15rem;
+}
+
+.scroll-cue--message {
+  margin-top: 2.9rem;
 }
 
 .grid {
@@ -1493,6 +1550,19 @@ footer {
 }
 
 @media (max-width: 56rem) {
+  .home-what-stage {
+    min-height: auto;
+  }
+
+  .home-what-pin {
+    position: static;
+    padding-top: 0.25rem;
+  }
+
+  .home-what-cta {
+    justify-content: center;
+  }
+
   .home-hub-stage {
     min-height: auto;
   }
