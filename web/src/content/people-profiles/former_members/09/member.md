@@ -1,5 +1,5 @@
 ---
-name: "Homero Gónzalez Velazquez"
+name: "Homero Gónzalez Velasco"
 position: "Visiting PhD Student"
 expertise: ""
 affiliation: ""
