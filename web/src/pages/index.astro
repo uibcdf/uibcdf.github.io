@@ -9,15 +9,16 @@ const latestUpdates = (await getCollection('updates', ({ data }) => !data.draft)
 
 const homeTitle = 'Computational Biology and Drug Design Research Unit';
 const contactChannelsTop = [
-  { id: 'email', label: 'Email' },
-  { id: 'x', label: 'X' },
-  { id: 'bluesky', label: 'Bluesky' },
+  { id: 'email', label: 'Email', href: 'mailto:uibcdf@gmail.com' },
+  { id: 'x', label: 'X', href: 'https://x.com/uibcdf' },
+  { id: 'bluesky', label: 'Bluesky', href: 'https://bsky.app/profile/uibcdf.bsky.social' },
+  { id: 'linkedin', label: 'LinkedIn', href: 'https://linkedin.com/company/11217379/' },
 ];
 const contactChannelsBottom = [
-  { id: 'linkedin', label: 'LinkedIn' },
-  { id: 'github', label: 'GitHub' },
-  { id: 'youtube', label: 'YouTube' },
-  { id: 'osf', label: 'Open Science Framework' },
+  { id: 'scholar', label: 'Google Scholar', href: 'https://scholar.google.com/citations?user=TgOsFSQAAAAJ' },
+  { id: 'github', label: 'GitHub', href: 'https://github.com/uibcdf' },
+  { id: 'youtube', label: 'YouTube', href: 'https://www.youtube.com/@uibcdf' },
+  { id: 'osf', label: 'Open Science Framework', href: 'https://osf.io/user/b3y6s' },
 ];
 
 const hubItems = [
@@ -238,7 +239,14 @@ const hubItems = [
               <div class="contact-icons-row contact-icons-row--top">
                 {
                   contactChannelsTop.map((channel) => (
-                    <div class="contact-icon-item" title={channel.label} aria-label={channel.label}>
+                    <a
+                      class="contact-icon-item"
+                      href={channel.href}
+                      target={channel.id === 'email' ? undefined : '_blank'}
+                      rel={channel.id === 'email' ? undefined : 'noreferrer'}
+                      title={channel.label}
+                      aria-label={channel.label}
+                    >
                       <span class="contact-icon" aria-hidden="true">
                         {channel.id === 'email' && (
                           <svg viewBox="0 0 24 24" fill="none">
@@ -252,26 +260,39 @@ const hubItems = [
                             <path d="M19 4.5 5 19.5" />
                           </svg>
                         )}
+                        {channel.id === 'linkedin' && (
+                          <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M5.2 6.3h.01" />
+                            <path d="M4.2 9.3h2v9.5h-2z" />
+                            <path d="M9.2 9.3h2v1.4h.1c.5-.9 1.5-1.8 3.2-1.8 2.6 0 3.4 1.8 3.4 4.2v5.7h-2.1v-5.1c0-1.2-.2-2.6-1.9-2.6-1.6 0-2.4 1.2-2.4 2.6v5.1H9.2V9.3Z" />
+                          </svg>
+                        )}
                         {channel.id === 'bluesky' && (
                           <svg viewBox="0 0 24 24" fill="none">
                             <path d="M12 11.6c1.6-2.4 3.5-4 6.1-5-.4 2.7-1.5 4.7-3.3 6.1 1.5.1 2.8.5 3.9 1.4-1.8.8-3.6 1-5.4.6-.2 1.8-1.1 3.3-3.1 4.4-2-1.1-2.9-2.6-3.1-4.4-1.8.4-3.6.2-5.4-.6 1.1-.9 2.4-1.3 3.9-1.4-1.8-1.4-2.9-3.4-3.3-6.1 2.6 1 4.5 2.6 6.1 5Z" />
                           </svg>
                         )}
                       </span>
-                    </div>
+                    </a>
                   ))
                 }
               </div>
               <div class="contact-icons-row contact-icons-row--bottom">
                 {
                   contactChannelsBottom.map((channel) => (
-                    <div class="contact-icon-item" title={channel.label} aria-label={channel.label}>
+                    <a
+                      class="contact-icon-item"
+                      href={channel.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      title={channel.label}
+                      aria-label={channel.label}
+                    >
                       <span class="contact-icon" aria-hidden="true">
-                        {channel.id === 'linkedin' && (
+                        {channel.id === 'scholar' && (
                           <svg viewBox="0 0 24 24" fill="none">
-                            <path d="M5.2 6.3h.01" />
-                            <path d="M4.2 9.3h2v9.5h-2z" />
-                            <path d="M9.2 9.3h2v1.4h.1c.5-.9 1.5-1.8 3.2-1.8 2.6 0 3.4 1.8 3.4 4.2v5.7h-2.1v-5.1c0-1.2-.2-2.6-1.9-2.6-1.6 0-2.4 1.2-2.4 2.6v5.1H9.2V9.3Z" />
+                            <path d="M3.8 10.2 12 5l8.2 5.2L12 15.3 3.8 10.2Z" />
+                            <path d="M7.2 12.6v3.1c0 1.3 2.2 2.4 4.8 2.4s4.8-1.1 4.8-2.4v-3.1" />
                           </svg>
                         )}
                         {channel.id === 'github' && (
@@ -297,7 +318,7 @@ const hubItems = [
                           </svg>
                         )}
                       </span>
-                    </div>
+                    </a>
                   ))
                 }
               </div>
