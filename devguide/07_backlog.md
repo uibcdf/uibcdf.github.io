@@ -5,6 +5,11 @@ A lightweight backlog to keep scope under control.
 ## TODO
 
 - [ ] Curate real production content for all placeholders.
+- [ ] Unify microcopy style across all pages (tone, length, consistency).
+- [ ] Run full responsive QA pass (mobile/tablet/desktop) for Home transitions and cards.
+- [ ] Apply collection-level SEO polish (page titles, meta descriptions, share metadata).
+- [ ] Run a lightweight performance pass (image weight, lazy loading, loading strategy).
+- [ ] Run accessibility fine-tuning pass (keyboard flow, focus states, contrast checks).
 - [ ] Add automated content lint/check scripts for frontmatter consistency.
 - [ ] Evaluate optional CMS adoption only if editing throughput requires it.
 

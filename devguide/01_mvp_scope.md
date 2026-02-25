@@ -19,3 +19,6 @@ This file defines what version `1.0.0` includes and what remains out of scope.
 - Optional CMS layer (only if content editing load requires it).
 - Automated bibliographic helpers (import/check tooling).
 - Internationalization if needed (ES/EN).
+- Editorial consistency pass (microcopy and naming normalization).
+- Technical quality pass: responsive QA + accessibility + performance.
+- SEO refinement pass per section and content entry.
