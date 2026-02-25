@@ -1,6 +1,6 @@
 ---
 name: "Roberto Velázquez Fuentes"
-position: "Visiting undergraduent Student"
+position: "Visiting Undergraduate Student"
 expertise: ""
 affiliation: ""
 draft: false
