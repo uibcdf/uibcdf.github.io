@@ -20,6 +20,8 @@ This file freezes the sitemap and navigation for version `1.0.0`.
 - Code is grouped in three sections: MolSysSuite ecosystem, Software engineering utilities, GitHub Actions.
 
 ## Next-version IA note
-- Positioning/mission content is currently under-specified and should be made explicit.
-- If a dedicated section is created, preferred naming is `Our Mission` (instead of `About`).
-- Preferred approach remains: add a mission block in Home (early in scroll flow) instead of increasing top-level menu items.
+- Positioning/mission content must be explicit in the next version.
+- Home will include a new first scroll stop titled `What we do`, with the approved positioning text.
+- The `What we do` block will include a clear link to a dedicated `Mission` section.
+- Top navigation for next version will include `Mission` as a menu item.
+- `Mission` page will contain an extended explanation of what the lab does and its purpose.

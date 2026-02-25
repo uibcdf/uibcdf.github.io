@@ -16,6 +16,7 @@ This file defines what version `1.0.0` includes and what remains out of scope.
 - Full bibliographic automation pipeline.
 
 ## Next-phase candidates
+- Add explicit lab positioning in Home via a first-stop `What we do` block plus dedicated `Mission` page.
 - Optional CMS layer (only if content editing load requires it).
 - Automated bibliographic helpers (import/check tooling).
 - Internationalization if needed (ES/EN).
