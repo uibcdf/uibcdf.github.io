@@ -84,6 +84,27 @@ const hubItems = [
     </div>
   </section>
 
+  <section class="home-what-stage" aria-label="What we do">
+    <div class="home-what-pin">
+      <article class="home-what-block">
+        <p class="home-what-copy">
+          Our work focuses on discovering and designing biomolecular systems with pharmacological
+          potential by integrating computational modeling and quantitative analysis with
+          experimental determination of molecular binding, advancing reproducible and open
+          strategies for molecular science and drug discovery.
+        </p>
+        <p class="home-what-cta">
+          <a href="/mission">More on the UIBCDF mission...</a>
+        </p>
+      </article>
+      <div class="scroll-cue scroll-cue--message" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M5 9l7 7 7-7" />
+        </svg>
+      </div>
+    </div>
+  </section>
+
   <section class="home-hub-stage">
     <div class="home-hub-pin">
       <section class="hero-frieze" aria-hidden="true">
@@ -291,12 +312,17 @@ const hubItems = [
     const stage = document.querySelector('[data-parallax-stage]');
     const figure = stage?.querySelector('[data-parallax-figure]');
     const hero = document.querySelector('.home-hero');
+    const whatStage = document.querySelector('.home-what-stage');
+    const whatPin = document.querySelector('.home-what-pin');
+    const whatCopy = document.querySelector('.home-what-copy');
+    const whatCta = document.querySelector('.home-what-cta');
+    const whatCue = document.querySelector('.scroll-cue--message');
+    const frieze = document.querySelector('.hero-frieze');
     const hubStage = document.querySelector('.home-hub-stage');
     const hubPin = document.querySelector('.home-hub-pin');
     const updatesStage = document.querySelector('.updates-stage');
     const updatesPin = document.querySelector('.updates-pin');
     const updatesTitle = document.querySelector('.updates-panel h2');
-    const hubCue = document.querySelector('.scroll-cue--hub');
     const updatesCue = document.querySelector('.scroll-cue--updates');
     const contactStage = document.querySelector('.contact-stage');
     const contactPanel = document.querySelector('.contact-panel');
@@ -309,8 +335,6 @@ const hubItems = [
     if (stage && figure && !reducedMotion) {
       let ticking = false;
       let startScale = 0.18;
-      let lineStartScroll = null;
-      let lineShiftStartScroll = null;
       let targetLineScale = startScale;
       let targetLineShift = 0;
       let targetLineSnake = 0;
@@ -319,12 +343,24 @@ const hubItems = [
       let currentLineShift = 0;
       let currentLineSnake = 0;
       let currentLineVertical = 0;
+      let messageTargetShiftPx = null;
+      let lastT12Shift = null;
+      let friezeCaptured = false;
+      let t23StartScroll = null;
+      let t23StartShift = null;
+      let t23TargetShift = null;
+      let lastT23Shift = null;
+      let hardLockShiftMode = false;
       let smoothingFrame = null;
 
       const runSmoothing = () => {
-        const lerp = 0.2;
+        const lerp = 0.28;
         currentLineScale += (targetLineScale - currentLineScale) * lerp;
-        currentLineShift += (targetLineShift - currentLineShift) * lerp;
+        if (hardLockShiftMode) {
+          currentLineShift = targetLineShift;
+        } else {
+          currentLineShift += (targetLineShift - currentLineShift) * lerp;
+        }
         currentLineSnake += (targetLineSnake - currentLineSnake) * lerp;
         currentLineVertical += (targetLineVertical - currentLineVertical) * lerp;
 
@@ -357,16 +393,31 @@ const hubItems = [
 
       const updateStartScale = () => {
         if (!hero) return;
-        const rem = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
-        const shortSegmentPx = 8.5 * rem;
-        const heroWidth = hero.clientWidth || 1;
-        startScale = Math.max(0.08, Math.min(0.96, shortSegmentPx / heroWidth));
+        // Keep S0 baseline deterministic: the line starts as the original short segment.
+        startScale = 0.18;
         targetLineScale = startScale;
         currentLineScale = startScale;
         hero.style.setProperty('--hero-line-scale', startScale.toFixed(4));
         hero.style.setProperty('--hero-line-shift', '0px');
         hero.style.setProperty('--hero-line-snake', '0');
         hero.style.setProperty('--hero-line-vertical', '0px');
+      };
+
+      const computeMessageTargetShift = () => {
+        if (!hero || !whatPin || !whatCopy || !whatCta) return 0;
+        const heroTopLock = parseFloat(getComputedStyle(hero).top) || 0;
+        const heroBottomLock = heroTopLock + hero.getBoundingClientRect().height;
+        const pinTopLock = parseFloat(getComputedStyle(whatPin).top) || 0;
+
+        // Use local coordinates inside the sticky S1 pin so the target remains constant
+        // during the whole S0->S1 transition.
+        const pinRect = whatPin.getBoundingClientRect();
+        const copyRect = whatCopy.getBoundingClientRect();
+        const ctaRect = whatCta.getBoundingClientRect();
+        const copyBottomInPin = copyRect.bottom - pinRect.top;
+        const ctaTopInPin = ctaRect.top - pinRect.top;
+        const midYLock = pinTopLock + (copyBottomInPin + ctaTopInPin) * 0.5;
+        return Math.max(0, midYLock - heroBottomLock);
       };
 
       const updateParallax = () => {
@@ -386,56 +437,150 @@ const hubItems = [
         figure.style.transform = `translateY(${translateY}px)`;
         figure.style.opacity = Math.max(0.08, opacity).toFixed(3);
 
-        // Start line growth exactly when the hero reaches its sticky lock point.
-        const heroStickyTop = hero ? parseFloat(getComputedStyle(hero).top) || 0 : 0;
-        const heroTopNow = hero?.getBoundingClientRect().top ?? Number.POSITIVE_INFINITY;
-        if (lineStartScroll === null && heroTopNow <= heroStickyTop + 0.5) {
-          lineStartScroll = scrollY;
+        // Hard lock at true top-of-page: keep S0 short segment until user actually scrolls.
+        if (scrollY < 3) {
+          messageTargetShiftPx = null;
+          lastT12Shift = null;
+          friezeCaptured = false;
+          t23StartScroll = null;
+          t23StartShift = null;
+          t23TargetShift = null;
+          lastT23Shift = null;
+          hardLockShiftMode = false;
+          targetLineScale = startScale;
+          targetLineShift = 0;
+          targetLineSnake = 0;
+          targetLineVertical = 0;
+          hero?.style.setProperty('--hero-line-progress', '0');
+          scheduleSmoothing();
+          ticking = false;
+          return;
         }
 
-        const lineStart = lineStartScroll ?? Number.POSITIVE_INFINITY;
+        // Milestones for S0 -> S1 -> S2 growth/shift choreography.
+        // Start where the parallax transition effectively starts, not after it.
+        const growthStart = start + 6;
+        const whatTop = whatStage?.offsetTop ?? stageTop;
+        const whatPinTop = whatPin ? parseFloat(getComputedStyle(whatPin).top) || 0 : 0;
+        const messageEarlyOffset = Math.max(70, Math.round((window.innerHeight || 900) * 0.1));
+        const messageLock = Math.max(growthStart + 80, whatTop - whatPinTop - messageEarlyOffset);
 
-        // End line growth at frieze lock (when hub pin reaches its sticky top).
         const hubTop = hubStage?.offsetTop ?? stageTop;
         const pinTop = hubPin ? parseFloat(getComputedStyle(hubPin).top) || 0 : 0;
-        const lineEnd = Math.max(lineStart + 1, hubTop - pinTop);
-        const lineRaw = Number.isFinite(lineStart)
-          ? (scrollY - lineStart) / Math.max(1, lineEnd - lineStart)
-          : 0;
-        const lineProgress = Math.max(0, Math.min(1, lineRaw));
+        const lineEnd = Math.max(messageLock + 80, hubTop - pinTop);
+        const firstRaw = (scrollY - start) / Math.max(1, messageLock - start);
+        const firstProgress = Math.max(0, Math.min(1, firstRaw));
+        const stagePause = Math.max(480, Math.round((window.innerHeight || 900) * 0.9));
+        const messagePause = stagePause;
+        const growthResume = messageLock + messagePause;
+        const secondRaw =
+          scrollY > growthResume
+            ? (scrollY - growthResume) / Math.max(1, lineEnd - growthResume)
+            : 0;
+        const secondProgress = Math.max(0, Math.min(1, secondRaw));
+        const lineProgress =
+          scrollY <= messageLock
+            ? 0.5 * firstProgress
+            : scrollY <= growthResume
+              ? 0.5
+              : 0.5 + 0.5 * secondProgress;
 
         const lineScale = startScale + (1 - startScale) * lineProgress;
         targetLineScale = lineScale;
         hero?.style.setProperty('--hero-line-progress', lineProgress.toFixed(3));
 
-        // Start moving the line only when the hub cue is about to pass below the line.
+        // Shift line to the S1 text/CTA split position by message lock.
         const heroBottom = hero?.getBoundingClientRect().bottom ?? 0;
-        const hubCueTop = hubCue?.getBoundingClientRect().top ?? Number.POSITIVE_INFINITY;
-        if (lineShiftStartScroll === null && hubCueTop <= heroBottom + 2) {
-          lineShiftStartScroll = scrollY;
+        if (messageTargetShiftPx === null) {
+          messageTargetShiftPx = computeMessageTargetShift();
         }
+        const messageTargetShift = messageTargetShiftPx ?? 0;
+        const earlyShift = messageTargetShift * firstProgress;
 
-        // After that trigger, move the line down until it underlines "Latest updates" at the second lock.
+        // T12 contact physics: hold S1 level until frieze reaches line, then follow frieze top rigidly.
+        const friezeLiveShift = Math.max(0, (frieze?.getBoundingClientRect().top ?? heroBottom) - heroBottom);
+        const contactEnterThreshold = 1.2;
+
+        // After S2, continue line shift toward the "Latest updates" underline target.
         const updatesTop = updatesStage?.offsetTop ?? hubTop;
         const updatesPinTop = updatesPin ? parseFloat(getComputedStyle(updatesPin).top) || 0 : 0;
-        const updatesLock = Math.max((lineShiftStartScroll ?? lineEnd) + 1, updatesTop - updatesPinTop);
-        const shiftStart = lineShiftStartScroll ?? Number.POSITIVE_INFINITY;
-        const shiftRaw = Number.isFinite(shiftStart)
-          ? (scrollY - shiftStart) / Math.max(1, updatesLock - shiftStart)
-          : 0;
-        const shiftProgress = Math.max(0, Math.min(1, shiftRaw));
-
-        const updatesTitleBottom = updatesTitle?.getBoundingClientRect().bottom ?? heroBottom;
-        const targetShift = Math.max(0, updatesTitleBottom + 6 - heroBottom);
-        const lineShift = targetShift * shiftProgress;
-        targetLineShift = lineShift;
-
-        // Snake phase starts when "Latest updates" begins to move up (end of its sticky interval).
-        const contactTop = contactStage?.offsetTop ?? updatesTop + viewport;
+        const updatesLock = Math.max(lineEnd + 1, updatesTop - updatesPinTop);
         const updatesStageHeight = updatesStage?.offsetHeight ?? 0;
         const updatesPinHeight = updatesPin?.offsetHeight ?? 0;
         const updatesRelease = updatesTop + updatesStageHeight - updatesPinHeight - updatesPinTop;
-        const snakeStart = Math.max(updatesLock, updatesRelease);
+        const s2PauseExtra = stagePause;
+        const updatesReleaseWithPause = updatesRelease + s2PauseExtra;
+        const s2MoveStart = lineEnd + s2PauseExtra;
+        const shiftResume = growthResume;
+        const usePostS2Shift = scrollY >= s2MoveStart;
+        if (scrollY <= shiftResume || usePostS2Shift) {
+          friezeCaptured = false;
+        } else if (!friezeCaptured && friezeLiveShift <= messageTargetShift + contactEnterThreshold) {
+          friezeCaptured = true;
+        }
+
+        const t12BaseShift = friezeCaptured ? friezeLiveShift : messageTargetShift;
+        const t12Shift =
+          lastT12Shift === null ? t12BaseShift : Math.min(lastT12Shift, t12BaseShift);
+        const s2Shift = t12Shift;
+        if (!usePostS2Shift) {
+          t23StartScroll = null;
+          t23StartShift = null;
+          t23TargetShift = null;
+          lastT23Shift = null;
+        } else if (t23StartScroll === null) {
+          t23StartScroll = scrollY;
+          t23StartShift = s2Shift;
+          const updatesPinTopLock = updatesPin ? parseFloat(getComputedStyle(updatesPin).top) || 0 : 0;
+          const updatesPinRect = updatesPin?.getBoundingClientRect();
+          const updatesTitleRect = updatesTitle?.getBoundingClientRect();
+          const updatesTitleBottomInPin =
+            updatesPinRect && updatesTitleRect
+              ? updatesTitleRect.bottom - updatesPinRect.top
+              : 0;
+          const heroTopLock = parseFloat(getComputedStyle(hero).top) || 0;
+          const heroBottomLock = heroTopLock + hero.getBoundingClientRect().height;
+          t23TargetShift = Math.max(
+            t23StartShift,
+            Math.max(0, updatesPinTopLock + updatesTitleBottomInPin + 6 - heroBottomLock),
+          );
+        }
+        const postS2Raw =
+          usePostS2Shift && t23StartScroll !== null
+            ? (scrollY - t23StartScroll) / Math.max(1, updatesLock - t23StartScroll)
+            : 0;
+        const postS2Progress = Math.max(0, Math.min(1, postS2Raw));
+        const t23From = t23StartShift ?? s2Shift;
+        const t23To = Math.max(t23From, t23TargetShift ?? t23From);
+        const postS2Candidate = t23From + (t23To - t23From) * postS2Progress;
+        const postS2Shift =
+          lastT23Shift === null ? postS2Candidate : Math.max(lastT23Shift, postS2Candidate);
+        if (!usePostS2Shift) {
+          lastT12Shift = t12Shift;
+        } else {
+          lastT12Shift = null;
+          lastT23Shift = postS2Shift;
+        }
+        hardLockShiftMode = scrollY > shiftResume && !usePostS2Shift;
+        targetLineShift =
+          scrollY <= messageLock
+            ? earlyShift
+            : scrollY <= shiftResume
+              ? messageTargetShift
+                : !usePostS2Shift
+                ? t12Shift
+                : postS2Shift;
+
+        // Rigid lock: once captured in T12, keep the line exactly attached to frieze top.
+        if (friezeCaptured && !usePostS2Shift) {
+          targetLineShift = friezeLiveShift;
+          currentLineShift = friezeLiveShift;
+          lastT12Shift = friezeLiveShift;
+        }
+
+        // Snake phase starts exactly when S3 starts moving up.
+        const contactTop = contactStage?.offsetTop ?? updatesTop + viewport;
+        const snakeStart = updatesRelease;
         const snakeEnd = Number.isFinite(snakeStart)
           ? Math.max(snakeStart + 1, contactTop - viewport * 0.18)
           : Number.POSITIVE_INFINITY;
@@ -446,6 +591,8 @@ const hubItems = [
           ? Math.max(0, Math.min(1, snakeRaw))
           : 0;
         targetLineSnake = snakeProgress;
+        const snakeHeadLift = 44 * snakeProgress;
+        targetLineShift = Math.max(0, targetLineShift - snakeHeadLift);
 
         // Fade out S2 cue during T23 so it is fully gone at S3.
         if (updatesCue) updatesCue.style.opacity = (1 - snakeProgress).toFixed(3);
@@ -455,7 +602,7 @@ const hubItems = [
         document.documentElement.style.setProperty('--s3-warm-alpha', warmAlpha);
 
         const panelHeight = contactPanel?.clientHeight ?? 0;
-        const verticalTarget = Math.max(0, panelHeight - 2);
+        const verticalTarget = Math.max(0, panelHeight - 16);
         targetLineVertical = Number.isFinite(snakeProgress) ? verticalTarget * snakeProgress : 0;
 
         scheduleSmoothing();
@@ -472,8 +619,20 @@ const hubItems = [
       updateStartScale();
       hero?.classList.add('line-animated');
       updateParallax();
+      requestAnimationFrame(() => {
+        updateStartScale();
+        updateParallax();
+      });
       window.addEventListener('scroll', requestUpdate, { passive: true });
       window.addEventListener('resize', () => {
+        messageTargetShiftPx = null;
+        lastT12Shift = null;
+        friezeCaptured = false;
+        t23StartScroll = null;
+        t23StartShift = null;
+        t23TargetShift = null;
+        lastT23Shift = null;
+        hardLockShiftMode = false;
         updateStartScale();
         targetLineScale = Math.max(targetLineScale, startScale);
         currentLineScale = Math.max(currentLineScale, startScale);
