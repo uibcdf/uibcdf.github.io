@@ -28,10 +28,11 @@ It should let a collaborator continue development with the same architecture and
 - `resources/` — auxiliary assets
 
 ## Current status (2026-02-25)
-- Version `1.1.0` released.
+- Version `1.3.2` released.
 - Routes: Home, Mission, Research, Team, Publications, `>Code` (route `/software`), Updates, Contact.
 - Content collections in use: `updates`, `people-profiles`, `research-lines`, `publication-papers`, `software-tools`.
 - Deployment workflow: `.github/workflows/deploy-gh-pages.yml`.
 - Updates includes client-side tag/date/text filters, sticky search/filter panel, and draggable vertical progress bar.
 - Contact page uses image + institutional address + email + social links.
 - Home uses five staged stops (`S0` to `S4`) and tuned transition choreography (`T01`, `T12`, `T23`, `T34`).
+- Home `S4` contact/social icons are clickable and ordered in two rows of four channels.

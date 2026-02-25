@@ -34,3 +34,6 @@ A lightweight backlog to keep scope under control.
 - [x] Add Home message stop (`S1`) and Mission CTA
 - [x] Refine Home line/serpent transition choreography (`T01`..`T34`)
 - [x] Freeze and tag release `1.1.0`
+- [x] Expand Team former members content in production
+- [x] Link all Home `S4` channel icons and finalize 2x4 channel order
+- [x] Freeze and tag release `1.3.2`

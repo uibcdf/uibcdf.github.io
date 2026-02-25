@@ -132,3 +132,20 @@ After `1.0.0`, the site needed stronger positioning clarity and smoother Home tr
 - IA now includes `Mission` as a stable route.
 - Home narrative is now explicitly five-stop (`S0`..`S4`) with shared notation in workflow docs.
 - Tag `1.1.0` is now the canonical reference for this iteration.
+
+---
+
+## 2026-02-25 — Release `1.3.2`: Team content expansion + Home S4 linked channels
+
+**Context**  
+After `1.1.0`, Team required additional former members and Home `S4` needed direct outbound links for all channel icons.
+
+**Decision**  
+- Add former member entries through the Team content collection.
+- Make all `S4` channel icons clickable and define final channel order as two rows of four.
+- Keep release tagging in patch cadence (`1.3.0`, `1.3.1`, `1.3.2`) for these incremental updates.
+
+**Consequences**  
+- Team reflects expanded former member records in production.
+- Home footer channels now work as direct navigation endpoints.
+- `1.3.2` is the latest stable reference for this set of updates.

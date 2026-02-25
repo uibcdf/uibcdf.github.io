@@ -1,12 +1,13 @@
 # MVP scope — UIBCDF Lab Website
 
-This file defines what version `1.1.0` includes and what remains out of scope.
+This file defines what version `1.3.2` includes and what remains out of scope.
 
-## MVP (`1.1.0`) included
+## MVP (`1.3.2`) included
 - Home page with staged scroll narrative (`S0` to `S4`) and tuned transitions (`T01` to `T34`).
 - Pages: Mission, Research, Team, Publications, `>Code` (route `/software`), Updates, Contact.
 - Structured content collections for research lines, member profiles, publications, software tools, and updates.
 - Unified updates stream with tag/date/text filtering.
+- Home `S4` channel icons linked to official UIBCDF contact/social destinations.
 - Static deploy to `https://www.uibcdf.org` through GitHub Pages (`gh-pages` branch).
 
 ## Not in MVP

@@ -22,7 +22,8 @@ This repo is intended to be developed locally with Codex (CLI) after the initial
 - Keep navigation minimal (see `devguide/02_information_architecture.md`).
 - Maintain one primary CTA per page.
 - For Research page content, use `web/src/content/research-lines/NN/` with `line.md` + `image.png` (numeric order defines render order).
-- For Team page content, use `web/src/content/people-profiles/{researchers|students|collaborators|former_members}/NN/` with `member.md` + `image.png` (and optional `cv.pdf`).
+- For Team page content, use `web/src/content/people-profiles/{researchers|students|collaborators|former_members}/NN/` with one profile markdown file (recommended `member.md`) + `image.png` (and optional `cv.pdf`).
+- Do not keep more than one profile markdown file per member folder to avoid duplicate content IDs in Astro.
 - For Publications page content, use `web/src/content/publication-papers/YYYY/NN/` with `paper.md` + `thumbnail.png` (year sections sort descending, items sort by numeric `NN`).
 - For Code page content, use `web/src/content/software-tools/{molsyssuite|utilities|github-actions}/NN/` with `tool.md` and category-specific assets:
   - `molsyssuite` / `utilities`: `logo.svg` shown in cards
