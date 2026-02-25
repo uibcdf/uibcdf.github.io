@@ -21,4 +21,5 @@ This file freezes the sitemap and navigation for version `1.0.0`.
 
 ## Next-version IA note
 - Positioning/mission content is currently under-specified and should be made explicit.
-- Preferred approach: add a dedicated mission block in Home (early in scroll flow) instead of adding a new top-level `About` menu item.
+- If a dedicated section is created, preferred naming is `Our Mission` (instead of `About`).
+- Preferred approach remains: add a mission block in Home (early in scroll flow) instead of increasing top-level menu items.
