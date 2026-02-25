@@ -114,3 +114,21 @@ Use release tags in `MAJOR.MINOR.PATCH` format (example: `1.0.0`), without `v` p
 **Consequences**  
 - First frozen release tag is `1.0.0`.
 - Future tags should follow the same format (for example: `1.0.1`, `1.1.0`, `2.0.0`).
+
+---
+
+## 2026-02-25 — Release `1.1.0`: Mission + Home choreography refinement
+
+**Context**  
+After `1.0.0`, the site needed stronger positioning clarity and smoother Home transition behavior between staged stops.
+
+**Decision**  
+- Add and publish `Mission` as a first-class route in top navigation.
+- Add the `S1` message stop in Home with direct CTA to `Mission`.
+- Refine Home transition timing and line/serpent choreography across `T01`, `T12`, `T23`, and `T34`.
+- Freeze and tag the state as `1.1.0`.
+
+**Consequences**  
+- IA now includes `Mission` as a stable route.
+- Home narrative is now explicitly five-stop (`S0`..`S4`) with shared notation in workflow docs.
+- Tag `1.1.0` is now the canonical reference for this iteration.

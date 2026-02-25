@@ -1,6 +1,6 @@
 # Content model — UIBCDF Lab Website
 
-This document defines the editable content under `web/src/content/` for version `1.0.0`.
+This document defines the editable content under `web/src/content/` for version `1.1.0`.
 
 ## Canonical collections
 - `updates`

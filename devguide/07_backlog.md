@@ -4,17 +4,6 @@ A lightweight backlog to keep scope under control.
 
 ## TODO
 
-- [ ] Add a new first Home stop titled `What we do`.
-- [ ] Insert the approved positioning text in that `What we do` block:
-  `We develop computational and experimental approaches to understand, design, and discover biomolecular systems, integrating molecular modeling, quantitative analysis, and open scientific practices. Our work combines software development with quantitative experimental binding measurements to advance reproducible strategies for molecular science and drug discovery, contributing to translational research through open tools and collaborative science.`
-- [ ] Keep this short alternative available for `What we do`:
-  `We develop computational and experimental approaches to understand, design, and discover biomolecular systems, integrating modeling, quantitative analysis, and binding experiments to advance reproducible molecular science and drug discovery.`
-- [ ] Alternative UX copy pattern for review:
-  Use the short text without `What we do` as heading, and append a CTA at the end: `More on what we do...` linking to `Mission`.
-- [ ] In `Mission`, add an end-of-page CTA linking to Research lines.
-- [ ] Add a prominent link in `What we do` pointing to a dedicated `Mission` page.
-- [ ] Add `Mission` to top navigation and create its route/page.
-- [ ] Write extended `Mission` content explaining what the lab does and the lab purpose.
 - [ ] Curate real production content for all placeholders.
 - [ ] Unify microcopy style across all pages (tone, length, consistency).
 - [ ] Run full responsive QA pass (mobile/tablet/desktop) for Home transitions and cards.
@@ -41,3 +30,7 @@ A lightweight backlog to keep scope under control.
 - [x] Redesign Contact page with photo + institutional data + social icon row
 - [x] Add GitHub Actions workflow to publish to `gh-pages`
 - [x] Freeze release `1.0.0` and synchronize `devguide/` with implemented architecture
+- [x] Add `Mission` route and include it in top navigation
+- [x] Add Home message stop (`S1`) and Mission CTA
+- [x] Refine Home line/serpent transition choreography (`T01`..`T34`)
+- [x] Freeze and tag release `1.1.0`
