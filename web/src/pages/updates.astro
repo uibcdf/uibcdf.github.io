@@ -307,6 +307,32 @@ const renderedUpdates = await Promise.all(
     window.addEventListener('resize', requestHideUpdate);
     requestHideUpdate();
   </script>
+
+  <script>
+    // When arriving via a #update-<slug> anchor (e.g. "Read full post" on Home),
+    // expand that entry's details and bring it into view so the full post shows.
+    const openTargetFromHash = () => {
+      const hash = window.location.hash;
+      if (!hash || hash.length < 2) return;
+      let target: Element | null = null;
+      try {
+        target = document.querySelector(hash);
+      } catch {
+        return;
+      }
+      if (!target) return;
+      const details = target.querySelector('details.update-details');
+      if (details instanceof HTMLDetailsElement) details.open = true;
+      target.scrollIntoView({ block: 'start' });
+    };
+
+    if (document.readyState !== 'loading') {
+      openTargetFromHash();
+    } else {
+      window.addEventListener('DOMContentLoaded', openTargetFromHash);
+    }
+    window.addEventListener('hashchange', openTargetFromHash);
+  </script>
 </BaseLayout>
 
 <style is:global>

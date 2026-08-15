@@ -187,6 +187,7 @@ const hubItems = [
                   summary={entry.data.summary}
                   date={entry.data.date}
                   tags={entry.data.tags}
+                  href={`/updates#update-${entry.slug.replaceAll('/', '-')}`}
                 />
               ))}
             </div>
