@@ -1215,7 +1215,8 @@ section + section {
   gap: 1.15rem;
 }
 
-#software-github-actions .software-group-grid {
+#software-github-actions .software-group-grid,
+#software-pytest-plugins .software-group-grid {
   grid-template-columns: 1fr;
   gap: 0.75rem;
 }
