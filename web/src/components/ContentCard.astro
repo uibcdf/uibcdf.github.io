@@ -25,19 +25,10 @@ const { title, summary, date, tags = [], href } = Astro.props;
   </div>
   <h2>{href ? <a href={href}>{title}</a> : title}</h2>
   <p>{summary}</p>
-  {href && (
-    <p class="card-entry-more">
-      <a href={href}>Read full post →</a>
-    </p>
-  )}
 </article>
 
 <style>
-  .card-entry-more {
-    margin-top: 0.65rem;
-  }
-
-  .card-entry-more a {
-    font-weight: 600;
+  .card-entry h2 a {
+    text-decoration: none;
   }
 </style>
